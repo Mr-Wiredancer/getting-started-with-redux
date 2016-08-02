@@ -1,0 +1,16 @@
+1
+00:00:00,620 --> 00:00:02,420
+The first principle of Redux
+
+2
+00:00:02,420 --> 00:00:06,850
+is whether your app is a really simple one like this counter example,
+
+3
+00:00:07,000 --> 00:00:11,000
+or a complex application with a lot of UI, and change of state,
+
+4
+00:00:11,000 --> 00:00:13,000
+you are going to represent the whole state of your application as a single JavaScript object.
+
