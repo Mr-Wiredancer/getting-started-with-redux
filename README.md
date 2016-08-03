@@ -34,3 +34,11 @@
 现任管理员：@hymRedemption
 
 现任校对员：@Mr-Wiredancer
+
+# 任务认领情况与进度
+任务 | 译者 | 校对 | 进度
+---- | ---- | ---- | ---
+01 | Mr-Wiredancer | Mr-Wiredancer | 完成
+02 | Mr-Wiredancer |  | 正在进行
+03 | [baurine](https://github.com/baurine) | | 正在进行
+04 | [lx7575000](https://github.com/lx7575000)| | 正在进行
