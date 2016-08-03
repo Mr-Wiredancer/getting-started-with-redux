@@ -1,0 +1,135 @@
+﻿1
+00:00:00,620 --> 00:00:02,420
+The first principle of Redux
+
+2
+00:00:02,420 --> 00:00:06,850
+is that whether your app is a really simple one like this counter example,
+
+3
+00:00:07,000 --> 00:00:11,000
+or a complex application with a lot of UI, and changes of state,
+
+4
+00:00:11,000 --> 00:00:16,910
+you are going to represent the whole state of your application as a single JavaScript object.
+
+5
+00:00:17,940 --> 00:00:22,680
+All mutations, and changes of state in Redux are explicit.
+
+6
+00:00:22,970 --> 00:00:26,340
+So, eh, it is possible to keep track of all of them.
+
+7
+00:00:26,480 --> 00:00:31,820
+In this case, I am logging every state change in the application in the console.
+
+8
+00:00:32,500 --> 00:00:35,680
+You can see that, in the counter example,
+
+9
+00:00:35,720 --> 00:00:38,520
+there isn't really much state to keep track of,
+
+10
+00:00:38,680 --> 00:00:42,650
+so it can be represented by a JavaScript number.
+
+11
+00:00:43,450 --> 00:00:49,250
+Here is a different example, a list of independent counters that I can add and remove.
+
+12
+00:00:49,740 --> 00:00:54,580
+In this case, a single number is not enough to represent the state of the application,
+
+13
+00:00:54,700 --> 00:00:57,940
+so we use an array of JavaScript numbers.
+
+14
+00:00:59,370 --> 00:01:03,450
+In a more complex application, there is more state to keep track of.
+
+15
+00:01:03,680 --> 00:01:07,110
+This is a typical to-do app, where I can add to-dos,
+
+16
+00:01:07,110 --> 00:01:09,340
+I can cross them as completed ones,
+
+17
+00:01:09,340 --> 00:01:11,760
+and I can change their current filter.
+
+18
+00:01:13,600 --> 00:01:16,500
+Looking back at the history of the state changes,
+
+19
+00:01:16,600 --> 00:01:20,580
+ we can see that the initial state of the app was a JavaScript object,
+
+20
+00:01:20,720 --> 00:01:24,280
+containing an array under the todos key,
+
+21
+00:01:24,280 --> 00:01:28,100
+and a string seen SHOW_ALL, under visibilityFilter.
+
+22
+00:01:28,200 --> 00:01:30,440
+When I added the first to-do,
+
+23
+00:01:30,440 --> 00:01:34,880
+it was added to the todos array, inside our state object.
+
+24
+00:01:35,080 --> 00:01:39,720
+The to-do itself, is described by a plain JavaScript object,
+
+25
+00:01:39,720 --> 00:01:43,060
+saying it was not completed, and the text was saved.
+
+26
+00:01:43,220 --> 00:01:45,940
+Every further change that the app,
+
+27
+00:01:45,940 --> 00:01:48,620
+ whether when I was crossing out the to-dos,
+
+28
+00:01:48,760 --> 00:01:51,240
+or when I changed the visibilityFilter,
+
+29
+00:01:51,340 --> 00:01:55,080
+resulted in this change to this state object,
+
+30
+00:01:55,080 --> 00:01:57,600
+described in our whole application.
+
+31
+00:01:58,280 --> 00:02:00,800
+Now you know the first principle of Redux,
+
+32
+00:02:00,900 --> 00:02:04,220
+ which is that, everything that changes in your application,
+
+33
+00:02:04,250 --> 00:02:06,660
+including the data and the UI state,
+
+34
+00:02:06,660 --> 00:02:11,380
+is contained in a single object, we call the state or the state tree.
