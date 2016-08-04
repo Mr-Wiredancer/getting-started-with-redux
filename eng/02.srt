@@ -1,0 +1,184 @@
+﻿1
+00:00:00,260 --> 00:00:04,740
+The second principle of Redux is that the state tree is read-only.
+
+2
+00:00:04,920 --> 00:00:07,300
+You cannot modify or write to it.
+
+3
+00:00:07,720 --> 00:00:10,480
+Instead, anytime you want to change the state,
+
+4
+00:00:10,700 --> 00:00:12,900
+you need to dispatch an action.
+
+5
+00:00:13,900 --> 00:00:17,880
+An action is a plain JavaScript object describing the change.
+
+6
+00:00:18,400 --> 00:00:23,120
+Just like the state is the minimal representation of the data in your app,
+
+7
+00:00:23,380 --> 00:00:28,420
+the action is the minimal representation of the change to that data.
+
+8
+00:00:29,340 --> 00:00:32,160
+The structure of the action object is up to you.
+
+9
+00:00:32,360 --> 00:00:35,640
+The only requirement is that it has a "type" property,
+
+10
+00:00:35,780 --> 00:00:37,300
+which is not "undefined".
+
+11
+00:00:37,420 --> 00:00:39,060
+We suggest using strings,
+
+12
+00:00:39,200 --> 00:00:40,960
+because they are serializable.
+
+13
+00:00:41,700 --> 00:00:42,860
+In different apps,
+
+14
+00:00:42,880 --> 00:00:45,060
+you're going to have different types of actions.
+
+15
+00:00:45,060 --> 00:00:50,740
+For example, in a counter app we only have "INCREMENT" and "DECREMENT" actions.
+
+16
+00:00:50,860 --> 00:00:53,940
+And we don't pass any additional information,
+
+17
+00:00:53,940 --> 00:00:57,460
+because this is all that is needed to describe these changes.
+
+18
+00:00:58,700 --> 00:01:01,940
+But say, for a counter release example,
+
+19
+00:01:01,940 --> 00:01:03,340
+we have more actions.
+
+20
+00:01:03,340 --> 00:01:05,340
+We have "ADD_COUNTER" action,
+
+21
+00:01:05,760 --> 00:01:07,800
+ we have a "REMOVE_COUNTER" action,
+
+22
+00:01:08,380 --> 00:01:12,160
+and anytime I change the individual counter,
+
+23
+00:01:12,320 --> 00:01:17,960
+you can see that the "INCREMENT" and the "DECREMENT actions now have index.
+
+24
+00:01:18,220 --> 00:01:22,780
+Because we need to describe which particular counter was changed.
+
+25
+00:01:24,380 --> 00:01:28,720
+This approach scales well to medium and complex applications.
+
+26
+00:01:29,540 --> 00:01:35,340
+Anytime I add a todo, the components don't really know how exactly it's been added.
+
+27
+00:01:35,600 --> 00:01:39,960
+All they know is that they need to dispatch an action with a type,
+
+28
+00:01:39,960 --> 00:01:44,580
+"ADD_TODO", and the text of the todo and a sequential ID.
+
+29
+00:01:45,220 --> 00:01:50,060
+And, If I toggle a todo, again, the components don't know how it happens.
+
+30
+00:01:50,300 --> 00:01:54,140
+All they need to do is to dispatch an action with a type,
+
+31
+00:01:54,140 --> 00:01:59,120
+toggle todo and pass in the ID of the todo I want to toggle.
+
+32
+00:01:59,800 --> 00:02:02,420
+The same is true for the visibility filter.
+
+33
+00:02:02,640 --> 00:02:04,960
+Anytime I click on this control
+
+34
+00:02:05,080 --> 00:02:07,480
+to change the currently visible todos,
+
+35
+00:02:07,620 --> 00:02:13,280
+what really happens is this component dispatches an action with a type,
+
+36
+00:02:13,280 --> 00:02:15,060
+"SET_VISIBILITY_FILTER",
+
+37
+00:02:15,200 --> 00:02:19,480
+and pass in the desired filter string, filter filled.
+
+38
+00:02:19,640 --> 00:02:22,100
+But these are all plain objects,
+
+39
+00:02:22,160 --> 00:02:24,800
+describing what happens in a wrap.
+
+40
+00:02:26,680 --> 00:02:29,400
+Now you know the second principle of Redux --
+
+41
+00:02:29,500 --> 00:02:31,340
+the state is read-only.
+
+42
+00:02:31,620 --> 00:02:36,020
+The only way to change the state tree is by dispatching an action.
+
+43
+00:02:36,520 --> 00:02:38,980
+An action is a plain JavaScript object,
+
+44
+00:02:39,100 --> 00:02:43,300
+describing in the minimal way what changed in the application.
+
+45
+00:02:43,780 --> 00:02:48,500
+Whether it is initiated by a network request or by user interaction,
+
+46
+00:02:48,620 --> 00:02:54,320
+any data that gets into the Redux application gets there by actions.
+
