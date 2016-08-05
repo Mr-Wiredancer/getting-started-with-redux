@@ -47,7 +47,7 @@
 任务 | 译者 | 校对 | 进度
 ---- | ---- | ---- | ---
 01 | Mr-Wiredancer | Mr-Wiredancer | 完成
-02 | Mr-Wiredancer |  | 正在进行
+02 | Mr-Wiredancer | hymRedemption  | 完成
 03 | [baurine](https://github.com/baurine) | | 正在进行
 04 | [lx7575000](https://github.com/lx7575000)| | 正在进行
 05 | Mr-Wiredancer | | 正在进行
