@@ -43,7 +43,7 @@
 
 现任校对员：@Mr-Wiredancer
 
-# 任务认领情况与进度
+# 任务认领情况与进度(deprecated)
 任务 | 译者 | 校对 | 进度
 ---- | ---- | ---- | ---
 01 | Mr-Wiredancer | Mr-Wiredancer | 完成
@@ -52,3 +52,16 @@
 04 | [lx7575000](https://github.com/lx7575000)| | 正在进行
 05 | Mr-Wiredancer | | 正在进行
 06 | [baurine](https://github.com/baurine) | | 正在进行
+
+# 新的进度表
+章节 | 听校 | 翻译 | 时间轴 |
+05 | | | 
+07 | | | 
+08 | | | 
+09 | | | 
+10 | | | 
+11 | | | 
+12 | | | 
+13 | | | 
+14 | | | 
+15 | | | 
