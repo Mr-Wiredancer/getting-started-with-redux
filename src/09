@@ -1,18 +1,18 @@
 In this lesson, I use Expect Library to make test assertions, and deepFreeze to make sure that my code is free of mutations.
 
-Let's say that I want to implement a counter list application. I would need to write a few functions that operate on its trait, and its trait is an array of JavaScript numbers representing the individual counters.
+Let's say that I want to implement a counter list application. I would need to write a few functions that operate on its state, and its state is an array of JavaScript numbers representing the individual counters.
 
-The first function I want to write is called addCounter, and all it should do is to append a zero at the end of the pass array.
+The first function I want to write is called addCounter, and all it should do is to append a zero at the end of the passed array.
 
 At first, I use the array push method to add a new item at the end of the array, and it works. However, we need to learn to avoid mutations in Redux, and I'm enforcing this by calling deepFreeze on the original array.
 
 Now my attempt to push does not work. It cannot add a new property to a frozen object. Instead of push, I'm going to use the concat method, which does not modify the original array.
 
-Now the test pass without mutations, and I can also use the new ES6 array spread operator to write the same code in a more concise way.
+Now the tests pass without mutations, and I can also use the new ES6 array spread operator to write the same code in a more concise way.
 
 My next function is called removeCounter, and it accepts two arguments, an array of numbers, and the index of the number to skip from the array.
 
-So if I've got three numbers and I'm passing one as the second argument, I expect to receive an array with two numbers with the second item skipped in the result array.
+So if I've got three numbers and I'm passing 1 as the second argument, I expect to receive an array with two numbers with the second item skipped in the result array.
 
 Usually, to delete an item from the array, I would use the splice method. However, splice is a mutation method, so you can't use it in Redux.
 
