@@ -1,6 +1,6 @@
-I added Redux to our application as a script act from CDNJS. This is the UMG build, so it exports a single global variable called Redux, with a capital R. And in real applications, I suggest you to use NPM instead and a module bundler like Webpack or Browserify, but the UMG build will suffice for our example.
+I added Redux to our application as a script act from CDNJS. This is the UMD build, so it exports a single global variable called Redux, with a capital R. And in real applications, I suggest you to use NPM instead and a module bundler like Webpack or Browserify, but the UMD build will suffice for our example.
 
-我把托管在 CDNJS 上 Redux 库添加到应用。这是 UMG 版本，所以它会导出一个单一的全局变量 Redux，注意是大写的 R。在真实的应用中，我建议你使用 NPM 和 Webpack 或者 Browserify 这样的模块打包工具来替代，但在我们这个例子中，UMG 版本就够用了。
+我把托管在 CDNJS 上 Redux 库添加到应用。这是 UMD 版本，所以它会导出一个单一的全局变量 Redux，注意是大写的 R。在真实的应用中，我建议你使用 NPM 和 Webpack 或者 Browserify 这样的模块打包工具来替代，但在我们这个例子中，UMD 版本就够用了。
 
 I'm going to need just a single function from Redux called createStore. I'm using ES6 destruction syntax here. It's equivalent to writing, "var createStore = Redux.createStore;" or, if you use NPM and something like Babel to transpile your ES6, you can write, "import { createStore }" notice the parenthesis, "from Redux".
 
@@ -24,16 +24,16 @@ The second and the most commonly used store method is called dispatch. And it le
 
 Of course, always log to the console gets boring, so we're actually going to render something to the body now, with the help of the third Redux store method, called subscribe. It lets you register a callback that the Redux store will call any time an action has been dispatched, so then you can update the UI of your application. It will reflect the current application state.
 
-当然，一直只是打印到控制台有点无聊，我们实际上想显示一些东西到 body 上，Redux store 的第三个方法 subcribe 可以帮助我们做到这一点。它允许你注册一个回调，只要一个动作被分发，Redux store 就会调用这个回调，这样你就可以更新应用的 UI，它 ( UI ) 反映了应用当前的状态。
+当然，一直只是打印到控制台有点无聊，我们实际上想渲染一些东西到 body 上，Redux store 的第三个方法 subcribe 可以帮助我们做到这一点。它允许你注册一个回调，只要一个动作被分发，Redux store 就会调用这个回调，这样你就可以更新应用的 UI，它 ( UI ) 反映了应用当前的状态。
 
 I'm being very naive now. I'm not using React or anything. I'm just rendering the counter into the document body. Any time the body is clicked, I'm going to dispatch an action to increment this counter.
 
-我现在用很简单的办法，我不使用 React 或其它，我只是把计数器显示到网页的 body 上。只要单击 body，我就会分发一个动作来使计数器加 1。
+我现在用很简单的办法，我不使用 React 或其它，我只是把计数器渲染到网页的 body 上。只要单击 body，我就会分发一个动作来使计数器加 1。
 
 Now if you pay close attention, you will notice that the initial state, the zero, was not rendered. And this is because I'm rendering inside the subscribe callback, but it doesn't actually fire the very first time.
 
-如果你观察得很仔细的话，你会发现初始状态，0，没有被显示。这是因为渲染只发生在订阅的回调里，但它在最开始的时候 (状态被初始化的时候) 并没有被触发。
+如果你观察得很仔细的话，你会发现初始状态，0，没有被渲染。这是因为渲染只发生在订阅的回调里，但它在最开始的时候 (状态被初始化的时候) 并没有被触发。
 
 So I extract this logic into render method. I subscribe the render method to this store. I also call it once to render the initial state. Now it renders the zero, and the click increments the counter. This is our first working Redux application.
 
-所以我把这个逻辑抽取出来到 render 方法中。我订阅 render 方法到 store。我同时手动调用 render 方法一次，让它显示初始状态。现在它显示 0，每次单击都会使计数器递增。这就是我们的第一个 Redux 应用。
+所以我把这个逻辑抽取出来到 render 方法中。我订阅 render 方法到 store。我同时手动调用 render 方法一次，让它渲染初始状态。现在它显示 0，每次单击都会使计数器递增。这就是我们的第一个 Redux 应用。

@@ -1,4 +1,4 @@
-I added Redux to our application as a script act from CDNJS. This is the UMG build, so it exports a single global variable called Redux, with a capital R. And in real applications, I suggest you to use NPM instead and a module bundler like Webpack or Browserify, but the UMG build will suffice for our example.
+I added Redux to our application as a script act from CDNJS. This is the UMD build, so it exports a single global variable called Redux, with a capital R. And in real applications, I suggest you to use NPM instead and a module bundler like Webpack or Browserify, but the UMD build will suffice for our example.
 
 I'm going to need just a single function from Redux called createStore. I'm using ES6 destruction syntax here. It's equivalent to writing, "var createStore = Redux.createStore;" or, if you use NPM and something like Babel to transpile your ES6, you can write, "import { createStore }" notice the parenthesis, "from Redux".
 
