@@ -1,0 +1,88 @@
+﻿1
+00:00:00,420 --> 00:00:02,210
+Before we proceed any further
+
+2
+00:00:02,210 --> 00:00:08,140
+it's important that you understand the difference between the pure and impure functions
+
+3
+00:00:08,140 --> 00:00:16,190
+The pure functions are the functions whose returned value depends solely on the values of their arguments
+
+4
+00:00:16,190 --> 00:00:20,350
+Pure functions do not have any observable side effects
+
+5
+00:00:20,350 --> 00:00:23,130
+such as network or database calls
+
+6
+00:00:23,560 --> 00:00:26,560
+The pure functions just calculate the new value
+
+7
+00:00:26,560 --> 00:00:30,510
+You can be confident that if you call the pure function
+
+8
+00:00:30,510 --> 00:00:33,050
+with the same set of arguments
+
+9
+00:00:33,050 --> 00:00:35,740
+you're going to get the same returned value
+
+10
+00:00:35,740 --> 00:00:37,180
+They are predictable
+
+11
+00:00:37,740 --> 00:00:42,330
+Also pure functions do not modify the values passed to them
+
+12
+00:00:42,330 --> 00:00:43,320
+For example
+
+13
+00:00:43,320 --> 00:00:49,200
+squareAll function that accepts an array does not overwrite the items inside this array
+
+14
+00:00:49,200 --> 00:00:53,070
+Instead it returns a new array by using items map
+
+15
+00:00:54,220 --> 00:00:55,260
+On the opposite
+
+16
+00:00:55,260 --> 00:00:59,640
+impure functions may call the database or the network
+
+17
+00:00:59,760 --> 00:01:01,550
+they may have side effects
+
+18
+00:01:01,550 --> 00:01:03,310
+they may operate on the DOM
+
+19
+00:01:03,310 --> 00:01:06,920
+and they may override the values that you pass to them
+
+20
+00:01:08,250 --> 00:01:10,780
+This is going to be an important distinction
+
+21
+00:01:10,780 --> 00:01:16,280
+because some of the functions that you're going to write in Redux have to be pure
+
+22
+00:01:16,280 --> 00:01:18,280
+and you need to be mindful of that
+
