@@ -1,0 +1,27 @@
+The first function we're going to write is the reducer for the counter example. And reducer accepts state and action as arguments and returns the next state. But before jumping into the implementation, we're going to make certain assertions using Michael Jackson's Expect library. We're going to assert that when the state of the counter is 0 and you pass an "INCREMENT" action it should return 1. And similarly it should return 2 when this state is 1 and you increment.
+
+我们要写的第一个方法是计数器的 reducer。reducer 接受 state 和 action 作为参数并返回新的 state。但在投入实现之前，我们先用 Michael Jackson 的 Expect 库来写断言测试。我们将确保当 counter 的 state 为 0 时，传递一个 "INCREMENT" 的动作后，它将返回 1。相似的，当 state 为 1 时，你递增它，它将返回 2。
+
+We're going to add a couple of tests that test how "DECREMENT" works, which is that it decrements from 2 to 1 and from 1 to 0 and we're going to add a log to tell if our tests are successful.
+
+我们将增加一些测试来看看 "DECREMENT" 是怎么工作的，它会将 2 递减成 1，将 1 递减成 0。我们还将增加一些输出来告诉我们测试是否成功。
+
+So if you run this test, they're actually going to fail because we haven't even begun to implement our reducer. We're going to start by checking the action type and if the action type is "INCREMENT", we're going to return "state + 1", but if it is "DECREMENT" we're going to return "state - 1".
+
+如果这时你运行这个测试，它会失败，因为我们甚至还没有开始实现 reducer。我们从检查 action 的 type 开始，如果 action type 是 "INCREMENT"，我们返回 state + 1，但如果是 "DECREMENT"，我们返回 state - 1。
+
+If you run the tests we will find that this is enough to get them to pass. However, there are still some flaws in our current implementation of the counter reducer. For example, I think that if we dispatch an action that it does not understand, it should return the current state of the application.
+
+如果这时你再运行测试，我们会发现现在这个 reducer 已经足够让测试通过。但是，这个 counter reducer 的实现仍然有一些不足。比如，如果我们分发一个它不理解的动作，它应该返回应用当前的状态。
+
+However, if we check for that we will see that this test fails, because we currently don't handle unknown actions. So I'm going to add an else clause that returns the current state. And the tests pass now.
+
+然而，我们这时运行测试将会发现测试失败了，因为我们目前还没有处理未知的动作。所以我将添加一个 else 语句来返回当前的状态，看，现在测试通过了。
+
+Another issue is that while the reducer is normally in control of the application state, currently it does not specify the initial state. In the case of counter example that would be 0. The convention we use in Redux is that if the reducer receives "undefined" as the state argument, it must return what it considers to be the initial state of the application. In this case it will be 0.
+
+另外一个问题是，reducer 现在只处理应用正常的状态，但它没有明确一个初始状态。在计数器这个例子中，初始状态应该是 0。使用 Redux 有一个约定，当 reducer 接收到一个 "undefined" 的 state 参数时，它必须返回它认为的应用的初始状态，在这个例子中初始状态应该是 0。
+
+Now come a few cosmetic tweaks. I'll replace this bunch of tweaks with a switch statement and I'm going to replace this condition with ES6 default argument, which looks better. I'm also going to replace the function declaration with an arrow function, which has clearer semantics in ES6.
+
+现在我们来美化一下代码。我们用 switch 语句来替代这部分代码，使用更好看 ES6 默认参数语法来替代这个条件判断。同时，我用 ES6 中具有更清晰语义的箭头函数替代这个函数声明。
