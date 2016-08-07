@@ -1,0 +1,130 @@
+﻿1
+00:00:00,000 --> 00:00:05,000
+You might have heard that the UI or the view layer is most predictable
+
+2
+00:00:05,000 --> 00:00:09,960
+when it is described as a pure function of the application state
+
+3
+00:00:09,960 --> 00:00:12,340
+his approach was pioneered by React 
+
+4
+00:00:12,340 --> 00:00:17,340
+but is now being picked up by other frameworks, such as Ember and Angular
+
+5
+00:00:17,340 --> 00:00:17,360
+Redux complements this approach with another idea
+but is now being picked up by other frameworks, such as Ember and Angular
+
+6
+00:00:17,360 --> 00:00:21,000
+Redux complements this approach with another idea
+
+7
+00:00:21,000 --> 00:00:27,020
+that the state mutations in your app need to be described as a pure function
+
+8
+00:00:27,020 --> 00:00:27,040
+that takes the previous state and the action being dispatched 
+that the state mutations in your app need to be described as a pure function
+
+9
+00:00:27,040 --> 00:00:31,200
+that takes the previous state and the action being dispatched 
+
+10
+00:00:31,200 --> 00:00:35,300
+and returns the next state of your application
+
+11
+00:00:36,080 --> 00:00:38,800
+Inside any Redux application
+
+12
+00:00:38,820 --> 00:00:44,020
+there is one particular function that takes the state of the whole application
+
+13
+00:00:44,020 --> 00:00:49,540
+and the action being dispatched and returns the next state of the whole application
+
+14
+00:00:49,940 --> 00:00:53,920
+It is important that it does not modify the state given to it
+
+15
+00:00:53,920 --> 00:00:58,380
+It has to be pure  so it has to return a new object
+
+16
+00:00:59,320 --> 00:01:01,700
+Even in large applications
+
+17
+00:01:01,700 --> 00:01:04,280
+there is still just a single function 
+
+18
+00:01:04,280 --> 00:01:08,540
+that manages how the next state is calculated 
+
+19
+00:01:08,540 --> 00:01:13,520
+based on the previous state of the whole application 
+
+20
+00:01:14,220 --> 00:01:15,880
+It does not have to be slow
+
+21
+00:01:15,880 --> 00:01:19,100
+For example  if I change the visibility filter
+
+22
+00:01:19,100 --> 00:01:22,240
+I have to create a new object for the whole state
+
+23
+00:01:22,300 --> 00:01:27,560
+but I can keep the reference to the previous version of the todos rate
+
+24
+00:01:27,560 --> 00:01:31,520
+because it has not changed when I changed the visibility filter
+
+25
+00:01:31,840 --> 00:01:34,500
+This is what makes Redux fast
+
+26
+00:01:35,000 --> 00:01:38,540
+Now you know the third and the last principle of Redux
+
+27
+00:01:38,540 --> 00:01:42,100
+To describe state mutations  you have to write a function 
+
+28
+00:01:42,100 --> 00:01:44,100
+that takes the previous state of the app
+
+29
+00:01:44,100 --> 00:01:45,760
+the action being dispatched
+
+30
+00:01:45,760 --> 00:01:48,320
+and returns the next state of the app
+
+31
+00:01:48,320 --> 00:01:50,640
+This function has to be pure
+
+32
+00:01:50,640 --> 00:01:53,760
+This function is called the Reducer
+
