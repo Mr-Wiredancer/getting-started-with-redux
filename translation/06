@@ -2,7 +2,7 @@ I added Redux to our application as a script act from CDNJS. This is the UMD bui
 
 我把托管在 CDNJS 上 Redux 库添加到应用。这是 UMD 版本，所以它会导出一个单一的全局变量 Redux，注意是大写的 R。在真实的应用中，我建议你使用 NPM 和 Webpack 或者 Browserify 这样的模块打包工具来替代，但在我们这个例子中，UMD 版本就够用了。
 
-I'm going to need just a single function from Redux called createStore. I'm using ES6 destruction syntax here. It's equivalent to writing, "var createStore = Redux.createStore;" or, if you use NPM and something like Babel to transpile your ES6, you can write, "import { createStore }" notice the parenthesis, "from Redux".
+I'm going to need just a single function from Redux called "createStore". I'm using ES6 destruction syntax here. It's equivalent to writing, "var createStore = Redux.createStore;" or, if you use NPM and something like Babel to transpile your ES6, you can write, "import { createStore }" notice the parenthesis, "from Redux".
 
 目前我只需要 Redux 中的一个方法 createStore。这里我使用 ES6 的解构语法。这等价于，"var createStore = Redux.createStore;" 或者，如果你使用 NPM 和像 Babel 这样的转换器来转换你的 ES6 代码，你也可以这样写，"import { createStore }" 注意大括号，"from Redux"。
 
@@ -10,19 +10,19 @@ This store binds together the three principles of Redux. It holds the current ap
 
 这个 store 把 Redux 的三大原则结合在一起。它保存了应用当前的状态。它允许你向它分发动作。当你创建 store 的时候，你需要指定 reducer 来让它知道当动作分发时，状态要如何更新。
 
-In this example, we're calling createStore with counter as the reducer that manages the state updates. This store has three important methods.
+In this example, we're calling "createStore" with counter as the reducer that manages the state updates. This store has three important methods.
 
 在这个例子中，我们调用 createStore 时指定 counter 作为 reducer 来管理状态的更新。这个 store 有三个重要的方法。
 
-The first method of this store is called getState. And it retrieves the current state of the Redux store. If we run this, we're going to see zero because this is the initial state of our application.
+The first method of this store is called "getState". And it retrieves the current state of the Redux store. If we run this, we're going to see 0 because this is the initial state of our application.
 
-第一个方法叫 getState。它可以获取 Redux store 当前的状态。如果我们执行这个方法，我们将看到 0，因为这是我们这个应用的初始状态。
+第一个方法叫 getState。它可以获取 Redux store 当前的状态。如果这时我们执行这个方法，我们将看到 0，因为这是我们这个应用的初始状态。
 
-The second and the most commonly used store method is called dispatch. And it lets you dispatch actions to change the state of your application. If we log this store state after dispatch, we're going to see that it has changed.
+The second and the most commonly used store method is called "dispatch". And it lets you dispatch actions to change the state of your application. If we log this store state after dispatch, we're going to see that it has changed.
 
 第二个，也是我们最常使用的方法，叫 dispatch。它允许你分发动作来改变应用的状态。如果我们在分发动作后打印 store 的状态，我们可以看到状态发生了改变。
 
-Of course, always log to the console gets boring, so we're actually going to render something to the body now, with the help of the third Redux store method, called subscribe. It lets you register a callback that the Redux store will call any time an action has been dispatched, so then you can update the UI of your application. It will reflect the current application state.
+Of course, always log to the console gets boring, so we're actually going to render something to the body now, with the help of the third Redux store method, called "subscribe". It lets you register a callback that the Redux store will call any time an action has been dispatched, so then you can update the UI of your application. It will reflect the current application state.
 
 当然，一直只是打印到控制台有点无聊，我们实际上想渲染一些东西到 body 上，Redux store 的第三个方法 subcribe 可以帮助我们做到这一点。它允许你注册一个回调，只要一个动作被分发，Redux store 就会调用这个回调，这样你就可以更新应用的 UI，它 ( UI ) 反映了应用当前的状态。
 
@@ -30,10 +30,10 @@ I'm being very naive now. I'm not using React or anything. I'm just rendering th
 
 我现在用很简单的办法，我不使用 React 或其它，我只是把计数器渲染到网页的 body 上。只要单击 body，我就会分发一个动作来使计数器加 1。
 
-Now if you pay close attention, you will notice that the initial state, the zero, was not rendered. And this is because I'm rendering inside the subscribe callback, but it doesn't actually fire the very first time.
+Now if you pay close attention, you will notice that the initial state, the 0, was not rendered. And this is because I'm rendering inside the subscribe callback, but it doesn't actually fire the very first time.
 
 如果你观察得很仔细的话，你会发现初始状态，0，没有被渲染。这是因为渲染只发生在订阅的回调里，但它在最开始的时候 (状态被初始化的时候) 并没有被触发。
 
-So I extract this logic into render method. I subscribe the render method to this store. I also call it once to render the initial state. Now it renders the zero, and the click increments the counter. This is our first working Redux application.
+So I extract this logic into "render" method. I subscribe the "render" method to this store. I also call it once to render the initial state. Now it renders the 0, and the click increments the counter. This is our first working Redux application.
 
 所以我把这个逻辑抽取出来到 render 方法中。我订阅 render 方法到 store。我同时手动调用 render 方法一次，让它渲染初始状态。现在它显示 0，每次单击都会使计数器递增。这就是我们的第一个 Redux 应用。
