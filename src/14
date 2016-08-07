@@ -1,12 +1,12 @@
 In the previous lesson, we established the pattern of reducer composition where one reducer can be called by another reducer to update items inside an array.
 
-If we create a store with this reducer and log its state, we will find that the initial state of it is an empty array of to dos. If we dispatch an at-to-do action, we will find that the corresponding to do has been added to the state array.
+If we create a store with this reducer and log its state, we will find that the initial state of it is an empty array of todos. If we dispatch an 'ADD_TODO' action, we will find that the corresponding todo has been added to the state array.
 
-If we dispatch another at-to-do action, the corresponding to do will also be added at the end of the array and dispatch in a toggle to do action with ID zero will flag the completed field of the to do with ID zero.
+If we dispatch another 'ADD_TODO' action, the corresponding todo will also be added at the end of the array and dispatch a 'TOGGLE_TODO' action with id 0 will flag the completed field of the todo with id 0.
 
-Representing the whole state of the application as an array of to dos works for a simple example, but what if we want to store more information? For example, we may want to let the user choose which to dos are currently visible with the visibility filter such as show completed, show all, or show active.
+Representing the whole state of the application as an array of todos works for a simple example, but what if we want to store more information? For example, we may want to let the user choose which todos are currently visible with the visibility filter such as 'SHOW_COMPLETED', 'SHOW_ALL', or 'SHOW_ACTIVE'.
 
-The state of the visibility filter is a simple string representing the current filter. It is changed by set visibility filter action.
+The state of the visibility filter is a simple string representing the current filter. It is changed by 'SET_VISIBILITY_FILTER' action.
 
 To store this new information, I don't need to change the existing reducers. I will use the reducer composition pattern and create a new reducer that calls the existing reducers to manage parts of its state and combines the results in a single state object.
 
@@ -18,4 +18,4 @@ This is another example of the reducer composition pattern, but this time we use
 
 This pattern helps scale Redux's development because different people on the team can work on different reducers handling the same actions without running into each other and causing merge conflicts.
 
-Finally, I'm dispatching the set visibility filter action. You can see that it doesn't affect the to dos, but the visibility filter field has been updated.
+Finally, I'm dispatching the 'SET_VISIBILITY_FILTER' action. You can see that it doesn't affect the todos, but the "visibilityFilter" field has been updated.
