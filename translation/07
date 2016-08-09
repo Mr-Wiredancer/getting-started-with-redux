@@ -1,0 +1,31 @@
+In the previous video we looked at how to implement a simple counter example using the "createStore" function provided by Redux and the "store" object it returns that provides the "getState" method to get the current application state, the "dispatch" method, to change the current application state by dispatching an action, and the "subscribe" method to subscribe to the changes and re-render our application with the current state of the app.
+
+在前面的视频中，我们已经看到了是如何实现一个简单的计数器的例子。通过 Redux 提供的 createStore 方法，得到了一个 store 对象；通过 store 对象的 getState 方法，得到应用当前的状态；使用 dispatch 方法分发动作去改变应用的状态；使用 subscribe 方法去订阅 store 的变化，从而使用当前的状态去重新渲染整个应用。
+
+If you're like me you prefer to understand the tools that you're using. In this tutorial we're going to re-implement the "createStore" function provided by Redux from scratch. The first and the only, from what we know so far,  argument to the "createStore" function is the reducer function provided by the application.
+
+如果你像我一样喜欢去深究正在使用的工具的内部原理，那么，在这个教程中，我们将重头开始来重新实现 Redux 提供的 createStore 方法。到目前为止，我们知道，createStore 唯一的参数就是应用提供的 reducer。
+
+And we know that the store holds the current state. We keep it in a variable, and the "getState" function is going to return the current value of that variable. This function, combined with the "dispatch" function and the "subscribe" function on a single object is what we call the Redux store.
+
+我们知道，store 持有当前的状态。我们用一个变量来保存，而且 getState 方法返回这个变量。这个方法 ( 指 getState )，和 dispatch 方法，subscribe 方法，一起组成了所谓的 Redux store 对象。
+
+Because the "subscribe" function can be called many times, we need to keep track of all the change listeners. And any time it is called we want to push the new listener into the array. Dispatching an action is the only way to change the internal state.
+
+因为 subscribe 方法会被调用很多次，所以我们需要记录下所有的监听者。只要它被调用，我们就把新的监听者添加到 ( 监听者 ) 数组里。分发动作是唯一可以改变内部状态的途径。
+
+And in order to calculate the new state we call the reducer with the current state and the action being dispatched. After the state was updated, we need to notify every change listener, by calling it.
+
+为了得到新的状态，我们使用当前的状态和分发过来的动作作为参数，调用 reducer。在状态被更新后，我们需要通知每一个监听者，通过调用它们。
+
+There is an important missing piece here. We haven't provided a way to unsubscribe a listener. But instead of adding a dedicated "unsubscribe" method, we'll just return a function from the "subscribe" method that removes this listener from the "listeners" array.
+
+这里漏掉了一个很重要的地方，我们没有提供方法来取消订阅一个监听者。为了避免增加一个专门的 unscribe 方法，我们从 subscribe 方法中返回一个可以将此临听者从临听者数组中移除的方法。
+
+Finally, by the time the store is returned we wanted to have the initial state populated. So we're going to dispatch a dummy action just to get the reducer to return the initial value.
+
+最后，在 store 被返回的时候，我们希望初始状态的值被填充。所以我们这时分发一个空的 action 来让 reducer 返回初始状态值。
+
+This implementation of the Redux store, apart from a few minor details in edge cases, is the createStore which was shipped with Redux.
+
+这个 Redux store 的实现，除去一些边缘情况的小细节外，( 差不多 ) 就是 Redux 中 createStore 的最终实现了。
