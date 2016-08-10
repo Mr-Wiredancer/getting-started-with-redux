@@ -1,0 +1,59 @@
+In the simplest counter example, I update the document body manually any time the store state changes.
+在这个最简单的计数器例子中，每当 store 的状态改变时，我会手动更新 document.body。
+
+But, of course, this approach does not scale to complex applications.
+但是，这种方法当然不能扩展到复杂的应用中。
+
+So instead of manually updating the DOM, I'm going to use React.
+所以我准备使用 React，而不是手动更新 DOM。
+
+
+I'm adding two script tags corresponding to React and react-dom packages and a root div to render to.
+我添加了两个 script 标签，分别对应 react 和 react-dom 这两个包。我还添加了一个 id 为 "root" 的 div 标签，用来渲染我的 React 部件。
+
+Now I can call the ReactDOM.render with my root component.
+现在我就可以用我的根部件来调用 ReactDOM.render() 了。
+
+
+The "render" function is called any time this store state changes, so I can safely pass the current state of this store as a prop to my root component.
+render() 函数在每一次 store 的状态改变时都会被调用，所以我可以放心地将 store 的当前状态以属性的形式传递给根部件。
+
+Since this state is held inside the Redux store, the counter component can be a simple function, which is a supported way of declaring components since React 14.
+因为这个状态储存在 Redux store 里面，所以 counter 部件可以是一个简单的函数，这是从 React 14 开始就支持的一种声明部件的方式。
+
+Now I want to add, decrement, and increment buttons to the component, but I don't want to hard-code the Redux dependency into the component.
+现在我想在部件里加上 + 和 - 按钮，但我不想把 Redux 依赖写死在部件里。
+
+So I just add "onIncrement" and "onDecrement" props as callbacks.
+所以我添加了 onIncrement 和 onDecrement 属性作为回调函数。
+
+And In my "render" method, I pass the callbacks that call store.dispatch with appropriate actions.
+然后在我的 render() 方法里，我把回调函数传了进去，这些回调函数会用合适的动作来调用 store.dispatch()。
+
+Now the application state is updated when I click the buttons.
+现在，当我点击按钮时，应用的状态就会被更新。
+
+Now let's recap how this application works.
+让我们来回顾一下应用的整个工作原理。
+
+The counter component is what I call a dumb component.
+我把 counter 部件叫作展示(笨拙)部件。
+
+It does not contain any business logic.
+它不包含任何的业务逻辑。
+
+It only specifies how the current application state transforms into renderable output and how the callbacks, passed via props, are bound to the event handlers.
+它只说明了当前的应用状态是如何转化成可渲染的输出，还有通过属性传递进来的回调函数如何绑定到事件处理器上。
+
+When we render a counter, we specify that its value should be taken from the Redux store current state.
+当我们渲染一个计数器时，我们指定了它的值应该来自于 Redux store 的当前状态。
+
+
+And when the user presses "increment" or "decrement," we dispatch corresponding action to the Redux store.
+而当用户按下 + 或者 - 时，我们会分发相应的动作到 Redux store。
+
+Our reducer specifies how the next state is calculated based on the current state and the action being dispatched.
+我们的 reducer 则指定了如何基于当前状态和被分发的动作，计算出下一个状态。
+
+And finally, we subscribe to the Redux store, so our render function runs any time the state changes, so the counter gets the current state.
+最后，我们订阅到 Redux store，这样我们的 render() 函数就可以在每次状态变化时运行，让计数器获取到它的当前状态。
