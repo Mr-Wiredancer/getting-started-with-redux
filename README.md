@@ -55,16 +55,21 @@
 06 | [baurine](https://github.com/baurine) | | 正在进行
 
 # 新的进度表
-章节 | 听校 | 翻译 | 时间轴 |
----- | ---- | ---- | ---- |
-05 |✔️ | | 
-06 |✔️ |✔️ |
-07 |✔️ | | 
-08 |✔️ | | 
-09 |✔️ | | 
-10 |✔️ | | 
-11 |✔️ | | 
-12 |✔️ | | 
-13 |✔️ | | 
-14 |✔️ | | 
-15 | | | 
+章节 | 听校者| 听校进度 | 翻译者| 翻译进度 
+---- | ---- | ---- | ---- | ---
+05 | Mr-Wiredancer| ✔️ | [baurine](https://github.com/baurine) | 正在进行
+06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️
+07 |Mr-Wiredancer |✔️ | [baurine](https://github.com/baurine) |正在进行
+08 |Mr-Wiredancer |✔️ |Mr-Wiredancer | ✔️
+09 |[baurine](https://github.com/baurine)| ✔️ |[baurine](https://github.com/baurine) | 正在进行
+10 |Mr-Wiredancer | ✔️ | | 
+11 |Mr-Wiredancer |✔️ | | 
+12 |[baurine](https://github.com/baurine) |✔️ | | 
+13 |[baurine](https://github.com/baurine) |✔️ | | 
+14 |[baurine](https://github.com/baurine) |✔️ | | 
+15 |[baurine](https://github.com/baurine)|正在进行 | | |
+16 |[baurine](https://github.com/baurine)|正在进行 | | |
+17 |
+18 |
+19 |
+20 |
