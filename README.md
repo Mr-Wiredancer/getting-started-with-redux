@@ -57,6 +57,9 @@
 # 新的进度表
 章节 | 听校| 状态 | 翻译| 状态 | 打轴 | 状态 
 ---- | ---- | ---- | ---- | --- | ---- | ---- 
+01 | | ✔️ | | ✔️| | ✔️
+02 | | ✔️ | | ✔️| | ✔️
+03 | | ✔️ | | ✔️| | ✔️
 05 | Mr-Wiredancer| ✔️ | [baurine](https://github.com/baurine) | 正在进行
 06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️
 07 |Mr-Wiredancer |✔️ | [baurine](https://github.com/baurine) |正在进行
