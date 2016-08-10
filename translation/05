@@ -1,6 +1,6 @@
 The first function we're going to write is the reducer for the counter example. And reducer accepts state and action as arguments and returns the next state. But before jumping into the implementation, we're going to make certain assertions using Michael Jackson's Expect library. We're going to assert that when the state of the counter is 0 and you pass an "INCREMENT" action it should return 1. And similarly it should return 2 when this state is 1 and you increment.
 
-我们要写的第一个方法是计数器的 reducer。reducer 接受 state 和 action 作为参数并返回新的 state。但在投入实现之前，我们先用 Michael Jackson 的 Expect 库来写断言测试。我们将确保当 counter 的 state 为 0 时，传递一个 "INCREMENT" 的动作后，它将返回 1。相似的，当 state 为 1 时，你递增它，它将返回 2。
+我们要写的第一个方法是计数器的 reducer。reducer 接受状态和动作作为参数并返回新的状态。但在开始实现之前，我们先用 Michael Jackson 的 Expect 库来写断言测试。我们将确保当计数器的状态为 0 时，传递一个 "INCREMENT" 的动作后，它将返回 1。相似地，当状态为 1 时，你递增它，它将返回 2。
 
 We're going to add a couple of tests that test how "DECREMENT" works, which is that it decrements from 2 to 1 and from 1 to 0 and we're going to add a log to tell if our tests are successful.
 
@@ -8,11 +8,11 @@ We're going to add a couple of tests that test how "DECREMENT" works, which is t
 
 So if you run this test, they're actually going to fail because we haven't even begun to implement our reducer. We're going to start by checking the action type and if the action type is "INCREMENT", we're going to return "state + 1", but if it is "DECREMENT" we're going to return "state - 1".
 
-如果这时你运行这个测试，它会失败，因为我们甚至还没有开始实现 reducer。我们从检查 action 的 type 开始，如果 action type 是 "INCREMENT"，我们返回 state + 1，但如果是 "DECREMENT"，我们返回 state - 1。
+如果这时你运行这个测试，它会失败，因为我们甚至还没有开始实现 reducer。我们从检查动作的类型开始，如果动作的类型是 "INCREMENT"，我们返回 state + 1，但如果是 "DECREMENT"，我们返回 state - 1。
 
 If you run the tests we will find that this is enough to get them to pass. However, there are still some flaws in our current implementation of the counter reducer. For example, I think that if we dispatch an action that it does not understand, it should return the current state of the application.
 
-如果这时你再运行测试，我们会发现现在这个 reducer 已经足够让测试通过。但是，这个 counter reducer 的实现仍然有一些不足。比如，如果我们分发一个它不理解的动作，它应该返回应用当前的状态。
+如果这时你再运行测试，我们会发现现在这个 reducer 已经足够让测试通过。但是，这个计数器 reducer 的实现仍然有一些不足。比如，如果我们分发一个它不理解的动作，它应该返回应用当前的状态。
 
 However, if we check for that we will see that this test fails, because we currently don't handle unknown actions. So I'm going to add an else clause that returns the current state. And the tests pass now.
 
