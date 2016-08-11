@@ -47,19 +47,14 @@
 # 任务认领情况与进度(deprecated)
 任务 | 译者 | 校对 | 进度
 ---- | ---- | ---- | ---
-01 | Mr-Wiredancer | Mr-Wiredancer | 完成
-02 | Mr-Wiredancer | hymRedemption  | 完成
-03 | [baurine](https://github.com/baurine) | | 正在进行
 04 | [lx7575000](https://github.com/lx7575000)| | 正在进行
-05 | Mr-Wiredancer | | 正在进行
-06 | [baurine](https://github.com/baurine) | | 正在进行
 
 # 新的进度表
 章节 | 听校| 状态 | 翻译| 状态 | 打轴 | 状态 
 ---- | ---- | ---- | ---- | --- | ---- | ---- 
-01 | | ✔️ | | ✔️| | ✔️
-02 | | ✔️ | | ✔️| | ✔️
-03 | | ✔️ | | ✔️| | ✔️
+01 |Mr-Wiredancer | ✔️ |Mr-Wiredancer | ✔️|Mr-Wiredancer | ✔️
+02 |Mr-Wiredancer | ✔️ |Mr-Wiredancer | ✔️|Mr-Wiredancer | ✔️
+03 |[baurine](https://github.com/baurine) | ✔️ |[baurine](https://github.com/baurine) | ✔️|[baurine](https://github.com/baurine) | ✔️
 05 | Mr-Wiredancer| ✔️ | [baurine](https://github.com/baurine) | ✔️
 06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️ | Mr-Wiredancer | 进行中
 07 |Mr-Wiredancer |✔️ | [baurine](https://github.com/baurine) |✔️
