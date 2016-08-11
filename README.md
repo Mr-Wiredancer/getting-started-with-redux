@@ -70,7 +70,7 @@
 12 |[baurine](https://github.com/baurine) |✔️ | | 
 13 |[baurine](https://github.com/baurine) |✔️ | | 
 14 |[baurine](https://github.com/baurine) |✔️ | | 
-15 |[baurine](https://github.com/baurine)|正在进行 | | |
+15 |[baurine](https://github.com/baurine)|✔️ | | |
 16 |[baurine](https://github.com/baurine)|正在进行 | | |
 17 |
 18 |
