@@ -62,7 +62,7 @@
 03 | | ✔️ | | ✔️| | ✔️
 05 | Mr-Wiredancer| ✔️ | [baurine](https://github.com/baurine) | ✔️
 06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️ | Mr-Wiredancer | 进行中
-07 |Mr-Wiredancer |✔️ | [baurine](https://github.com/baurine) |正在进行
+07 |Mr-Wiredancer |✔️ | [baurine](https://github.com/baurine) |✔️
 08 |Mr-Wiredancer |✔️ |Mr-Wiredancer | ✔️| Mr-Wiredancer | 进行中
 09 |[baurine](https://github.com/baurine)| ✔️ |[baurine](https://github.com/baurine) | 正在进行
 10 |Mr-Wiredancer | ✔️ | | 
