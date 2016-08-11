@@ -4,7 +4,7 @@ In fact this pattern is so common that it's present in most Redux applications. 
 
 The only argument to "combineReducers" is an object. And this object lets me specify the mapping between the state field names, and the reducers managing them. The return value of the "combineReducers"'s call is a reducer function, which is pretty much equivalent to the reducer function I wrote by hand previously.
 
-The keys of the object I configure combined reducers with correspond to the fields of the state object is going to manage. The values of the object I passed to "combineReducers", are the reducers you should call to update the correspondence state fields.
+The keys of the object I configure combined reducers with correspond to the fields of the state object is going to manage. The values of the object I passed to "combineReducers", are the reducers you should call to update the corresponding state fields.
 
 This "combineReducers" call says that the "todos" field inside the state object managers will be updated by the "todos" reducer, and the "visibilityFilter" field inside the state object will be updated by calling the "visibilityFilter" reducer. And the results will be assembled into a single object. In other words, it behaves pretty much exactly as the function commented down below.
 
