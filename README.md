@@ -59,17 +59,17 @@
 06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️ | Mr-Wiredancer | 进行中
 07 |Mr-Wiredancer |✔️ | [baurine](https://github.com/baurine) |✔️
 08 |Mr-Wiredancer |✔️ |Mr-Wiredancer | ✔️| Mr-Wiredancer | 进行中
-09 |[baurine](https://github.com/baurine)| ✔️ |[baurine](https://github.com/baurine) | 正在进行
+09 |[baurine](https://github.com/baurine)| ✔️ |[baurine](https://github.com/baurine) | 进行中
 10 |Mr-Wiredancer | ✔️ | | 
 11 |Mr-Wiredancer |✔️ | | 
 12 |[baurine](https://github.com/baurine) |✔️ | | 
 13 |[baurine](https://github.com/baurine) |✔️ | | 
 14 |[baurine](https://github.com/baurine) |✔️ | | 
 15 |[baurine](https://github.com/baurine)|✔️ | | |
-16 |[baurine](https://github.com/baurine)|正在进行 | | |
-17 |
-18 |
-19 |
+16 |[baurine](https://github.com/baurine)|进行中 | | |
+17 |Mr-Wiredancer|进行中
+18 |[baurine](https://github.com/baurine)|进行中
+19 |[baurine](https://github.com/baurine)|进行中
 20 |
 21 |
 22 | 
