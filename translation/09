@@ -1,0 +1,71 @@
+In this lesson, I use Expect Library to make test assertions, and "deepFreeze" to make sure that my code is free of mutations.
+
+在这节课，我使用 Expect 库来做一些断言测试，deepFreeze() 方法可以确保我的代码是不会被改变的。
+
+Let's say that I want to implement a counter list application. I would need to write a few functions that operate on its state, and its state is an array of JavaScript numbers representing the individual counters.
+
+比方说，我想要实现一个计数器列表的应用。我需要写一些方法来操作它的状态，而且它的状态是一个 Javascript 数值数组，每一个数值代表一个独立的计数器。
+
+The first function I want to write is called "addCounter", and all it should do is to append a 0 at the end of the passed array.
+
+第一个方法我想写的是 addCounter(), 它需要做的是把一个 0 附加到传递进来的数组末尾。
+
+At first, I use the array "push" method to add a new item at the end of the array, and it works. However, we need to learn to avoid mutations in Redux, and I'm enforcing this by calling "deepFreeze" on the original array.
+
+首先，我使用数组的 push() 方法来添加一个新项到数组的末尾，工作正常。然而，我们需要学会在 Redux 中避免变化，现在我使用 deepFreeze() 方法强制原来的数组不能变化。
+
+Now my attempt to "push" does not work. It cannot add a new property to a frozen object. Instead of "push", I'm going to use the "concat" method, which does not modify the original array.
+
+现在 push() 方法不管用了。它不能添加一个新的属性到一个被冻结的对象上。为了替代 push()，我将使用 concat() 方法，它不会修改原来的数组。
+
+Now the tests pass without mutations, and I can also use the new ES6 array spread operator to write the same code in a more concise way.
+
+现在在没有变化的情况下通过了测试，而且我可以使用 ES6 的数组扩展运算符 ( ... ) 来简化代码。 
+
+My next function is called "removeCounter", and it accepts two arguments, an array of numbers, and the index of the number to skip from the array.
+
+我的下一个方法叫 removeCounter()，它接受两个参数，一个是数值数组，一个是需要从数组中移除的那个数值的索引。
+
+So if I've got three numbers and I'm passing 1 as the second argument, I expect to receive an array with two numbers with the second item skipped in the result array.
+
+所以如果我有 3 个数值，同时我传递 1 作为第二个参数，我期望得到一个只有 2 个数值的数组，原来数组中第二个值被跳过了。
+
+Usually, to delete an item from the array, I would use the "splice" method. However, splice is a mutation method, so you can't use it in Redux.
+
+通常情况下，从数组中删除一个元素，我会使用 splice() 方法。但是，splice() 是一个变化的方法，所以你不能在 Redux 中使用它。
+
+I'm going to "deepFreeze" the array object, and now I need to figure out a different way to remove an item from the array without mutating it.
+
+我将 deepFreeze() 数组对象，现在我需要找到另一个办法来从数组中移除一个元素，同时又不修改它。
+
+I'm using a method called "slice" here, and it doesn't have anything to do with "splice". It is not mutating, and it gives me a part of the array from some beginning to some end index.
+
+我在这里使用一个叫 slice() 的方法，它跟 splice() 没有任何关系。它不会改变 ( 原来的数组 )，它返回数组中从某个开始的索引，到某个结束的索引之间的那部分。
+
+So what I'm doing is that I'm taking the parts before the index I want to skip and after the index I want to skip, and I concatenate them to get a new array.
+
+所以我现在正在做的就是，拿到在我想要跳过的索引之前的那部分，和在我想要跳过的索引之后的那部分，然后连接它们，多而得到一个新的数组。
+
+Finally, instead of writing it as a method chain with "concat" calls, I can use the ES6 array spread operator to write it more concisely.
+
+最后，为了替代使用 concat() 进行链式方法调用的方式，我可以使用 ES6 的数组扩展运算符 ( ... ) 来简化。 
+
+Now that we implemented adding and removing counters, let's implement incrementing the counter. The "incrementCounter" function takes your arguments, the array and the index of the counter that should be incremented, so the return value has the same count of items, but one of them is incremented.
+
+现在我们已经实现了添加和删除计数器，让我们来实现递增计数器。incrementCounter() 方法，接收一个数组，和数组中计数值要递增的计数器的索引作为参数。返回值是具有相同元素个数的数组，但其中有一个元素被递增了。
+
+Directly setting the array value at index works, but this is a mutation. So if we add a "deepFreeze" call, it's not going to work anymore, so how do we replace a single value in the array without mutating it?
+
+直接设置数组中对应索引的值是可以工作的，但这是变化的。所以如果我们增加一个 deepFreeze() 调用，它就不再工作了。那么我们要怎样替换数组中的一个值同时又不修改它呢？
+
+It turns out the answer is really similar to how we remove an item. We want to take the slice before the index, concat it with a single item array with a new value, and then concat it with the rest of the original array.
+
+答案就是，它真的和我们从中移除一个元素很相似。我们想拿到索引之前的那部分，连接一个新值的元素，然后再连接原来数组中剩下的那部分。
+
+Finally, with the ES6 spread operator, we can spread over the left part of the array, specify the new item, and then spread over the right part of the original array, and this looks much nicer.
+
+最后，通过 ES6 的扩展操作符，我们可以扩展数组的左边部分，再指定一个新元素，然后扩展数数组的右边部分，看上去好多了。
+
+In this lesson, you learned how to use the "concat" method or the spread operator, and the "slice" method to add, remove, and change items in arrays without mutating them, and how to protect yourself with "deepFreeze" from mutation in your tests.
+
+在这节课，你学到了，如何使用 concat() 方法或是扩展运算符，和 slice() 方法，去添加，移除，修改数组中的元素却不改变它们，如何在你的测试中，使用 deepFreeze() 来保护自己被改变。
