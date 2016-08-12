@@ -26,7 +26,7 @@ To calculate the next state for a given key, it calls the corresponding reducer 
 
 The generated reducer will pass through the child reducer only if part of its state by the key. So if its state is a single object, it's only going to pass the relevant part, such as "todos" or "visibilityFilter", depending on the current key, and save the result in the next state by the same key.
 
-Finally, we use the array reduce operation with the empty object as the initial next state, that is being filled on every iteration until it is the return value of the whole reduce operation.
+Finally, we use the array reduce operation with the empty object as the initial next state, that is being filled on every iteration until it is the returned value of the whole reduce operation.
 
 In this lesson, you learned how to implement the "combineReducers" utility that comes with Redux from scratch.
 
