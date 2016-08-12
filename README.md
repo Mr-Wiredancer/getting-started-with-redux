@@ -56,9 +56,9 @@
 02 |Mr-Wiredancer | ✔️ |Mr-Wiredancer | ✔️|Mr-Wiredancer | ✔️
 03 |[baurine](https://github.com/baurine) | ✔️ |[baurine](https://github.com/baurine) | ✔️|[baurine](https://github.com/baurine) | ✔️
 05 | Mr-Wiredancer| ✔️ | [baurine](https://github.com/baurine) | ✔️
-06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️ | Mr-Wiredancer | 进行中
+06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️ | Mr-Wiredancer | ✔️
 07 |Mr-Wiredancer |✔️ | [baurine](https://github.com/baurine) |✔️
-08 |Mr-Wiredancer |✔️ |Mr-Wiredancer | ✔️| Mr-Wiredancer | 进行中
+08 |Mr-Wiredancer |✔️ |Mr-Wiredancer | ✔️| Mr-Wiredancer |  ✔️ 
 09 |[baurine](https://github.com/baurine)| ✔️ |[baurine](https://github.com/baurine) | 进行中
 10 |Mr-Wiredancer | ✔️ | | 
 11 |Mr-Wiredancer |✔️ | | 
