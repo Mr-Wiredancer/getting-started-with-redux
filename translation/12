@@ -1,0 +1,31 @@
+In this lesson, we will continue creating the reducer for Todo list application. The only action that this reducer currently handles is called 'ADD_TODO'. We also created a test that makes sure that when the reducer is called with an empty array as a state and the 'ADD_TODO' action, it returns an array with a single Todo element.
+
+在本次课程中，我们将会继续给我们的Todo List应用完善 reducer。当前的 reducer 能处理的 action 只有 ADD_TODO。我们也添加了相应的测试来确保，当传入参数 state 为空数组以及 action 为 ADD_TODO 的 reducer 被调用时，它返回一个只包含一个 Todo 的数组。
+
+In this lesson, we will follow the same approach to implement another action called 'TOGGLE_TODO'. We're going to start with a test again. This time, we're testing a different action and we have a different initial state. The state before calling the reducer now includes two different todos with id 0 and 1. Notice how both of them have their completed fields set to false.
+
+在本次课程中，我们将遵循同样的方法来实现一个新的 action -- TOGGLE_TODO。 我们同样从测试开始，这一次将测试新的 action 及新的初始 state。在调用 reducer 之前， state 包含了两个不同的 todo，id分别是0和1。注意设置这两个 todo 的 completed 字段为 false。
+
+Next, I declare the action. The action is an object with the type property which is a 'TOGGLE_TODO' string and the id of the todo that I want to be toggled. I declare the state that I expect to receive after calling the reducer. And it's pretty much the same as before calling the reducer. However, I expect the todo with the id specified in the action or 1 in this case. The change is completed field.
+
+接着，我声明了一个 action 对象。它包含 type 属性是字符串 'TOGGLE_TODO' 和 id 属性是我想要切换的 todo id。然后我声明了调用 reducer 之后期待返回的 state。它和我们调用的 reducer 之前 state 的长得基本一样。但是我们要把 action 指定 id 的 todo ，也就是 id 为 1 的 todo ,修改其 completed 为true。
+
+The reducer must be a pure function. So it is a matter of precaution, I called freeze on the state and the action. Finally, just like in the previous lesson, I'm asserting that the result of calling my reducer with the state before and the action is going to be deeply equal to the state after.
+
+reducer 一定要是纯函数。所以作为一种预防措施，我调用了 deepFreeze() 来确保 state 和 action 不被修改。最后，和上节课一样，我断言 reducer 在接收 stateBefore 和 action 之后的运行结果等于 stateAfter。
+
+Now my test is a function, so I need to call it at the end of the file. And if I run it, it fails because I have not implemented handling this action yet.
+
+现在我的测试是一个函数，所以我需要在文件的最后调用一下。然后运行测试，噢它失败了，那是因为我还没有在 reducer 中处理相应的 action。
+
+I'm adding a new switch case to my reducer. And I remember that I shouldn't change the original array, so I'm using the array map method to produce a new array.
+
+我添加一个新的 switch case 到我的 reducer 中，我记得要不应该修改它原来的数组，所以我用数组的 map() 函数来创建一个新的数组。
+
+The function I pass as an argument will be called for every todo. So if it's not a todo I'm looking for, I don't want to change it. I just return it as is. However, if the todo is the one we want to toggle, I'm going to return a new object that has all the properties of the original todo object thanks to the object spread operator, but also an inverted value of the completed field.
+
+我传入 map() 的函数会被每个 todo 所调用。因此要是当前的 todo 不是我 action 中指定的 todo，我不想要修改它，所以直接返回。要是当前的 todo 就是我想要切换的那个，我将返回一个新的 todo 对象，它将包含所有原 todo 的属性（感谢对象展开运算符），但 completed 字段的值将取反运算。
+
+Now both of our tests run successfully. And we have an implementation of the reducer that can add and toggle todos.
+
+现在我们所有的测试都通过了，并且我们实现了一个能够添加和切换 todo 的 reducer 。
