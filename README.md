@@ -44,12 +44,7 @@
 
 现任校对员：@[mrwiredancer](https://github.com/Mr-Wiredancer)
 
-# 任务认领情况与进度(deprecated)
-任务 | 译者 | 校对 | 进度
----- | ---- | ---- | ---
-04 | [lx7575000](https://github.com/lx7575000)| | 正在进行
-
-# 新的进度表
+# 进度表
 章节 | 听校| 状态 | 翻译| 状态 | 打轴 | 状态 
 ---- | ---- | ---- | ---- | --- | ---- | ---- 
 01 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️|[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
