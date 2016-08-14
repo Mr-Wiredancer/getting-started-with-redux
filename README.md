@@ -42,7 +42,7 @@
 
 现任管理员：@hymRedemption
 
-现任校对员：@[J.L](https://github.com/Mr-Wiredancer)
+现任校对员：@[mrwiredancer](https://github.com/Mr-Wiredancer)
 
 # 任务认领情况与进度(deprecated)
 任务 | 译者 | 校对 | 进度
@@ -52,23 +52,23 @@
 # 新的进度表
 章节 | 听校| 状态 | 翻译| 状态 | 打轴 | 状态 
 ---- | ---- | ---- | ---- | --- | ---- | ---- 
-01 |[J.L](https://github.com/Mr-Wiredancer) | ✔️ |[J.L](https://github.com/Mr-Wiredancer) | ✔️|[J.L](https://github.com/Mr-Wiredancer) | ✔️
-02 |[J.L](https://github.com/Mr-Wiredancer) | ✔️ |[J.L](https://github.com/Mr-Wiredancer) | ✔️|[J.L](https://github.com/Mr-Wiredancer) | ✔️
+01 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️|[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+02 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️|[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 03 |[baurine](https://github.com/baurine) | ✔️ |[baurine](https://github.com/baurine) | ✔️|[baurine](https://github.com/baurine) | ✔️
 04 |
-05 | [J.L](https://github.com/Mr-Wiredancer)| ✔️ | [baurine](https://github.com/baurine) | ✔️ | [J.L](https://github.com/Mr-Wiredancer) | 进行中
-06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️ | [J.L](https://github.com/Mr-Wiredancer) | ✔️
-07 |[J.L](https://github.com/Mr-Wiredancer) |✔️ | [baurine](https://github.com/baurine) |✔️ | [J.L](https://github.com/Mr-Wiredancer) | 进行中
-08 |[J.L](https://github.com/Mr-Wiredancer) |✔️ |[J.L](https://github.com/Mr-Wiredancer) | ✔️| [J.L](https://github.com/Mr-Wiredancer) |  ✔️ 
+05 | [mrwiredancer](https://github.com/Mr-Wiredancer)| ✔️ | [baurine](https://github.com/baurine) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
+06 | [baurine](https://github.com/baurine) |✔️ | [baurine](https://github.com/baurine) |✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+07 |[mrwiredancer](https://github.com/Mr-Wiredancer) |✔️ | [baurine](https://github.com/baurine) |✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
+08 |[mrwiredancer](https://github.com/Mr-Wiredancer) |✔️ |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️| [mrwiredancer](https://github.com/Mr-Wiredancer) |  ✔️ 
 09 |[baurine](https://github.com/baurine)| ✔️ |[baurine](https://github.com/baurine) | 进行中
-10 |[J.L](https://github.com/Mr-Wiredancer) | ✔️ |[zhaozhiming](https://github.com/zhaozhiming) | 进行中
-11 |[J.L](https://github.com/Mr-Wiredancer) |✔️ |[J.L](https://github.com/Mr-Wiredancer) | 进行中 
-12 |[baurine](https://github.com/baurine) |✔️ | [ZED](https://github.com/[J.L](https://github.com/Mr-Wiredancer)) | 进行中 
+10 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[zhaozhiming](https://github.com/zhaozhiming) | 进行中
+11 |[mrwiredancer](https://github.com/Mr-Wiredancer) |✔️ |[mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中 
+12 |[baurine](https://github.com/baurine) |✔️ | [ZED](https://github.com/[mrwiredancer](https://github.com/Mr-Wiredancer)) | 进行中 
 13 |[baurine](https://github.com/baurine) |✔️ | | 
 14 |[baurine](https://github.com/baurine) |✔️ | | 
 15 |[baurine](https://github.com/baurine)|✔️ | | |
 16 |[baurine](https://github.com/baurine)|进行中 | | |
-17 |[J.L](https://github.com/Mr-Wiredancer)|进行中
+17 |[mrwiredancer](https://github.com/Mr-Wiredancer)|进行中
 18 |[baurine](https://github.com/baurine)|进行中
 19 |[baurine](https://github.com/baurine)|进行中
 20 |
