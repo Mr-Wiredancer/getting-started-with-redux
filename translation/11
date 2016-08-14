@@ -1,0 +1,92 @@
+Just like in the previous two lessons, I'm using "expect" library to make test assertions and "deep-freeze" library to prevent accidental mutations in my code.
+就像在前两节课一样，我使用 expect 库来进行测试断言，还有 deep-freeze 库来避免我的代码对对象作出意外的修改。
+
+In this lesson, I will create the reducer for a todo list application whose state is described an array of todos.
+在这节课中，我会为一个 todo 列表应用创造一个 reducer, 我们会用一个 todo 的数组来描述这个应用的状态。
+
+Just to remind you what a reducer is, it's a pure function you write to implement the update logic of your application -- that is, how the next state is calculated given the current state and the action being dispatched.
+提醒一下，一个 reducer 就是一个纯函数，用来实现应用的更新逻辑 —— 也就是给定当前状态和被分发的动作，如何计算出下一个状态。
+
+Before writing a reducer, I want to have a way of knowing whether its code is correct, so I'm starting by writing a test for it.
+在开始实现一个 reducer 之前，我希望有一种方式可以知道我的代码是否正确，所以我会先从为 reducer 写测试开始。
+
+I'm declaring two variables, the "stateBefore", which is an empty array, and the action being dispatched, which is an action describing user adding a new todo with some ID and a text.
+我现在定义两个变量，stateBefore 是一个空数组，还有被分发的动作，它描述了用户添加一个新的带有 ID 和内容的 todo。
+
+I am also declaring the state I expect to get after calling the reducer.
+我还声明了在调用 reducer 之后，我期望得到的状态。
+
+And like state before, it is an array, but this time, it has a single element representing the todo that was just added.
+就像之前的状态一样，它是一个数组，但不同的是，这一次它会有一个元素代表着刚刚添加的 todo。
+
+So it has the same ID and the text as the action object.
+所以它会有和动作对象一样的 ID 和内容。
+
+It also has an additional field called, "completed," that I want to be initialized to be "false".
+它还有一个额外的属性叫作 "complted"，我希望把它初始化为 false。
+
+We want to make sure that the reducer is a pure function, so I'm calling deepFreeze both on the state and the action.
+我们希望保证 reducer 是一个纯函数，所以我会对状态和动作调用 deepFreeze()。
+
+Finally, I am ready to use the expect library to verify that if I call the "todos" reducer with the state before and the action object, I'm going to get the result that is deeply equal to the "stateAfter" I just declared.
+最后，我已经准备好使用 expect 库来验证，如果我对前一个状态和动作对象调用 todos reducer，那么我得到的结果将会和我刚刚声明的 stateAfter 深层相等.
+
+This concludes my first test.
+好了，这就是我的第一个测试。
+
+Now I can call it just like a regular JavaScript function.
+现在，我可以像调用一个普通 JavaScript 函数一样调用它。
+
+ And if it doesn't throw in the expect call, I'm going to see a message saying that the tests have passed.
+ 而且，如果它不抛出异常的话，我会看到一个信息，表明测试已经通过。
+
+Of course, it fails because the reducer is not implemented yet.
+当然，这个测试现在无法通过，因为 reducer 还没有被实现。
+
+It's an empty function.
+它是一个空的函数。
+
+So it returns undefined instead of the array with a single item that I expect in the test.
+所以它现在返回 undefined，而不是我所期望的一个带有单一元素的数组。
+
+To fix this, I would need my reducer to take a look at the action type property, which is a string.
+为了修复这个问题，我会需要 reducer 去检查动作的 type 属性，这个属性的值是个字符串。
+
+When it matches the "ADD_TODO" string, which I specify as the action type in my test, to satisfy the test I need to return a new array which includes all items from the original array but also a new todo item that has its ID and text copied from the action object and a "completed" field set to "false".
+当它匹配 "ADD_TODO" 字符串时，也就是我在测试中指明的动作类型，要满足测试条件，我需要返回一个新的数组。这个数组包含了原有数组的所有元素，还有一个新的 todo 元素，这个元素的 ID 和 text 是从动作对象那里拷贝过来的，同时它的 completed 属性会被设为 false。
+
+Finally, I add a default case to my switch statement because every reducer has to return the current state for any unknown action.
+最后，我给 switch 语句加了一个缺省条件，因为在遇到未知的动作时，每一个 reducer 都需要返回当前的状态。
+
+Now the tests run successfully.
+现在测试就通过了。
+
+Let's recap the data flow in this example to see why.
+让我们回顾一下这个例子里的数据流，来看一下为什么测试会通过。
+
+First, I create the state array, which is an empty array, and the action object inside my test function.
+首先，在我的测试函数里，我创建了一个空的状态数组，还有动作对象。
+
+I'm passing them as arguments to my reducer function, called, "todos."
+我将它们以参数的形式传递给我的 reducer 函数 todos。
+
+The "todos" reducer accepts the state and the action as arguments and takes a look at the action type.
+todos reducer 接受状态和动作作为参数，然后检查动作的类型。
+
+In this case, the action type is a string saying "ADD_TODO",  so it matches the switch case inside the reducer.
+在这个例子中，动作的类型是 "ADD_TODO"，所以它跟 reducer 中的 switch 条件是匹配的。
+
+The reducer returns a new array which contains the items from the old array and the new item representing the added todo.
+reducer 返回了一个新数组，这个数组包含了原来数组的元素，以及一个代表被添加的 todo 的新元素。
+
+However, the state we passed from the test was actually an empty array, so, at the end, we're going to get an array with a single item, which is the new todo.
+不过，测试中我们传进去的状态是个空数组，所以最后，我们会得到一个只有单一元素的数组，而这个元素就是新的 todo。
+
+Finally, we compare the return value to an array with a single todo item to make sure that the reducer works as intended.
+最后，我们将返回值和只有一个 todo 元素的数组对比，确保 reducer 像我们预想的那样运行。
+
+The equality check passes.
+这里的等价检查通过了。
+
+So this makes the test successful.
+这样测试就全部通过了。
