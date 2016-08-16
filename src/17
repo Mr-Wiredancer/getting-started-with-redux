@@ -1,10 +1,12 @@
 In the previous lessons, we learned how to split the root reducers into many smaller reducers that manage parts of the state tree.
 
-And now we have a ready "todoApp" reducer that handles all the actions of our simple ToDo application. So now it's time to implement the view layer. I'm going to use React in this example.
+And now we have a ready "todoApp" reducer that handles all the actions of our simple ToDo application. So now it's time to implement the view layer. And I'm going to use React in this example.
 
 I'm adding react and redact-dom packages from the Facebook CDN. I'm also adding a div with ID "root", which is where I'm going to render my react application.
 
-And the implementation of the render method is going to use react, so it will call "ReactDom.render" for some "TodoApp" component I haven't written yet. And it renders it into the div I created inside the HTML. It's div with ID called "root".
+imilar to the React counter example from the eighth lesson, I declare a "render" function that is going to update DOM in response to the current application state. And I'm going to subscribe to the store changes and call "render" whenever the store changes, and once to render the initial state.
+
+And the implementation of the render method is going to use react, so it will call "ReactDom.render" for some "TodoApp" component I haven't written yet. And it renders it into the div I created inside the HTML. So it's the div with ID called "root".
 
 React provides a base class for all components. So I'm grabbing from the react object called "reactComponent". And I'm declaring my own "TooApp" component that extends the react base component. This component is only going to have a "render" function and is going to return a "div". And inside the "div", I'm going to place a botton saying "Add Todo".
 
@@ -26,7 +28,7 @@ For the text field, it uses the current input value and it passes an incrementin
 
 It is common for react components to dispatch actions in Redux apps. However, it is equally important to be able to render the current state. My "TodoApp" component assumes that it's going to receive todos as a prop, and it maps over the todos to display a list of them using the ID as a key.
 
-This component is being rendered in the "render" function that runs any time the state changes and initially. The render function reads the current state of the store and passes the " todos" array that it gets from the current state of this store to the "TodoApp" component as a prop.
+This component is being rendered in the "render" function that runs any time the store state changes and initially. The render function reads the current state of the store and passes the " todos" array that it gets from the current state of this store to the "TodoApp" component as a prop.
 
 The "render" function is called on every store change so the "todos" prop is always up to date. This was the rendering part of the redux flow. Let's recap how mutations work in Redux.
 
@@ -36,7 +38,7 @@ And in our case, this is the "todoApp" reducer, which we obtained by combining "
 
 It matches the action type and the switch statement. And if the action type is "ADD_TODO", and indeed, it is equal to "ADD_TODO" string. In this case, it will call the child "todo" reducer, passing it undefined, because there is no state for a new todo that it can pass, and the action.
 
-We have a similar switch statement inside the "todo" reducer and the action type is "ADD_TODO". So It returns the initial state of the todo with the ID and text from the action and the "completed" field set to false.
+And we have a similar switch statement inside the "todo" reducer and the action type is "ADD_TODO". So It returns the initial state of the todo with the ID and text from the action and the "completed" field set to false.
 
 The "todos" reducer that called it was returned a new array with all existent items and the new item added at the very end. So it adds a need todo to the current state.
 
