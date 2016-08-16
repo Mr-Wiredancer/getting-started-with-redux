@@ -10,7 +10,7 @@ Again, the "TodoApp" component acts as a container component for the "AddTodo". 
 
 The last component I want to extract today is the footer, which contains all these three "FilterLink"s. I'm creating a new functional component called, "Footer." And I'm not sure which props it needs, so I skip them. And  I paste the markup. It seems that the "FilterLink" need the "visibilityFilter", so I add it as a prop.
 
-I would like the "Footer" and the "FilterLink" to be presentational components. However, currently the "FilterLink" includes a "store.dispatch" call. I am replacing it with an "onClick" call. And I pass the "filter" as the single parameter for the calling component's convenience. I add "onClick" to the props.
+I would like the "Footer" and the "FilterLink" to be presentational components. However, the "FilterLink" currently includes a "store.dispatch" call. I am replacing it with an "onClick" call. And I pass the "filter" as the single parameter for the calling component's convenience. I add "onClick" to the props.
 
 Now I need to specify it every time "FilterLink" is used. So I add "onFilterClick" to the footer. I pass "onClick" equals "onFilterClick" for every "FilterLink" in the "Footer", so whatever we pass to the "Footer" as "onFilterClick" prop is going to end up in the "FilterLink" as "onClick".
 
