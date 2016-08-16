@@ -11,7 +11,7 @@ Before writing a reducer, I want to have a way of knowing whether its code is co
 在开始实现一个 reducer 之前，我希望有一种方式可以知道我的代码是否正确，所以我会先从为 reducer 写测试开始。
 
 I'm declaring two variables, the "stateBefore", which is an empty array, and the action being dispatched, which is an action describing user adding a new todo with some ID and a text.
-我现在定义两个变量，stateBefore 是一个空数组，还有被分发的动作，它描述了用户添加一个新的带有 ID 和内容的 todo。
+我现在定义两个变量我现在定义两个变量，一个是 stateBefore, 它是一个空数组，另一个是被分发的动作，它描述了用户添加一个新的带有 ID 和内容的 todo。
 
 I am also declaring the state I expect to get after calling the reducer.
 我还声明了在调用 reducer 之后，我期望得到的状态。
