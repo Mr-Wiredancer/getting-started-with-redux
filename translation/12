@@ -8,7 +8,7 @@ In this lesson, we will follow the same approach to implement another action cal
 
 Next, I declare the action. The action is an object with the type property which is a 'TOGGLE_TODO' string and the id of the todo that I want to be toggled. I declare the state that I expect to receive after calling the reducer. And it's pretty much the same as before calling the reducer. However, I expect the todo with the id specified in the action or 1 in this case. The change is completed field.
 
-接着，我声明了一个 action 对象。它包含值为字符串 'TOGGLE_TODO' 的 type 属性是和值为想要切换 todo 的 id 属性。然后我声明了调用 reducer 之后期待返回的 state。它和我们调用的 reducer 之前 state 的长得基本一样。但是我们要把 action 指定 id 的 todo ，也就是 id 为 1 的 todo ,修改其 completed 为true。
+接着，我声明了一个 action 对象。这个对象的 type 属性是字符串 "TOGGLE_TODO"，而它的 id 属性则是我所想要完成/撤销的 todo 的 id。然后我声明了调用 reducer 之后期待返回的 state。它和我们调用的 reducer 之前 state 的长得基本一样。但是我们要把 action 指定 id 的 todo ，也就是 id 为 1 的 todo ,修改其 completed 为true。
 
 The reducer must be a pure function. So it is a matter of precaution, I called freeze on the state and the action. Finally, just like in the previous lesson, I'm asserting that the result of calling my reducer with the state before and the action is going to be deeply equal to the state after.
 
@@ -20,7 +20,7 @@ Now my test is a function, so I need to call it at the end of the file. And if I
 
 I'm adding a new switch case to my reducer. And I remember that I shouldn't change the original array, so I'm using the array map method to produce a new array.
 
-我添加一个新的 switch case 到 reducer 中，记得不要修改它原来的数组，所以我用数组的 map() 函数来创建一个新的数组。
+我现在添加一个新的 switch 条件到 reducer 中。这时我想起来我不应该去修改原有的数组，所以我用数组的 map() 函数来创建一个新的数组。
 
 The function I pass as an argument will be called for every todo. So if it's not a todo I'm looking for, I don't want to change it. I just return it as is. However, if the todo is the one we want to toggle, I'm going to return a new object that has all the properties of the original todo object thanks to the object spread operator, but also an inverted value of the completed field.
 
