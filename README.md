@@ -69,8 +69,8 @@
 20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
-23 | 
-24 |
+23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
+24 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
 25 |
 26 | 
 27 |
