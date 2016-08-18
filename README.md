@@ -68,9 +68,9 @@
 19 |[baurine](https://github.com/baurine)|✔️
 20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
-22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
+22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
-24 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
+24 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 25 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
 26 | 
 27 |
