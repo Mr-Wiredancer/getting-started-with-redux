@@ -22,7 +22,7 @@ The first component I'm looking at is called "AddTodo". Frankly, I can classify 
 
 However, in this case, I'd rather keep them together because there isn't any state, the UI is very simple. It's hard to imagine any other behavior other than dispatching the "ADD_TODO" action.
 
-The second component rendered inside the "TodoApp" is called the "visibleTodoList". And this time, it is a proper container component that subscribes to store store and re-renders the "TodoList" any time the store state changes. It calculates the visible todos from the current Redux store state, the todos and the "visibilityFilter" fields. It passes them as the "todos".
+The second component rendered inside the "TodoApp" is called the "visibleTodoList". And this time, it is a proper container component that subscribes to the store and re-renders the "TodoList" any time the store state changes. It calculates the visible todos from the current Redux store state, the todos and the "visibilityFilter" fields. And it passes them as the "todos".
 
 And when the todos are clicked, it's going to dispatch an action with the type "TOGGLE_TODO" and the ID of the respective ToDo. The actual rendering here is performed by the "TodoList" component that just renders the todos passed through it as prop and binds their clicks through the "onTodoClick" prop.
 
