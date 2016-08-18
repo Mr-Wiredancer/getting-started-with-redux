@@ -1,8 +1,8 @@
-In the previous lesson, we got rid of the top-level store variable and instead started passing the store as a prop to the "TodoApp" component. So every component below receives the store as a prop. And w e even have to do this for presentational components because sometimes they contain container components that need the store to subscribe to the changes.
+In the previous lesson, we got rid of the top-level store variable and instead started passing the store as a prop to the "TodoApp" component. So every component below receives the store as a prop. And we even have to do this for presentational components because sometimes they contain container components that need the store to subscribe to the changes.
 
 We have to write a lot of boiler plate code to pass the store down as a prop. But there is another way, using the advanced React feature called "Context".
 
-I'm creating a new component called "Provider". And From its "render" method, it just returns whatever its child is. So we can wrap any component in a "Provider", and it's going to render that component.
+I'm creating a new component called "Provider". And from its "render" method, it just returns whatever its child is. So we can wrap any component in a "Provider", and it's going to render that component.
 
 I'm changing the "render" call to render a "TodoApp" inside the "Provider". And I'm moving the "store" prop from the "TodoApp" to the "Provider" component. The "Provider" component will use the React advanced Context feature to make the store available to any component inside it, including grandchildren.
 
@@ -14,7 +14,7 @@ However, there is an important condition for the context to work. And this condi
 
 The container components currently access store by props, but we're going to change this to read the store from React context. And to do that, we just wrap it to "this.context". Similarly, in the "render" method, I'm also going to read the store from the context instead of the props.
 
-Finally, the context is opt-in for the receiving components, too, so you have to specify a special field called "contextTypes", which are similar to "childContextTypes". But, in this case, we are specifying which context we want to receive and not pass down. If you forget to declare the "contextTypes", the component will not receive the relevant context, so it is essential to remember to declare them.
+Finally, the context is opt-in for the receiving components, too. So you have to specify a special field called "contextTypes", which are similar to "childContextTypes". But, in this case, we are specifying which context we want to receive and not pass down. If you forget to declare the "contextTypes", the component will not receive the relevant context, so it is essential to remember to declare them.
 
 What about the functional components that don't have "this"? It turns out that they also receive the context but as a second argument after the props. So I'm destructuring the second argument and getting the store from there. And the second argument is the context.
 
