@@ -1,6 +1,6 @@
 In the previous lesson, we separated the presentational components from the main container component. The "TodoApp" specifies the behaviors, which is what happens when "Add Todo" button is clicked, how the todos are selected, what happens when a single todo is being clicked, and what happens when a footer link is clicked.
 
-And the components, such as "AddTodo", the "TodoList", the "Todo" itself, the "Footer", and the "FilterLink", they don't dispatch actions. They call their callbacks in the props. They are only responsible for the looks but not for the behavior.
+And the components, such as "AddTodo", the "TodoList", the "Todo" itself, the "Footer", and the "FilterLink", they don't dispatch actions. They call their callbacks in the props. So they are only responsible for the looks but not for the behavior.
 
 The downside of this approach is that I have to pass a lot of props down the tree even when the intermediate components don't really use them.
 
