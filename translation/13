@@ -1,29 +1,29 @@
 In the previous lesson we created a reducer that can handle two actions, adding a new todo, and toggling an existing todo. Right now, the code to update the todo item or to create a new one is placed right inside of the todos reducer.
 
-在上节课程中，我们创建了一个可以持有两个 action 的 reducer：增加一个新的 todo 和切换已有的 todo。现在，在 todos 的 reducer 中，可以看到更新一项 todo 或创建一个新的 todo 的这样一串代码。
+在上节课程中，我们创建了一个可以处理两个 action 的 reducer：增加一个新的 todo 和完成/撤销已有的 todo。而现在，这段更新／添加一个 todo 的代码，是放在 todos 这个 reducer 里面的。
 
 This function is hard to understand because it makes us two different concerns, how the todos array is updated, and how individual todos are updated. This is not a problem unique to Redux. Any time a function does too many things, you want to extract other functions from it, and call them so that every function only addresses a single concern.
 
-这个方法非常难以理解，因为这里有两点让我们很困惑：todo 列表是怎么更新的以及每个独立的 todo 又是怎么更新的。这在 Redux 中不是一个独特的问题。任何时间，如果一个方法做了太多事情，我们都想从中提取出多个方法，然后再调用它们，以至每一个方法都只专注做一件事情。
+这个函数令人费解，因为我们要考虑两个不同的问题：todos 数组是如何被更新的；以及每个独立的 todo 是如何被更新的。不仅仅是在 Redux 中有这个问题，任何时候，如果一个函数做了太多事情，你都会想从中提取出其他函数，然后再调用它们，这样每一个函数就只需要解决一个问题。
 
 In this case, I decided that creating and updating a todo in response to an action is a separate operation, and needs to be handled by a separate function called "todo". As a matter of convention, I decided that it should also accept two arguments, the current state and the action being dispatched, and it should return the next state.
 
-在这种情况下，我打算创建和更新一个 todo 作为一个 action 的响应，这是一个单独的操作，并且这个操作需要被一个叫 todo 的单独方法处理。由于习惯问题，我打算让它接收两个参数，当前的状态和一个正在派发的 action，以及这个方法应该返回下一个状态。
+在这个例子中，我认为根据动作来创建和更新一个 todo 是个独立的操作，这个操作应该用一个独立的 todo 函数去处理。出于 Redux 的约定，我决定让这个 todo 函数接受两个参数：当前状态和被分发的动作，同时它应该返回下一个状态。
 
 But in this case, this state refers to the individual todo, and not to the list of todos. Finally, there is no magic in Redux to make it work. We extracted the "todo" reducer from the "todos" reducer, so now we need to call it for every todo, and assemble the results into an array.
 
-但是在这种情况下，这个状态被关联到一个单独的 todo，不是一个 todo 的列表。最后它就可以成功的运行了。我们已近从 "todos" reducer 中提取了 "todo" reducer，所以现在我们需要在每一个 todo 中去调用它，并且将结果合并到一个数组当中。
+但是在 todo 这个函数中，状态指向的是某个具体的 todo，而不是整个 todo 的列表。最后，不出意外，在 Redux 中它就可以顺利的运行了。我们已近从 "todos" reducer 中提取了 "todo" reducer，所以现在我们需要对每一个 todo 调用这个函数，然后将结果合并到一个数组当中。
 
 While this is not required in this particular example, I suggest that you always have the default case where you return the current state to avoid all bugs in the future. The part described in this lesson is pervasive in Redux's development, and is called reducer composition.
 
-虽然在这个例子中我们没必要这样做，但我还是建议你都有一个默认的 case 返回当前的状态，以避免以后产生 bug。这节课程中所描述的内容在 Redux 的开发中是无处不在的，我们称它叫 reducer composition.
+虽然在这个例子中我们没必要这样做，但我还是建议你都有一个默认的 case 返回当前的状态，以避免以后产生 bug。这节课程中所描述的内容在 Redux 的开发中是无处不在的，我们称它叫 reducer 组合。
 
 Different reducers specify how different parts of the state tree are updated in response to actions. Reducers are also normal JavaScript functions, so they can call other reducers to delegate and abstract a way handling of updates of some parts of this tree they manage.
 
-不同的 reducer 定义了状态树的不同分支是如何对 actions 的响应作出更新的。Reducers 是普通的 JavaScript 函数，所以我们可以调用其他 reducers 作为代理，抽象出一个方法，处理他们所管理的分支的更新。
+不同的 reducer 定义了状态树的不同分支是如何根据动作作出更新。Reducers 是普通的 JavaScript 函数，所以我们可以调用其他的 reducers 作为代理，抽象出一种方式，来处理对它们所管理的状态树的某些分支的更新。
 
-This pattern can be applied many times, and while there is still a single top level reducer managing the state of your app, you will find it convenient to express it as many reducers call on each other, each contributing to a part of the application state tree.
+This pattern can be applied many times, and while there is still a single top level reducer managing the state of your app, you will find it convenient to express it as many reducers calling each other, each contributing to a part of the application state tree.
 
-这种方式可以被应用很多次，而且它们还是一个单独的高阶 reducer 用来管理你的 app 的状态，你会发现当有多个 reducer 在互相调用，每一个都应用到了状态树的部分分支，用这种方式表述会非常方便。
+这种方式可以被应用很多次，虽然还是有一个单独的上层 reducer 来管理你的应用的状态，但你会发现当，将它表述为多个 reducer 互相调用，每一个 reducer 分别负责状态树的某一个分支，这种方式是非常方便的。
 
 
