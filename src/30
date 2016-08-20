@@ -1,6 +1,6 @@
 So far we have covered the container components, the presentational components, the reducers, and the store. But we have not covered the concept of action creators, which you might see in the Redux talks and examples.
 
-Let's consider the following example. I dispatch the "ADD_TODO" action from inside the "button" oli ck handler. And this is fine. However, it references the "nextTodoId" variable, which I declared alongside the "AddTodo" component.
+Let's consider the following example. I dispatch the "ADD_TODO" action from inside the "button onClick" handler. And this is fine. However, it references the "nextTodoId" variable, which I declared alongside the "AddTodo" component.
 
 Normally, it would be local. However, what if another component wants to dispatch the "ADD_TODO" action? It would need to have the access to "nextTodoId" somehow. And while I could make this variable global, it's not a very good idea.
 
