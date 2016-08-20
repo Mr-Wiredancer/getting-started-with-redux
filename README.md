@@ -69,11 +69,11 @@
 20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
-23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
+23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 24 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
-25 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
-26 |  [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
-27 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
-28 |[mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
+25 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+26 |  [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+27 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+28 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 29 |[mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
 30 | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
