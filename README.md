@@ -58,7 +58,7 @@
 09 |[baurine](https://github.com/baurine)| ✔️ |[baurine](https://github.com/baurine) | ✔️
 10 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[zhaozhiming](https://github.com/zhaozhiming) | ✔️
 11 |[mrwiredancer](https://github.com/Mr-Wiredancer) |✔️ |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️  
-12 |[baurine](https://github.com/baurine) |✔️ | [ZED](https://github.com/zedzhang)| ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer)) | ✔️ 
+12 |[baurine](https://github.com/baurine) |✔️ | [ZED](https://github.com/zedzhang)| ✔️ | 
 13 |[baurine](https://github.com/baurine) |✔️ |[alfredcc](https://github.com/alfredcc) | 进行中 
 14 |[baurine](https://github.com/baurine) |✔️ |[zhaozhiming](https://github.com/zhaozhiming) | 进行中
 15 |[baurine](https://github.com/baurine)|✔️ | | |
