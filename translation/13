@@ -20,10 +20,10 @@ While this is not required in this particular example, I suggest that you always
 
 Different reducers specify how different parts of the state tree are updated in response to actions. Reducers are also normal JavaScript functions, so they can call other reducers to delegate and abstract a way handling of updates of some parts of this tree they manage.
 
-不同的 reducer 定义了状态树的不同分支是如何根据动作作出更新。Reducers 是普通的 JavaScript 函数，所以我们可以调用其他的 reducers 作为代理，抽象出一种方式，来处理对它们所管理的状态树的某些分支的更新。
+不同的 reducer 定义了状态树的不同部分是如何根据动作作出更新。Reducers 是普通的 JavaScript 函数，所以我们可以调用其他的 reducers 作为代理，抽象出一种方式，来处理对它们所管理的状态树的某些部分的更新。
 
 This pattern can be applied many times, and while there is still a single top level reducer managing the state of your app, you will find it convenient to express it as many reducers calling each other, each contributing to a part of the application state tree.
 
-这种方式可以被应用很多次，虽然还是有一个单独的上层 reducer 来管理你的应用的状态，但你会发现当，将它表述为多个 reducer 互相调用，每一个 reducer 分别负责状态树的某一个分支，这种方式是非常方便的。
+这种方式可以被应用很多次，虽然还是有一个单独的上层 reducer 来管理你的应用的状态，但你会发现当，将它表述为多个 reducer 互相调用，每一个 reducer 分别负责状态树的某一个部分，这种方式是非常方便的。
 
 
