@@ -1,0 +1,48 @@
+In the previous lesson we learned how to use the reducer composition pattern to let different reducers handle different parts of the state tree, and then combine their results.
+在上一课中，我们学习了如何使用组合 reducer 的模式来让不同的 reducer 处理状态树的不同部分，然后再合并它们的结果。
+
+In fact this pattern is so common that it's present in most Redux applications.
+实际上，这种模式是如此的常见，以至于在大部分 Redux 应用中它都存在。
+
+And this is why Redux provides a function called "combineReducers" that lets you avoid writing this code by hand.
+而这就是为什么，Redux 提供了一个 combineReducers 函数，来让你不用自己从头写这段代码。
+
+And instead, it generates the top level reducer for you.
+combineReducers 函数会帮你生成这个最高阶的 reducer。
+
+The only argument to "combineReducers" is an object.
+combineRecuers 函数的唯一参数是一个对象。
+
+And this object lets me specify the mapping between the state field names, and the reducers managing them.
+这个对象让我可以声明，状态对象的字段的名称，以及对应的管理该字段的 reducer 之间的映射关系。
+
+The return value of the "combineReducers"'s call is a reducer function, which is pretty much equivalent to the reducer function I wrote by hand previously.
+combineReducers 函数的返回值是一个 reducer 函数，它基本上等价于我之前手写的 reducer 函数。
+
+The keys of the object I configure "combineReducers" with correspond to the fields of the state object is going to manage.
+我传递给 combineReducers 的对象的键，对应了它所返回的 reducer 所要管理的状态对象的字段。
+
+The values of the object I passed to "combineReducers", are the reducers you should call to update the corresponding state fields.
+我传递给 combineReducers 的对象的值，就是更新对应的状态字段时所需要调用的 reducer。
+
+This "combineReducers" call says that the "todos" field inside the state object managers will be updated by the "todos" reducer, and the "visibilityFilter" field inside the state object will be updated by calling the "visibilityFilter" reducer.
+这个 combineReducers 函数调用的意思是，状态对象的 todos 属性会被 todos 这个 reducer 更新，而状态对象的 visibilityFilter 属性会被 visibilityFilter 这个 reducer 更新。
+
+And the results will be assembled into a single object.
+然后这些更新的结果会被合并到一个单一的对象里。
+
+ In other words, it behaves pretty much exactly as the function commented down below.
+ 换句话说，它的行为基本上就像下面注释里所写的一样。
+
+Finally, I will establish a useful convention.
+最后，我要提出一个非常有用的约定。
+
+I will always name my reducers after the state keys they manage.
+在任何情况下，我都会以 reducer 所要管理的状态对象的键来命名我的 reducer。
+
+Since the key names and the value names are now the same, I can omit the values thanks to the ES6 object literal shorthand notation.
+这样，归功于 ES6 的对象属性的简洁表示法，我就可以忽略掉值，因为键和值的名字都是相同的。
+
+In this lesson, you learned how to generate a simple reducer that calls many reducers to manage parts of its state by using the "combineReducers" utility function.
+在本课中，你学习了如何使用 combineReducers 工具函数，来生成一个简单的 reducer，这个 reducer 会调用多个 reducer 来分别管理状态树的某个部分。
+
