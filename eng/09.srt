@@ -1,0 +1,320 @@
+﻿1
+00:00:00,300 --> 00:00:01,180
+In this lesson,
+
+2
+00:00:01,180 --> 00:00:04,040
+I use Expect Library to make test assertions,
+
+3
+00:00:04,140 --> 00:00:05,920
+and "deepFreeze" to make sure that
+
+4
+00:00:05,920 --> 00:00:08,380
+my code is free of mutations.
+
+5
+00:00:08,920 --> 00:00:09,620
+Let's say that
+
+6
+00:00:09,620 --> 00:00:13,020
+I want to implement a counter list application.
+
+7
+00:00:13,420 --> 00:00:15,260
+I would need to write a few functions
+
+8
+00:00:15,260 --> 00:00:17,100
+that operate on its state,
+
+9
+00:00:17,220 --> 00:00:20,580
+and its state is an array of JavaScript numbers
+
+10
+00:00:20,580 --> 00:00:23,040
+representing the individual counters.
+
+11
+00:00:23,440 --> 00:00:26,800
+The first function I want to write is called "addCounter",
+
+12
+00:00:26,900 --> 00:00:30,140
+and all it should do is to append a 0
+
+13
+00:00:30,220 --> 00:00:32,140
+at the end of the passed array.
+
+14
+00:00:33,340 --> 00:00:35,960
+At first, I use the array "push" method
+
+15
+00:00:35,960 --> 00:00:38,660
+to add a new item at the end of the array,
+
+16
+00:00:38,960 --> 00:00:39,920
+and it works.
+
+17
+00:00:40,100 --> 00:00:43,800
+However, we need to learn to avoid mutations in Redux,
+
+18
+00:00:43,880 --> 00:00:45,400
+and I'm enforcing this
+
+19
+00:00:45,500 --> 00:00:48,460
+by calling "deepFreeze" on the original array.
+
+20
+00:00:49,240 --> 00:00:51,560
+Now my attempt to "push" does not work.
+
+21
+00:00:51,940 --> 00:00:55,400
+It cannot add a new property to a frozen object.
+
+22
+00:00:55,940 --> 00:00:59,000
+Instead of "push", I'm going to use the "concat" method,
+
+23
+00:00:59,220 --> 00:01:02,180
+which does not modify the original array.
+
+24
+00:01:03,120 --> 00:01:05,600
+Now the tests pass without mutations,
+
+25
+00:01:05,740 --> 00:01:09,700
+ and I can also use the new ES6 array spread operator
+
+26
+00:01:09,760 --> 00:01:12,480
+to write the same code in a more concise way.
+
+27
+00:01:15,060 --> 00:01:17,440
+My next function is called "removeCounter",
+
+28
+00:01:17,440 --> 00:01:19,560
+and it accepts two arguments,
+
+29
+00:01:19,560 --> 00:01:21,240
+an array of numbers, 
+
+30
+00:01:21,240 --> 00:01:24,600
+and the index of the number to skip from the array.
+
+31
+00:01:24,780 --> 00:01:27,100
+So if I've got three numbers
+
+32
+00:01:27,180 --> 00:01:29,820
+ and I'm passing 1 as the second argument,
+
+33
+00:01:29,900 --> 00:01:32,620
+I expect to receive an array with two numbers
+
+34
+00:01:32,700 --> 00:01:35,560
+with the second item skipped in the result array.
+
+35
+00:01:36,440 --> 00:01:38,800
+Usually, to delete an item from the array,
+
+36
+00:01:38,800 --> 00:01:40,700
+I would use the "splice" method.
+
+37
+00:01:41,180 --> 00:01:43,940
+However, splice is a mutation method,
+
+38
+00:01:43,940 --> 00:01:46,220
+so you can't use it in Redux.
+
+39
+00:01:46,840 --> 00:01:49,300
+I'm going to "deepFreeze" the array object,
+
+40
+00:01:49,420 --> 00:01:51,740
+and now I need to figure out a different way
+
+41
+00:01:51,740 --> 00:01:54,920
+to remove an item from the array without mutating it.
+
+42
+00:01:56,180 --> 00:01:59,120
+I'm using a method called "slice" here,
+
+43
+00:01:59,120 --> 00:02:01,840
+ and it doesn't have anything to do with "splice".
+
+44
+00:02:01,980 --> 00:02:03,360
+It is not mutating,
+
+45
+00:02:03,440 --> 00:02:05,980
+and it gives me a part of the array
+
+46
+00:02:06,020 --> 00:02:08,420
+from some beginning to some end index.
+
+47
+00:02:08,520 --> 00:02:10,160
+So what I'm doing is that
+
+48
+00:02:10,160 --> 00:02:14,360
+ I'm taking the parts before the index I want to skip
+
+49
+00:02:14,360 --> 00:02:16,220
+and after the index I want to skip,
+
+50
+00:02:16,460 --> 00:02:19,060
+and I concatenate them to get a new array.
+
+51
+00:02:20,840 --> 00:02:25,180
+Finally, instead of writing it as a method chain with "concat" calls,
+
+52
+00:02:25,360 --> 00:02:28,480
+I can use the ES6 array spread operator
+
+53
+00:02:28,480 --> 00:02:30,480
+to write it more concisely.
+
+54
+00:02:32,980 --> 00:02:36,500
+Now that we implemented adding and removing counters,
+
+55
+00:02:36,600 --> 00:02:39,540
+let's implement incrementing the counter.
+
+56
+00:02:40,000 --> 00:02:43,220
+The "incrementCounter" function takes your arguments,
+
+57
+00:02:43,220 --> 00:02:46,340
+the array and the index of the counter
+
+58
+00:02:46,340 --> 00:02:47,860
+that should be incremented,
+
+59
+00:02:48,220 --> 00:02:51,580
+so the return value has the same count of items,
+
+60
+00:02:51,680 --> 00:02:53,860
+ but one of them is incremented.
+
+61
+00:02:54,800 --> 00:02:58,160
+Directly setting the array value at index works,
+
+62
+00:02:58,260 --> 00:02:59,980
+but this is a mutation.
+
+63
+00:03:00,020 --> 00:03:02,360
+So if we add a "deepFreeze" call,
+
+64
+00:03:02,360 --> 00:03:04,360
+it's not going to work anymore,
+
+65
+00:03:04,880 --> 00:03:09,720
+so how do we replace a single value in the array without mutating it?
+
+66
+00:03:10,400 --> 00:03:14,540
+It turns out the answer is really similar to how we remove an item.
+
+67
+00:03:15,300 --> 00:03:17,900
+We want to take the slice before the index,
+
+68
+00:03:17,980 --> 00:03:21,620
+concat it with a single item array with a new value,
+
+69
+00:03:21,880 --> 00:03:25,020
+and then concat it with the rest of the original array.
+
+70
+00:03:25,780 --> 00:03:28,160
+Finally, with the ES6 spread operator,
+
+71
+00:03:28,240 --> 00:03:30,920
+we can spread over the left part of the array,
+
+72
+00:03:30,960 --> 00:03:32,700
+specify the new item,
+
+73
+00:03:32,760 --> 00:03:35,800
+and then spread over the right part of the original array,
+
+74
+00:03:35,800 --> 00:03:37,500
+and this looks much nicer.
+
+75
+00:03:38,320 --> 00:03:39,140
+In this lesson,
+
+76
+00:03:39,140 --> 00:03:41,560
+you learned how to use the "concat" method
+
+77
+00:03:41,560 --> 00:03:43,560
+or the spread operator,
+
+78
+00:03:43,560 --> 00:03:44,800
+and the "slice" method
+
+79
+00:03:44,800 --> 00:03:49,220
+to add, remove, and change items in arrays without mutating them
+
+80
+00:03:49,220 --> 00:03:54,160
+and how to protect yourself with "deepFreeze" from mutation in your tests.
+
