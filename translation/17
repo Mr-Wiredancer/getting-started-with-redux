@@ -1,0 +1,182 @@
+In the previous lessons, we learned how to split the root reducers into many smaller reducers that manage parts of the state tree.
+在前面几课中，我们学习了如何将根 reducer 拆分成多个小 reducer，让这些小的 reducer 来管理状态树的不同部分。
+
+And now we have a ready "todoApp" reducer that handles all the actions of our simple ToDo application.
+而我们现在已经有一个写好的 todoApp reducer 来处理 todo 应用的所有动作。
+
+So now it's time to implement the view layer.
+所以现在是时候来实现视图层了。
+
+And I'm going to use React in this example.
+在这个例子中我准备使用 React。
+
+I'm adding react and redact-dom packages from the Facebook CDN.
+我现在添加 react 和 react-dom 这两个库，它们都放在 Facebook CDN 上。
+
+I'm also adding a div with ID "root", which is where I'm going to render my react application.
+同时我还添加了一个 ID 为 "root" 的 div 标签，我准备用它来渲染我的 React 应用。
+
+Similar to the React counter example from the eighth lesson, I declare a "render" function that is going to update DOM in response to the current application state.
+与第八课的 React 计数器示例类似，我声明了一个 render() 函数，用它来根据当前的应用状态更新 DOM。
+
+And I'm going to subscribe to the store changes and call "render" whenever the store changes, and once to render the initial state.
+现在我要订阅 store 的变化，在最开始以及每次 store 变化时调用 render() 函数。
+
+And the implementation of the render method is going to use react, so it will call "ReactDom.render" for some "TodoApp" component I haven't written yet.
+而 render() 函数的实现会用到 React，所以我会用某个我还没实现的 TodoApp 部件来调用 ReactDom.render()。
+
+And it renders it into the div I created inside the HTML.
+然后 render() 会把应用渲染到我在 HTML 里面创建的 div 标签。
+
+So it's the div with ID called "root".
+也就是 ID 为 "root" 的 div 标签。
+
+React provides a base class for all components.
+React 为所有的部件提供了一个模版类。
+
+So I'm grabbing from the react object called "React.Component".
+所以我把这个 React.Component 类从 React 对象里取出来。
+
+And I'm declaring my own "TodoApp" component that extends the react base component.
+然后我声明了一个继承这个 React 模版类的 TodoApp 部件。
+
+This component is only going to have a "render" function and is going to return a "div".
+这个部件只有一个 render() 函数，而且它会返回一个 div 部件。
+
+And inside the "div", I'm going to place a botton saying "Add Todo".
+在 div 部件里，我会加上一个 button 部件 ，上面写着 "Add Todo"。
+
+But I don't want to add an input field yet to keep the example simple at first.
+但我还不想加上一个 input 字段，因为我想先让我的示例保持简单一些。
+
+So I'm dispatching the "ADD_TODO"  action, and I'm going to put a "Test" as my text for the action.
+所以我现在要分发一个 "ADD_TODO" 动作，用 "Test" 字符串作为它的 text 字段。
+
+So It's going to keep adding todos with the text "Test".
+它会不断地添加内容为 "Test" 的待办事项。
+
+And, The ID, I need to specify a sequential ID.
+对了，还有 ID，我需要声明一个序列化的 ID。
+
+So This is why I'm declaring a global variable called "nextTodoId", and I'm going to keep incrementing it.
+这就是为什么我声明了一个全局变量 nextTodoId，然后我现在会不断地让它递增。
+
+So, every time, it's going to emit a new id.
+所以每一次，它都会生成一个新的 ID。
+
+And finally, I also want to display a list of the todos.
+最后，我还想要显示一个待办事项的列表。
+
+So assuming that I have the todos injected as a "todos" prop, I'll call map and for every todo item, I'm going to show a list item showing the text of that particular todo.
+假设我把待办事项以 todos 属性来注入，我会调用 map() 函数，让每一个待办事项显示它的内容。
+
+Finally, because I need to the "todos" as a prop, I'm going to pass it to the TodoApp by reading the current store state and written its "todos" field.
+最后，因为我需要 todos 作为一个属性，我会读取当前的 store 状态，把它的 todos 字段传递给 TodoApp。
+
+You can see that there is a button "Add Todo" and anytime I press it, I see a new ToDo with a text "Test".
+你可以看到一个写着 "Add Todo" 的按钮，每一次我点击它，我就会看到一个新的待办事项，上面的内容就是 "Test"。
+
+Now I'm going to add an "input" inside my "render" function, and I'm using the react callback "ref" API where "ref" is a function, it gets the node corresponding to the "ref", and I'm saving that node with some name, in this case, "this.input".
+现在我要在 render() 函数里添加一个 input 部件，然后我要使用 React 的 ref API，这里的 ref 是一个函数，它会得到对应的 DOM 节点。然后我要把这个节点存放在 this.input 里。
+
+
+So I'm able to read the value of the input inside my event handler.
+所以我能够在我的事件处理器里读取 input 部件的值。
+
+I'm reading "this.input.value".
+我现在要读取 this.input.value。
+
+And I'm also able to reset the value after dispatching the action so that the field is cleared.
+而且我还可以在分发动作之后重置 this.input.value，这样 input 里面的内容就被清除了。
+
+Now if I try to write something to fill and press "Add Todo", the "ADD_TODO" action is dispatched and the field is cleared.
+现在如果我在这里填写一些内容，然后点击 "Add Todo" 按钮，那么 "ADD_TODO" 动作就会被分发，然后输入框里面的内容会被清除。
+
+Let's take a moment to recap how this application works.
+让我们花点时间来回顾一下这个应用的工作原理。
+
+It starts with a "TodoApp" react component.
+从 TodoApp 这个 React 部件开始。
+
+This component is not aware of how exactly todos are being added.
+这个部件并不知道 todos 是如何被添加的。
+
+However, it can express its desire to mutate the state by dispatching an action with the type "ADD_TODO".
+但是它可以通过分发 "ADD_TODO" 动作，来表达它想改变状态的愿望。
+
+For the text field, it uses the current input value and it passes an incrementing ID as the ID of todo.
+它使用当前输入框的值作为 todo 的 text 字段，还传入了一个递增的 ID 作为 todo 的 id。
+
+Every todo needs its own ID, and in this approach, we're just going to increment the counter, so it always gives us the next integer as ID.
+每一个 todo 都需要有自己的 ID，而在这个例子里，我们只管递增计数器，所以我们总会得到下一个整数作为 ID。
+
+It is common for react components to dispatch actions in Redux apps.
+在 Redux 应用中，React 部件分发动作是很常见的。
+
+However, it is equally important to be able to render the current state.
+但同样重要的是，React 部件要能够渲染当前的状态。
+
+ My "TodoApp" component assumes that it's going to receive todos as a prop, and it maps over the todos to display a list of them using the ID as a key.
+ 我的 TodoApp 部件会假设自己以属性的方式得到 todos，然后它会遍历所有的 todos，使用 ID 作为 key 属性，以列表的方式来显示它们。
+
+This component is being rendered in the "render" function that runs any time the store state changes and initially.
+在最开始以及每次 store 状态改变的时候，这个部件都会在 render() 函数里被渲染。
+
+The render function reads the current state of the store and passes the " todos" array that it gets from the current state of this store to the "TodoApp" component as a prop.
+render() 函数读取 store 的当前状态，然后将从当前状态里得到的 todos 数组以属性方式传递给 TodoApp 部件。
+
+The "render" function is called on every store change so the "todos" prop is always up to date.
+render() 函数在每一次 store 变化都会被调用，所以 todos 属性会一直保持最新版本。
+
+This was the rendering part of the redux flow.
+这就是 Redux 工作流的渲染部分。
+
+Let's recap how mutations work in Redux.
+让我们回顾一下 Redux 中的变化是怎么运作的。
+
+Any state change is caused by a "store.dispatch" call somewhere in the component.
+任何的状态变化都是由部件里某处的 sotre.dispatch() 引起的。
+
+When an action is dispatched, the store calls the reducer it was created with, with the current state and the action being dispatched.
+当一个动作被分发时，store 会用当前状态和被分发的动作，调用与 store 一起被创建的 reducer。
+
+And in our case, this is the "todoApp" reducer, which we obtained by combining "visibilityFilter" and "ToDos" reducer.
+而在我们的例子中，它就是 todoApp reducer，它是由 visibilityFilter 和 todos 着两个 reducer 组合而来的。
+
+It matches the action type and the switch statement.
+它会将动作的类型和 switch 条件作匹配。
+
+And if the action type is "ADD_TODO", and indeed, it is equal to "ADD_TODO" string, in this case, it will call the child "todo" reducer, passing it undefined, because there is no state for a new todo that it can pass, and the action.
+如果动作的类型是 "ADD_TODO"，（这里的确就是 "ADD_TODO"），在这种情况下，它会调用 todo reducer，将 undefined 和动作传递给它。这里传递 undefined 是因为新的 todo 没有任何状态可以传递。
+
+
+And we have a similar switch statement inside the "todo" reducer.
+在 todo 这个 reducer 中，我们也有类似的 switch 语句。
+
+ And the action type is "ADD_TODO", so It returns the initial state of the todo with the ID and text from the action and the "completed" field set to false.
+而这里的动作类型是 "ADD_TODO"，所以它返回了 todo 的初始状态，里面有 ID ，从动作中获得的的 text，还有设为 false 的 completed 字段。
+
+The "todos" reducer that called it was returned a new array with all existent items and the new item added at the very end.
+调用 todo 的这个 todos reducer 会返回一个新的数组，包含了所有已有的 todo，而数组的最末端是新添加的 todo。
+
+So it adds a need todo to the current state.
+这样就将一个新的  todo 添加到了当前状态。
+
+Finally, the combined producer called "todoApp" will use this new array as the new value for the "todos" field in the global state object.
+最后，合并起来的 todoApp reducer 会使用这个新的数组，作为全局的状态对象中 todos 字段的值。
+
+It's going to return a new state object where the "todos" field corresponds to the array with the newly added todo item.
+它会返回一个新的状态对象，其中的 todos 字段对应了那个带有新添加的 todo 项的数组。
+
+The "todoApp" reducer is the root reducer in this application.
+todoApp reducer 是这个应用的根 reducer。
+
+It is the one the store was created with.
+它是与 store 一起被创建的。
+
+So its next state is a next state of the Redux store, and all the listeners are notified.
+所以它的下一个状态就是 Redux store 的下一个状态，所有的监听者都会被通知。
+
+The "render" function is subscribed to the store changes so it is called again, and it gets the fresh state by calling "getState" and it passes the fresh todos to the component, re-rendering it with the new data .
+render() 函数会订阅到 store 的变化，它会通过调用 getState() 来得到新的状态，将最新的 todos 传递给部件，用新的数据来重新渲染。
+
