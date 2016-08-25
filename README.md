@@ -65,8 +65,8 @@
 16 |[baurine](https://github.com/baurine)|✔️ |[alfredcc](https://github.com/alfredcc) |进行中 | | 
 17 |[mrwiredancer](https://github.com/Mr-Wiredancer)|✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer)| 进行中
 18 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | 进行中
-19 |[baurine](https://github.com/baurine)|✔️
-20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+19 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | 进行中
+20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
