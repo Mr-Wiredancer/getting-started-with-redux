@@ -1,0 +1,95 @@
+In the previous two lessons, we were working on creating the user interface for the todo list application that displays the todos, lets us add new todos, and toggle them on click. We implemented that by dispatching "ADD_TODO" and "TOGGLE_TODO" actions that we already know how to handle in our reducers.
+
+在前面的两节课中，我们为 todo 列表应用创建了用户界面，用于显示 todo，添加新的 todo，通过点击切换它们的状态。我们通过发起 ADD_TODO 和 TOGGLE_TODO 动作来实现，我们已经知道 reducer 会怎么处理它们。
+
+In this lesson, we're going to dispatch "SET_VISIBILITY_FILTER" action and use the "visibilityFilter" field to only show the todos the user wants to see -- either the completed todos, active todos, or all todos in the current state.
+
+在这节课，我们将发起 SET_VISIBILITY_FILTER 动作，并且使用 visibilityFilter 字段来只显示用户想看到的 todo -- 或者是当前状态中已完成的 todo，进行中的 todo，或者是所有的 todo。
+
+I'm starting by creating a new functional component called, "FilterLink" that the user needs to click to switch the current visible todos. And "FilterLink" accepts the filter prop, which is just a string, and the children, which is the contents of the link. And it's going to be a simple "<a>" tag that doesn't really link anywhere. It's going to prevent the navigation when clicked.
+
+我从创建一个新的功能组件 FilterLink 开始。用户需要点击它来切换当前可见的 todo。而且 FilterLink 接受 filter 属性，它只是一个字符串，还有 children，它是链接的内容。它是一个简单的 <a> 标签，不链接到任何其它地方。当它被点击时会禁止导航。
+
+It's going to dispatch an action, the type, "SET_VISIBILITY_FILTER", and pass in the filter prop so that the reducer knows which filter is being clicked. I will pass the children down to the "<a>" tag, so the consumer can specify the text of the link. Now I can use it in my "TodoApp" component.
+
+它将发起一个动作，类型是 SET_VISIBILITY_FILTER，并且把 filter 属性传递给它，这样 reducer 才知道是哪一个过滤器被点击了。我将把 children 传递到 <a> 标签下，这样消费者就可以自己指定链接的文本了。现在我可以把它用到我的 TodoApp 组件中。
+
+Just below the todo list, I am adding a paragraph where I'm going to offer the user the choice as to which todos should be currently visible by using the "FilterLink" component I just created.
+
+就在 todo 列表下面，我添加一段内容，使用刚创建的 FilterLink 组件为用户提供选择，哪些 todo 是当前可见的。
+
+The filter prop is one of the three possible values, such as "SHOW_ALL", which corresponds to showing every todo in the state, "SHOW_ACTIVE", which means just show the todos that are not completed yet, and "SHOW_COMPLETED", which means show the completed todos. So I'm copy-pasting the "FilterLink", and I'm changing the labels and the filters corresponding to it.
+
+filter 属性是三个可能的值之一，比如 SHOW_ALL，对应显示状态中所有的 todo，SHOW_ACTIVE，意味着只显示那些还没有完成的 todo，SHOW_COMPLETED，意味着显示已完成的 todo。所以我复制粘贴 FilterLink，然后修改它们的标签和对应的 filter 属性。
+
+Running this code will give me three different things under the list of todos. Clicking on them will change the state visibilityFilter field. However, it doesn't have any effect yet because we don't interpret the value of the visibilityFilter.
+
+运行这段代码，将会在 todo 列表下面显示三个不同的东西。点击它们将会改变状态中的 visibilityFilter 字段 ( 的值 )。然而，目前还没有任何效果，因为我们还没有处理 visibilityFilter 的值。
+
+I am creating a new function that is going to help me filter the todos according to the filter value. So it's called, "getVisibleTodos", It accepts two arguments, the todos and the filter. It switches on the current filter value.
+
+现在我创建一个新的函数来帮助我过滤这些 todo，通过 filter 的值。所以把它命名为 getVisibleTodos()。它接受两个参数，todos 和 filter。它对当前的 filter 值进行匹配。
+
+If the filter is "SHOW_ALL", it's going to return all of the todos. But if the filter is "SHOW_COMPLETED", it's going to call "todos.filter()", that is array "filter" method, to only return those todos that have "completed" set to true. "SHOW_ACTIVE" is going to the opposite of that. It's going to return only those todos where a "completed" field is false.
+
+如果 filter 是 SHOW_ALL，那么它将返回所有的 todo，但是如果 filter 是 SHOW_COMPLETED，它将调用 todos.filter() ，那是数组的 filter 方法，只返回那些 completed 字段为真的 todo。SHOW_ACTIVE 和它正好相反，它将只返回 completed 字段为假的 todo。
+
+Now I need to call this function to filter the todos before rendering them. In the "render" function of the "TodoApp" component, I get the visible todos by calling "getVisibleTodos" with the "todos" and the "visibilityFilter" values from my props. And I'm going to use the "visibleTodos" instead of these props "todos" when I enumerate them for rendering.
+
+现在我需要在渲染它们之前调用这个方法来过滤这些 todo。在 TodoApp 组件的 render 方法中，我通过从属性中取得 todos 和 visibilityFilter 值来调用 getVisibileTodos()，得到可见的 todo。而且我将使用 visibleTodos 来替代这些 todos 属性，当我逐一渲染它们时。
+
+Finally, I now use the "visibilityFilter" inside my "TodoApp" component, so I need to pass it as a prop.
+
+最后，我现在在我的 TodoApp 组件内使用了 visibilityFilter，所以我需要把它作为属性进行传递进来。
+
+I could do this explicitly, but actually it's easier for me just to spread over all the state fields. So every state field inside the state object is passed as a prop to the "TodoApp" component. This way, it receives the "visibilityFilter". And if I add some todo items and then click on them, so I change their "completed" fields, and then click on the visibility filter links, the currently visible todos are rendered according to the chosen visibility filter.
+
+我可以显式的声明，但对我来说，实际上更简单的做法是，扩展状态的所有字段。这样状态对象中的每一个字段都将作为属性传递给 TodoApp 组件。通过这种方式，它接收到了 visibilityFilter。如果我添加一些 todo，然后点击它们，这样我就改变了它们的 completed 字段，然后点击可见过滤链接，当前可见的 todo 就被渲染了，对应被选中的可见过滤值。
+
+The links look all the same right now, but we want to highlight the chosen one. To implement this, we're going to need the "visibilityFilter" prop which says which is the current one.
+
+这些链接现在看上去都长一样，但是我想高亮被选中的那个，为了实现它，我们需要 visibilityFilter 这个属性来表明当前的过滤值。
+
+I'm changing the beginning of the "render" method to destructure the "todos" and the "visibilityFilter" from the props, so I can access them directly now without typing "this.props" every time. I'm going to pass the "visibilityFilter" to every "FilterLink", so it can know which filter is the current one and apply different styling if the "currentFilter" matches the FilterLink's own filter.
+
+现在我修改 render 方法开头部分，从属性中解构出 todos 和 visibilityFilter。所以现在我可以直接访问它们，而不用再每次都输入 this.props 了。我们传递 visibilityFilter 给每一个 FilterLink，这样它就可以知道哪一个是当前的过滤值，如果 currentFilter 和 FilterLink 自己的过滤值相同的话，就采用不同的样式。
+
+After passing the "currentFilter" prop to every "FilterLink", I go back to the "FilterLink" declaration. And I'm adding "currentFilter" as a prop to it, and I'm adding a condition that says that when the filter is the "currentFilter", that is, when the link is active, I want to return a "span" instead of a link because I don't want it to be clickable. I want it to be static text.
+
+在传递了 currentFilter 属性给每一个 FilterLink 后，我回到声明 FilterLink 的地方，现在我给它添加 currentFilter 属性，而且我添加一个条件判断，如果过滤值就是 currentFilter，那么，这个链接是激活的，我想返回一个 span 来替代一个链接，因为我不想让它可以点击，我想让它是静态文本。
+
+This completes the user interface of our todo list example. It lets us add items. It lets us view items, toggle them as completed. And when we switch the visibility filter, it displays only relevant todos, and it also updates the link appearance, so we see which link is active.
+
+现在完成了我们的 todo 列表示例的用户界面。它可以让我们添加元素，它可以让我们查看元素，切换它们为完成状态。而且当我们切换可见过滤值时，它只显示相应的 todo，它同时也更新链接的样子，这样我们可以看到哪个链接是激活的。
+
+Let's recap how a change in the visibility filter works. It starts with a dispatch code with an action of the type "SET_VISIBILITY_FILTER". And it passes filter, which is a prop, to the link component, so every one of those three links is going to have a different filter prop it passes in the action.
+
+让我们来回顾改变可见过滤值是怎么工作的。它从发起一个类型为 SET_VISIBILITY_FILTER 的动作开始。而且它传递 filter，链接组件的一个属性。所以这三个链接中的每一个都将拥用一个不同的传递给动作的 filter 属性。
+
+The store dispatch function will call our root reducer with the state and the action which in turn will call the "visibilityFilter" reducer with the part of the state and the action.
+
+store 的 dispatch 方法将使用状态和动作来调用我们的根 reducer，它 ( 根 reducer ) 将会使用状态的一部分和动作依次调用 visibilityFilter reducer。
+
+Note that when the action type is "SET_VISIBILITY_FILTER", it doesn't care for the previous state, it just returns the action filter as the next value, the next state, of the "visibilityFilter" reducer. The root reducer will use this new field as part of its new state object.
+
+注意当动作的类型是 SET_VISIBILITY_FILTER 时，它不关心之前的状态，它只是将动作的 filter 值返回，作为 visibilityFilter reducer 的下一个状态值。根 reducer 将会使用这个新的字段作为它的新的状态对象的一部分。
+
+And because the "render" function is subscribed to the store changes, it's going to get this new state object and pass all its keys as props to the "TodoApp" component. So the "TodoApp" component will receive the "todos" and the updated "visibilityFilter" as its props.
+
+而且因为 render 方法被订阅到 store 的变化上，它将得到新的状态对象，传递 ( 新的状态对象的 ) 所有键作为属性到 TodoApp 组件。所以 TodoApp 组件将会接收到 todos 和更新后的 visibilityFilter 作为它的属性。
+
+Both these props are passed through the "getVisibleTodos" function, which calculates the currently visible todos according to a list of all "todos" and the "visibilityFilter". And the filter is just a string saying show all, completed, or active.
+
+这两个属性都被传递给 getVisibleTodos 方法，它根据 todos 和 visibilityFilter 计算出当前可见的 todo。filter 只是一个字符串用来说明是显示所有，已完成，或是进行中的。
+
+And the return value is a new array of todos that in some cases, filters them, and in some cases, returns as is. And the show completed and show active are only different in their predicates.
+
+返回值是一个新的数组，某些情况下，是过滤 todo 数组得到的，某些情况下，就是原来的 todo 数组。显示已完成和显示进行中的 todo 区别仅在于它们的判断条件。
+
+The returned value is the array of visible todos. And it is used in the render function to actually enumerate every todo and render it.
+
+返回值是可见的 todo 数组，它用于在 render 方法被逐个渲染。
+
+And the "visibilityFilter" field is also used by the FilterLinks as the "currentFilter" because the "FilterLink" wants to know whether its filter is the current one in order to render a "span" instead of a link. This is how clicking a link makes it appear selected and changes the currently displayed items in the list.
+
+visibilityFilter 字段也用于 FilterLink 组件作为 currentFilter 属性，因为 FilterLink 想知道它的过滤值是否是当前过滤值，以便渲染一个 span 而不是一个链接。这就是单击一个链接，会让它表现为被选中，同时改变当前在列表中显示的元素的原理。
