@@ -1,54 +1,50 @@
 In the previous lesson, we learned to use the "combineReducers" function, which comes with Redux and generates one reducer from several other reducers, delegating to them paths of the state tree.
-在上一节课程中 我们学习了使用 Redux 中的 combineReducers() 函数，这个函数可以从其他 reducer 中生成 reducer，代理状态数的路径。
+在上一课中，我们学习了使用 Redux 中的 combineReducers() 函数，这个函数可以将多个 reducer 合并成一个 reducer，而这些 reducer 分别管理了状态树的不同部分。
 
 To gain a deeper understanding of how exactly "combineReducers" works, we will implement it from scratch in this lesson.
-为了深入理解 combineReducers()函数，我们会在这节课程中从头讲述它究竟是如何工作的。
+为了深入理解 combineReducers()函数，我们会在这节课中从头实现它。
 
 "combineReducers" is a function, so I'm writing a function declaration. And its only argument is the mapping between the state keys and the reducers, so I'm just going to call it "reducers".
-combineReducers() 是一个函数，所以我正在写一个函数的声明.它唯一的参数是状态的健和 reducer 之间的映射关系，所以我把它叫做 "reducers"。
+combineReducers() 是一个函数，所以我要写一个函数声明。这个函数唯一的参数是状态的键和 reducer 之间的映射关系，所以我把它叫做 reducers。
 
 The return value is supposed to be a reducer itself, so this is a function that returns another function. And the signature of the return function is a reducer signature. It has the state and the action.
-它支持返回 reducer 自身的返回值，所以这是一个返回另一个函数的函数。而且返回函数的的签名参数是一个 reducer，它包含了一个状态和动作。
-
+这个函数的返回值本身也应该是一个 reducer，所以这是一个返回另一个函数的函数。而被返回的函数的签名也应该是一个 reducer 函数的签名，也就是一个状态和一个动作。
 
 Now, I'm calling the "Object.keys" method, which gives me all the keys of the reducers object. In our example, this is "todos" and the "visibilityFilter".
-现在，我正在调用 Object.keys() 这个方法，它返回给我们 reducer 的所有 key 对象。在我们的例子中， 我们得到的是 "todos" 和 "visibilityFilter"。
+现在，我要调用 Object.keys() 这个方法，它会返回包含 reducers 对象的所有键的数组。在我们的这个例子中，我们得到的是 "todos" 和 "visibilityFilter"。
 
 Next, I'm calling the "reduce" method on the keys, because I want to produce a single value, such as the next state, by accumulating over every reducer key and calling the corresponding reducer.
-接下来，我根据这些 key 来调用 reduce() 方法，因为我想通过遍历调用每个 reducer 的健所对应的 reducer 来产生下一个状态值，这个状态是唯一的。
+接下来，我根据这些键来调用(数组的) reduce() 方法，因为我想通过遍历每一个 reducer 键来调用对应的 reducer 函数，最后把他们叠加起来，生成一个单一的值作为下一个状态。
 
 Each reducer passed through the "combineReducers" function is only responsible for updating a part of the state. This is why I'm saying that the next state by the given key can be calculated by calling the corresponding reducer by the given key with the current state by the given key and the action.
-每个传入 combineReducers() 函数的reducer，他们唯一的职责是更新状态中的一部分。这就是为什么我说，要计算出某个健的下一个状态，只要用这个健对应的当前状态和动作，调用这个健对应的 reducer 就可以了。
+每个传入 combineReducers() 函数的 reducer，都只负责更新状态树中的某个部分。这就是为什么我说，要计算出某个健的下一个状态，只要用这个健对应的当前状态和动作，调用这个健对应的 reducer 就可以了。
 
-
-
-The array reduce wants me to return the next accumulated value from the call back, so I'm returning the next state. And I'm also specifying an empty object as the initial on next state, before all the keys are processed.
-reduce 数组想要我在回调中返回下一个遍历值，所以我在这里返回下一个状态。在所有的健被遍历之前，我们需要定义一个空对象作为下一个状态的初始值。
+The array reduce wants me to return the next accumulated value from the callback, so I'm returning the nextState. And I'm also specifying an empty object as the initial nextState, before all the keys are processed.
+这个数组的 reduce() 方法想要我在回调中返回下一个需要叠加的值，所以我在这里返回 nextState。同时我指定了一个空对象作为 nextState 的初始值，它会在任何键被处理之前初始化。
 
 And there we have it. This is a working re-implementation of "combineReducers" utility from Redux.
-我们完成了。这是一个可执行的 "combineReducers" utility，我们用 Redux 重新实现了它。
+现在我们就完成了。这是一个 Redux 的 combineReducer() 函数的重新实现，而且它是可用的。
 
 Let's briefly recap how it works. I'm calling "combineReducers" with an object whose values are the reducer functions and keys are the state field they manage. Inside the generated reducer, I'm retrieving all the keys of the reducers I passed to "combineReducers", which is an array of strings, "todos" and "visibilityFilter".
-让我们简短地回顾下这是如何实现的。我调用了 combineReducers()函数，它的参数是一个由一组 reducer 函数和对应 reducer 所管理的状态字段组成的键值对对象。在生成的 reducer 里面，我检索了所有传入到 combineReducers() 函数的 reducers 的键 —— 由 "todos" 和 "visibilityFilter" 组成字的符串数组。
+让我们简短地回顾下这是如何实现的。我调用了 combineReducers()函数，它的参数是对象，这个对象的值是多个 reducer 函数，而它的键则是对应的 reducer 函数所管理的状态字段。在这个函数最后生成的 reducer 中，我提取了所有传入到 combineReducers() 函数的 reducer 的键，也就是 "todos" 和 "visibilityFilter"。
 
-I'm starting with an empty object for my next state and I'm using the reduce operation of these keys to fill it gradually.
-我以一个空对象作为我的下一个状态的开始，我使用 reduce 操作逐步地填充这些键。
+I'm starting with an empty object for my nextState and I'm using the reduce operation over these keys to fill it gradually.
+我先用一个空对象初始化 nextState，然后用数组的 reduce() 函数来遍历这些键，逐步填充 nextState 对象。
 
-Notice that I'm mutating the next state object on every iteration. This is not a problem, because it is the object I created inside the reducer. It is not something passed from outside, so reducer stays a pure function.
-注意我在每一次遍历中改变了对象的下一个状态。这么做并没什么问题，因为这个对象是我在 reducer 中创建的，它不是从外部传入的，所以 reducer 还是一个纯粹的函数。
+Notice that I'm mutating the nextState object on every iteration. This is not a problem, because it is the object I created inside the reducer. It is not something passed from outside, so reducer stays a pure function.
+注意，我在每一次遍历中都修改了 nextState 对象。这么做并没什么问题，因为这个对象是我在 reducer 中创建的。它不是从外部传入的，所以 reducer 还是一个纯函数。
 
 To calculate the next state for a given key, it calls the corresponding reducer function, such as "todos" or "visibilityFilter".
-类似 "todos" 和 "visibilityFilter"，通过这些键来计算出下一个状态，我们称它叫做 corresponding reducer 函数
+要计算出一个键的下一状态，我们会调用对应的 reducer 函数，比如todos() 和 visibilityFilter() 函数。
 
-The generated reducer will pass through the child reducer only if part of its state by the key. So if its state is a single object, it's only going to pass the relevant part, such as "todos" or "visibilityFilter", depending on the current key, and save the result in the next state by the same key.
-如果子 reducer 键对应的状态是其中的一部分生，它将作为参数传入到 reducer 中。所以如果生成的 reducer 的状态是一个单独的对象， 它只传入相关的一部分键，例如 "todos" 和 "visibilityFilter"，通过这些键将结果保存在下一个状态中。
+The generated reducer will pass to the child reducer only a part of its state by the key. So if its state is a single object, it's only going to pass the relevant part, such as "todos" or "visibilityFilter", depending on the current key, and save the result in the nextState by the same key.
+我们只会给子 reducer 传递那个键所对应的状态的一部分。所以如果生成的 reducer 的状态是一个单独的对象， 它只会传递给键所对应的那部分状态，例如 todos 和 visibilityFilter，然后在 nextState 用同样的键把结果保存下来。
 
-
-Finally, we use the array reduce operation with the empty object as the initial on next state, that is being filled on every iteration until it is the returned value of the whole reduce operation.
-最后，我们使用数组的 reduce 操作一个空对象作为下一个状态的初始值, 它将被穿插在每一次循环中，直到它作为整个 reduce 操作的返回值。
+Finally, we use the array reduce operation with the empty object as the initial nextState, that is being filled on every iteration until it is the returned value of the whole reduce operation.
+最后，我们使用数组的 reduce() 操作，它以一个空对象作为 nextState 的初始值，然后在每一次迭代中填充它，直到它可以作为整个 reduce 操作的结果被返回。
 
 In this lesson, you learned how to implement the "combineReducers" utility that comes with Redux from scratch.
-这节课程中，你已经学习了如何使用 Redux 中从零开始实现一个 "combineReducers" utility。
+这节课中，你学习了如何从头实现 Redux 中的 combineReducers() 工具函数。
 
 It is not essential to use in Redux, so it is fine if you don't fully understand how it works yet. However, it is a good idea to practice functional programming and understand functions can take other functions as arguments and return other functions, because knowing this will help you get more productive in Redux in the long term.
-如果你没有完全明白它的工作原理，这没有关系，因为在 Redux 中这不是必须使用的。不管怎样，这是一个学习函数式编程的好方法，明白函数可以将另外一个函数作为参数以及函数返回另外的函数，站在长远角度，熟悉这个可以帮助你在今后的 Redux 编程中变得更加高效率。
+如果你还没有完全明白它的工作原理，没有关系，因为这对于使用 Redux 并不是非常重要。但是，练习函数式编程，以及理解函数可以接受其它函数为参数，然后返回其它函数，是一个很好的主义。因为长期来说，理解这些会让你在使用 Redux 时更具生产力。
