@@ -1,0 +1,51 @@
+In the last lesson, we implemented a simple UI for the todo list application that is able to add new todos and view the existing todos in the list.
+
+在上节课，我们为 todo 列表应用实现了一个简单的 UI，可以添加新的 todo，查看已存在的 todo。
+
+To add the todos, we dispatched the "ADD_TODO" action. In this lesson, we're going to dispatch the "TOGGLE_TODO" action to toggle the completed state of the todos by clicking on them.
+
+为了添加新的 todo，我们发起了 ADD_TODO 动作。在这节课，我们将通过点击 todo，发起 TOGGLE_TODO 的动作来切换 todo 的已完成状态。
+
+I'm scrolling down to my React component. And I've got a list item here corresponding to the todo, so I'm adding the "onClick" handler. So when the user clicks on the list item, I want to dispatch an action to my store with a type "TOGGLE_TODO" and the id of the todo being toggled, which I get from the todo object.
+
+我往下滚动到 ( 定义 ) 我的 React 组件的地方。在这里我得到一个 todo 对应的列表元素，所以我 ( 在这 ) 添加一个 onClick 的处理方法。当用户单击列表元素时，我想发起一个动作到 store 中，它具有 TOGGLE_TODO 的类型，并且还有即将被切换 ( 已完成状态 ) 的 todo 的 id，id 从这个 todo 对象中得到。
+
+The event handler knows which todo it corresponds to, so it is able to pass its id in the action.
+
+这个事件处理方法知道它所对应的 todo，所以它能够在动作中传递它 ( todo ) 的 id。
+
+In the user interface, I want the completed todos to appear crossed out, so I'm adding this style attribute to the list item. And I'm going to use the "textDecoration" property, which is going to be a "line-through" when todo completed is true, and "none" when todo completed is false, so I get a normal looking todo.
+
+在用户界面上，我想让已完成的 todo 显示成删除的样子，所以我为这个列表元素添加 style 属性。我将使用 textDecoration 属性，当 todo 的已完成状态为真时，它的值为 line-through，当 todo 的已完成状态为假时，它的值为 none。所以现在我得到看上去正常的 todo。
+
+Now, if I add a couple of todos, I can click on them and they're going to appear toggled, and I can toggle them back. Isn't that satisfying?
+
+现在，如果我添加一些 todo，我可以点击它们，它们的状态会被切换，我还可以把它们的状态切换回来，还不错吧。
+
+Let's recap how toggling the todo actually works.
+
+让我们来回顾一下切换 todo ( 的状态 ) 究竟是怎么工作的。
+
+It starts with me dispatching the "TOGGLE_TODO" action inside my click handler, with a type "TOGGLE_TODO" and the id, which is the id of the todo being rendered. I get the todo object as an argument to the array map callback inside my render method where I render all the todos.
+
+它是从我的点击处理方法中发起 TOGGLE_TODO 的动作开始的，这个动作具有 TOGGLE_TODO 的类型，和当前正在被渲染的 todo 的 id。在渲染所有 todo 的 render 方法中，我从数组的 map 回调函数中得到作为参数的 todo 对象。
+
+When an action is dispatched, the store will call the root reducer, which will call the "todos" reducer with the array of todos and the action. In this case, the action type is "TOGGLE_TODO", so the "todos" reducer delegates handling of every todo to the "todo" reducer with a "map" function to call it for every todo item. So the "todo" reducer receives the todo as state, and the action.
+
+当一个动作被分发，store 将会调用根 reducer，根 reducer 又将会调用 todos reducer 来处理 todos 数组和此动作。在这个例子中，这个动作的类型是 TOGGLE_TODO，所以 todos reducer 以代理的方式，在 map 函数中调用 todo reducer 来处理每一个 todo。所以 todo reducer 接收 todo 作为状态，还接收动作。
+
+Again, we switch on the action type, and it matches "TOGGLE_TODO" string. And now, for every todo whose id does not match the id specified in the action, we just return the previous state, that is the todo object, as it was.
+
+我们继续对比动作的类型，它匹配 TOGGLE_TODO 字符串。现在，对于每一个和动作中指定的 id 不匹配的 todo，我们就返回之前的状态，即原来的 todo 对象。
+
+However, if the id of the todo matches the one specified in the action, we're going to return a new object with all the properties of the original todo, but with the "completed" field equal to the opposite value of what it was.
+
+然而，如果 todo 的 id 和动作中指定的 id 相匹配，我们将返回一个新的对象，它具有原来 todo 所有的属性，但是 completed 字段的值和原来是相反的。
+
+The updated todo item will be included in the "todos" field under the new application state. And because we subscribe the render function is going to get the next state of the application in "store.getState()" and pass the new version of the todos to the "TodoApp" component, which is going to render the updated todos.
+
+更新后的 todo 元素将会被包含在应用的新状态的 todos 字段中。而且因为我们订阅了 render 方法，它将从 store.getState() 中得到应用的下一状态，然后将新的 todos 传递给 TodoApp 组件，TodoApp 组件将渲染更新后的 todos。
+
+Finally, this style of the list item, the bands on the todo "completed" field, which we just updated, which is why it re-renders in a cross-child state.
+
+最后，列表元素的这个 style，和 todo 的 completed 字段绑定，我们刚更新它，这就是为什么它重新渲染时显示删除线。
