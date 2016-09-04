@@ -28,7 +28,7 @@ Running this code will give me three different things under the list of todos. C
 
 I am creating a new function that is going to help me filter the todos according to the filter value. So it's called, "getVisibleTodos", It accepts two arguments, the todos and the filter. It switches on the current filter value.
 
-现在我创建一个新的函数来帮助我过滤这些 todo，通过 filter 的值。所以把它命名为 getVisibleTodos()。它接受两个参数，todos 和 filter。它对当前的 filter 值进行匹配。
+现在我创建一个新的函数，该函数根据 filter 的值来帮助我过滤这些 todo。所以把它命名为 getVisibleTodos()。它接受两个参数，todos 和 filter。它对当前的 filter 值进行匹配。
 
 If the filter is "SHOW_ALL", it's going to return all of the todos. But if the filter is "SHOW_COMPLETED", it's going to call "todos.filter()", that is array "filter" method, to only return those todos that have "completed" set to true. "SHOW_ACTIVE" is going to the opposite of that. It's going to return only those todos where a "completed" field is false.
 
@@ -80,7 +80,7 @@ And because the "render" function is subscribed to the store changes, it's going
 
 Both these props are passed through the "getVisibleTodos" function, which calculates the currently visible todos according to a list of all "todos" and the "visibilityFilter". And the filter is just a string saying show all, completed, or active.
 
-这两个属性都被传递给 getVisibleTodos 方法，它根据 todos 和 visibilityFilter 计算出当前可见的 todo。filter 只是一个字符串用来说明是显示所有，已完成，或是进行中的。
+这两个属性都被传递给 getVisibleTodos 方法，它根据 todos 和 visibilityFilter 计算出当前可见的 todo。filter 只是一个字符串用来说明是显示所有的、已完成的或是进行中的 todo。
 
 And the return value is a new array of todos that in some cases, filters them, and in some cases, returns as is. And the show completed and show active are only different in their predicates.
 
