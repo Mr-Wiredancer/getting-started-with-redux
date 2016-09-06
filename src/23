@@ -1,33 +1,71 @@
 In the previous lesson, I separated the "Link" presentational component from the "FilterLink" container component that is subscribed to the Redux store and that provides the data and the behavior for the "Link" component it renders.
 
+在上一课我把 Link 这个展示型组件由 FilterLink 容器组件分离了。容器订阅 Redux store，并提供绚烂 Link 所需要的数据和行为。
+
 While it makes the data flow a little bit less explicit, it makes it easy to use "FilterLink" in any component without worrying about passing additional data to the "FilterLink" or to the component that contains it. In this lesson we'll continue extracting the container components from the top level container component. And the first candidate is the "TodoList" component.
+
+虽然这个做法让数据流比较不显明，FilterLink 可以轻易地在任何组件里面引用，而不需要去担心传递数据给它，或者给它的父元素。在这一课我们会继续由最上面的容器组件抽出容器组件。第一个候选就是 TodoList 组件。
 
 I actually want to keep the "TodoList" presentational component. However, I want to encapsulate within the currently visible todos into a separate container component that connects the "TodoList" to the Redux store. I'm going to call this component the "VisibleTodoList".
 
-Just like when declaring the "FilterLink" component in the previous lesson, I calculate the data from the current component by using the current state which is the state from the Redux store. I'm using the "getVisibleTodos" function to calculate the currently visible todos based on all the todos from the Redux store and the current visibility filter from the Redux store state. And I'm specifying the behavior as well. I'm seeing that when the todo is clicked, we should dispatch an action with the type "TOGGLE_TODO" and the ID of the todo being clicked.
+我打算保持 TodoList 为展示型组件。然而我想把当前可见的 todos 封装在一个自己的容器组件，并把他和 TodoList 连在一起。我会叫这个组件为 VisibleTodoList。
+
+Just like when declaring the "FilterLink" component in the previous lesson, I calculate the data from the current component by using the current state which is the state from the Redux store. I'm using the "getVisibleTodos" function to calculate the currently visible todos based on all the todos from the Redux store and the current visibility filter from the Redux store state.
+
+And I'm specifying the behavior as well. I'm seeing that when the todo is clicked, we should dispatch an action with the type "TOGGLE_TODO" and the ID of the todo being clicked.
+
+就像在上一课定义 FilterLink 的时候，我用 Redux store 的状态去计算数据。这里我用 getVisibleTodos 这个函数去计算当前可见的 todos，基于在 Redux store 里面所有的 todos 和 Redux store 里面的当前可见过滤器。
+
+我也要指定行为。如果我看到 todo 被点击，我们应该分发一个动作，type 为 TOGGLE_TODO, ID 为被点击的 todo。
 
 All container components are similar. Their job is to connect a presentational component to the Redux store and specify the data and the behavior that it needs. I'm scrolling up to the "FilterLink" container component I wrote in the previous lesson to copy-paste this store subscription logic.
 
-Just like the "FilterLink", the visible "TodoList" is going to subscribe to this store and force an update any time the store state changes because it uses this state in its render method. Now that the visible "TodoList" is connected to the Redux store, we can use it instead of the "TodoList". And we no longer have to pass all the props from the top.
+所有的容器都很类似。他们的工作是连接展示型组件和 Redux store，并指定需要的行为和数据。我滚动到上节课写的 FilterLink 容器组件，复制粘贴他的 store 订阅逻辑。
 
-Finally, in the previous lesson, I made "AddTodo" a presentational component, but I'm going to backtrack on this now. I will copy-paste the dispatch call back in line into the onClick handler inside the component because there isn't really a lot of presentation or behavior here.
+Just like the "FilterLink", the "VisibleTodoList" is going to subscribe to this store and force an update any time the store state changes because it uses this state in its render method. Now that the  "VisibleTodoList。" is connected to the Redux store, we can use it instead of the "TodoList". And we no longer have to pass all the props from the top.
+
+就像 FilterLink，VisibleTodoList 会订阅 store，并在每次状态改变时强制用新的状态重绚烂。现在 VisibleTodoList。 已经和 Redux store 连接一起，我们可以用它替代 TodoList。我们不再需要由最上面传递所有的属性。
+
+Finally, in the previous lesson, I made "AddTodo" a presentational component, but I'm going to backtrack on this now. I will copy-paste the dispatch callback inline into the onClick handler inside the component because there isn't really a lot of presentation or behavior here.
+
+最后，在上一节课，我把 AddTodo 改成了展示型组件，现在我要反悔了。我要复制粘贴分发回调到组件里面的 onClick 处理器，因为这里实在没有多少展示或者行为。
 
 And it's easier to keep them together until we figure out how to split the presentation. For example, if in the future, we're going to have something like a "Form" component, we may split it, but for now we'll keep them together.
 
+在我们知道怎么分离它们之前，把它们放一起更简单。比如，在未来我们可能会有一个 Form 组件，那时候会分离，但现在就算了。
+
 I'm scrolling down to my "TodoApp" component. And I'm removing the "onAddClick" prop. And I just noticed that none of the containers actually need any props from the state. So I can remove the props of the "TodoApp" component. And I can remove the "render" function that renders the "TodoApp" component with the current state of the store because I can just call it once, remove all the props that are related to the state and just render it as is because the container components that I render are going to subscribe to this store themselves and are going to update themselves when the store state changes.
+
+我向下滚动到 TodoApp 组件。我移除了 onAddClick 属性。我发现没有一个容器需要以属性传递状态。所以我可以移除所有 TodoApp 的属性。并且我可以移除用当前 store 状态绚烂的 render 函数。我可以只调用它一次，移除所有和状态有关的属性，因为绚烂出来的容器组件会各自去对 store 产生订阅，并响应 store 状态改变自动更新。
 
 Let's recap the data flow after separating the presentational and the container components. There is just one "React.Render" call at the very end. We don't render again when this store state changes because the container components take care of that.
 
+我们回顾分离展示组件和容器组件后的数据流。现在只有一个 Reactrender 在最后被调用。当 store 改变，我们不需要再重复绚烂，因为容器组件已经解决了。
+
 The first component I'm looking at is called "AddTodo". Frankly, I can classify it either as a presentational component or as a container component because it doesn't fit either category. The input and the button are the presentational part, but dispatching an action on click is the behavior which is usually specified by the container.
+
+我在看的第一个组件叫做 AddTodo。老实说，我把它归类为展示型组件或者容器组件都可以，因为它两者都不太符合。输入栏和按钮属于展示的部分，但是点击的动作分发是行为，通常由容器来指定。
 
 However, in this case, I'd rather keep them together because there isn't any state, the UI is very simple. It's hard to imagine any other behavior other than dispatching the "ADD_TODO" action.
 
-The second component rendered inside the "TodoApp" is called the "visibleTodoList". And this time, it is a proper container component that subscribes to the store and re-renders the "TodoList" any time the store state changes. It calculates the visible todos from the current Redux store state, the todos and the "visibilityFilter" fields. And it passes them as the "todos".
+但在这个例子我更愿意把它们放一起，因为这里没有任何状态，UI 也很简单。很难想象会有除了分发 "ADD_TODO“ 以外的动作。
+
+The second component rendered inside the "TodoApp" is called the "VisibleTodoList". And this time, it is a proper container component that subscribes to the store and re-renders the "TodoList" any time the store state changes. It calculates the visible todos from the current Redux store state, the todos and the "visibilityFilter" fields. And it passes them as the "todos".
+
+第二个在 TodoApp 里面的组件叫 VisibleTodoList。现在他是个正经的容器，对 store 订阅，并在 store 变化时重绚烂 TodoList。它计算可见的 todo，用上当前的 Redux store 状态，todos，和 visibilityFilter 栏。它把数据往下传为 "todos"。
 
 And when the todos are clicked, it's going to dispatch an action with the type "TOGGLE_TODO" and the ID of the respective ToDo. The actual rendering here is performed by the "TodoList" component that just renders the todos passed through it as prop and binds their clicks through the "onTodoClick" prop.
 
+当 todos 被点击，它会分派一个 TOGGLE_TODO 的动作，和该 todo 的 ID。这里的实际绚烂由 TodoList 组件负责。它绚烂所有由属性传进来的 todos，并用 onTodoClick 绑定它们的点击。
+
 Finally, the last component "TodoApp" renders is the "Footer". The "Footer" is just a presentational component rendering three different "FilterLink"s. The "FilterLink" is a container component. So It subscribes to the store and it renders the presentational component called, "Link," calculating whether it should be active based on its props and the current Redux store state and specifies the behavior what happens when it's clicked.
+
+最后一个在 TodoApp 里面的组件是 Footer。Footer 只是一个展示型组件，绚烂三个 FilterLink。FilterLink 是容器组件，所以它订阅 store，并绚烂 Link 展示型组件。它会由 Redux store 的状态和 props 计算 Link 是否为 active，并指定点击的行为。
 
 Finally, the "Link" component is just a presentational component that renders an "a" tag. Separating the container and the presentational components is often a good idea, but you shouldn't take it as a dogma. Only do this when it truly reduces the complexity of your code base.
 
+最最后，Link 组件只是个绚烂 a 标签的展示型组件。分离容器和展示型组件通常是个好主意，但你别把这当做个教条。除非这样做真的能降低你代码的复杂度。
+
 In general, I suggest first trying to extract the presentational components. And if there is too much boilerplate passing the props through them, then you can create the containers around them that load the data and specify the behavior.
+
+总而言之，我建议先尝试抽出展示型组件。如果传递属性照成太多重复性代码，那你可以考虑创建容器去加载数据和指定行为。
