@@ -1,18 +1,18 @@
 In this lesson, we will continue creating the reducer for Todo list application. The only action that this reducer currently handles is called 'ADD_TODO'. We also created a test that makes sure that when the reducer is called with an empty array as a state and the 'ADD_TODO' action, it returns an array with a single Todo element.
 
-在本次课程中，我们将会继续给我们的Todo List应用完善 reducer。当前的 reducer 能处理的 action 只有 ADD_TODO。我们也添加了相应的测试来确保，当传入参数 state 为空数组以及 action 为 ADD_TODO 的 reducer 被调用时，它返回一个只包含一个 Todo 的数组。
+在本次课程中，我们将会继续给我们的 Todo List 应用完善 reducer 。当前的 reducer 能处理的 action 只有 ADD_TODO 。我们也添加了相应的测试来确保，当传入参数 state 为空数组以及 action 为 ADD_TODO 的 reducer 被调用时，它返回一个只包含一个 Todo 的数组。
 
 In this lesson, we will follow the same approach to implement another action called 'TOGGLE_TODO'. We're going to start with a test again. This time, we're testing a different action and we have a different initial state. The state before calling the reducer now includes two different todos with id 0 and 1. Notice how both of them have their completed fields set to false.
 
-在本次课程中，我们将遵循同样的方法来实现一个新的 action -- TOGGLE_TODO。 我们同样从测试开始，这一次将测试新的 action 及新的初始 state。在调用 reducer 之前， state 包含了两个不同的 todo，id分别是0和1。注意设置这两个 todo 的 completed 字段为 false。
+在本次课程中，我们将遵循同样的方法来实现一个新的 action -- TOGGLE_TODO 。 我们同样从测试开始，这一次将测试新的 action 及新的初始 state 。在调用 reducer 之前， state 包含了两个不同的 todo ， id 分别是 0 和 1 。注意设置这两个 todo 的 completed 字段为 false 。
 
 Next, I declare the action. The action is an object with the type property which is a 'TOGGLE_TODO' string and the id of the todo that I want to be toggled. I declare the state that I expect to receive after calling the reducer. And it's pretty much the same as before calling the reducer. However, I expect the todo with the id specified in the action or 1 in this case. The change is completed field.
 
-接着，我声明了一个 action 对象。这个对象的 type 属性是字符串 "TOGGLE_TODO"，而它的 id 属性则是我所想要完成/撤销的 todo 的 id。然后我声明了调用 reducer 之后期待返回的 state。它和我们调用的 reducer 之前 state 的长得基本一样。但是我们要把 action 指定 id 的 todo ，也就是 id 为 1 的 todo ,修改其 completed 为true。
+接着，我声明了一个 action 对象。这个对象的 type 属性是字符串 "TOGGLE_TODO" ，而它的 id 属性则是我所想要完成/撤销的 todo 的 id。然后我声明了调用 reducer 之后期待返回的 state 。它和我们调用的 reducer 之前 state 的长得基本一样。但是我们要把 action 指定 id 的 todo ，也就是 id 为 1 的 todo ,修改其 completed 为 true。
 
 The reducer must be a pure function. So it is a matter of precaution, I called freeze on the state and the action. Finally, just like in the previous lesson, I'm asserting that the result of calling my reducer with the state before and the action is going to be deeply equal to the state after.
 
-reducer 一定要是纯函数。所以作为一种预防措施，我调用了 deepFreeze() 来确保 state 和 action 不被修改。最后，和上节课一样，我断言 reducer 在接收 stateBefore 和 action 之后的运行结果等于 stateAfter。
+reducer 一定要是纯函数。所以作为一种预防措施，我调用了 deepFreeze() 来确保 state 和 action 不被修改。最后，和上节课一样，我断言 reducer 在接收 stateBefore 和 action 之后的运行结果等于 stateAfter 。
 
 Now my test is a function, so I need to call it at the end of the file. And if I run it, it fails because I have not implemented handling this action yet.
 
