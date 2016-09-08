@@ -62,10 +62,10 @@
 13 |[baurine](https://github.com/baurine) |✔️ |[alfredcc](https://github.com/alfredcc) | ✔️ 
 14 |[baurine](https://github.com/baurine) |✔️ |[zhaozhiming](https://github.com/zhaozhiming) | ✔️
 15 |[baurine](https://github.com/baurine)|✔️ |[mrwiredancer](https://github.com/Mr-Wiredancer) |✔️ |
-16 |[baurine](https://github.com/baurine)|✔️ |[alfredcc](https://github.com/alfredcc) |进行中 | | 
+16 |[baurine](https://github.com/baurine)|✔️ |[alfredcc](https://github.com/alfredcc) |✔️ | | 
 17 |[mrwiredancer](https://github.com/Mr-Wiredancer)|✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer)| ✔️
 18 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | ✔️
-19 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | 进行中
+19 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | 校对中
 20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[zhaozhiming](https://github.com/zhaozhiming) | 进行中
 22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
