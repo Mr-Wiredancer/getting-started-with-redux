@@ -79,7 +79,6 @@ You can see that there is a button "Add Todo" and anytime I press it, I see a ne
 Now I'm going to add an "input" inside my "render" function, and I'm using the react callback "ref" API where "ref" is a function, it gets the node corresponding to the "ref", and I'm saving that node with some name, in this case, "this.input".
 现在我要在 render() 函数里添加一个 input 部件，然后我要使用 React 的 ref API，这里的 ref 是一个函数，它会得到对应的 DOM 节点。然后我要把这个节点存放在 this.input 里。
 
-
 So I'm able to read the value of the input inside my event handler.
 所以我能够在我的事件处理器里读取 input 部件的值。
 
