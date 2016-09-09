@@ -2,10 +2,10 @@ In the previous lesson, we learned to use the "combineReducers" function, which 
 在上一课中，我们学习了使用 Redux 中的 combineReducers() 函数，这个函数可以将多个 reducer 合并成一个 reducer，而这些 reducer 分别管理了状态树的不同部分。
 
 To gain a deeper understanding of how exactly "combineReducers" works, we will implement it from scratch in this lesson.
-为了深入理解 combineReducers()函数，我们会在这节课中从头实现它。
+为了深入理解 combineReducers() 函数，我们会在这节课中从头实现它。
 
 "combineReducers" is a function, so I'm writing a function declaration. And its only argument is the mapping between the state keys and the reducers, so I'm just going to call it "reducers".
-combineReducers() 是一个函数，所以我要写一个函数声明。这个函数唯一的参数是状态的键和 reducer 之间的映射关系，所以我把它叫做 reducers。
+combineReducers() 是一个函数，所以我要写一个函数声明。这个函数唯一的参数是状态的键和 reducer 之间的映射关系，所以我把它叫做 reducers.
 
 The return value is supposed to be a reducer itself, so this is a function that returns another function. And the signature of the return function is a reducer signature. It has the state and the action.
 这个函数的返回值本身也应该是一个 reducer，所以这是一个返回另一个函数的函数。而被返回的函数的签名也应该是一个 reducer 函数的签名，也就是一个状态和一个动作。
@@ -26,7 +26,7 @@ And there we have it. This is a working re-implementation of "combineReducers" u
 现在我们就完成了。这是一个 Redux 的 combineReducer() 函数的重新实现，而且它是可用的。
 
 Let's briefly recap how it works. I'm calling "combineReducers" with an object whose values are the reducer functions and keys are the state field they manage. Inside the generated reducer, I'm retrieving all the keys of the reducers I passed to "combineReducers", which is an array of strings, "todos" and "visibilityFilter".
-让我们简短地回顾下这是如何实现的。我调用了 combineReducers()函数，它的参数是对象，这个对象的值是多个 reducer 函数，而它的键则是对应的 reducer 函数所管理的状态字段。在这个函数最后生成的 reducer 中，我提取了所有传入到 combineReducers() 函数的 reducer 的键，也就是 "todos" 和 "visibilityFilter"。
+让我们简短地回顾下这是如何实现的。我调用了 combineReducers() 函数，它的参数是对象，这个对象的值是多个 reducer 函数，而它的键则是对应的 reducer 函数所管理的状态字段。在这个函数最后生成的 reducer 中，我提取了所有传入到 combineReducers() 函数的 reducer 的键，也就是 "todos" 和 "visibilityFilter"。
 
 I'm starting with an empty object for my nextState and I'm using the reduce operation over these keys to fill it gradually.
 我先用一个空对象初始化 nextState，然后用数组的 reduce() 函数来遍历这些键，逐步填充 nextState 对象。
@@ -35,7 +35,7 @@ Notice that I'm mutating the nextState object on every iteration. This is not a 
 注意，我在每一次遍历中都修改了 nextState 对象。这么做并没什么问题，因为这个对象是我在 reducer 中创建的。它不是从外部传入的，所以 reducer 还是一个纯函数。
 
 To calculate the next state for a given key, it calls the corresponding reducer function, such as "todos" or "visibilityFilter".
-要计算出一个键的下一状态，我们会调用对应的 reducer 函数，比如todos() 和 visibilityFilter() 函数。
+要计算出一个键的下一状态，我们会调用对应的 reducer 函数，比如 todos() 和 visibilityFilter() 函数。
 
 The generated reducer will pass to the child reducer only a part of its state by the key. So if its state is a single object, it's only going to pass the relevant part, such as "todos" or "visibilityFilter", depending on the current key, and save the result in the nextState by the same key.
 我们只会给子 reducer 传递那个键所对应的状态的一部分。所以如果生成的 reducer 的状态是一个单独的对象， 它只会传递给键所对应的那部分状态，例如 todos 和 visibilityFilter，然后在 nextState 用同样的键把结果保存下来。
