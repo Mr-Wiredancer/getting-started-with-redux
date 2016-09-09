@@ -2,7 +2,7 @@ In the previous lesson, we established the pattern of reducer composition where 
 
 If we create a store with this reducer and log its state, we will find that the initial state of it is an empty array of todos. If we dispatch an 'ADD_TODO' action, we will find that the corresponding todo has been added to the state array.
 
-If we dispatch another 'ADD_TODO' action, the corresponding todo will also be added at the end of the array and dispatch a 'TOGGLE_TODO' action with id 0 will flag the completed field of the todo with id 0.
+If we dispatch another 'ADD_TODO' action, the corresponding todo will also be added at the end of the array, and dispatch a 'TOGGLE_TODO' action with id 0 will flip the completed field of the todo with id 0.
 
 Representing the whole state of the application as an array of todos works for a simple example, but what if we want to store more information? For example, we may want to let the user choose which todos are currently visible with the visibility filter such as 'SHOW_COMPLETED', 'SHOW_ALL', or 'SHOW_ACTIVE'.
 

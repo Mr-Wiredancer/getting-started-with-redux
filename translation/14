@@ -1,21 +1,43 @@
-在上一节课中 我们创造了一种reducer组合模式 在模式中一个reducer可以被另外一个reducer调用 进行数组中元素的更新
+In the previous lesson, we established the pattern of reducer composition where one reducer can be called by another reducer to update items inside an array.
 
-如果我们带着这个reducer创建一个store并且记录它的state 我们将发现它的初始state是一个空的todos数组 如果我们发送一个‘ADD_TODO’动作 我们发现相应的todo将被添加到state数组中
+在上一节课中，我们建立了一种 reducer 组合模式。在模式中，一个 reducer 可以被另外一个 reducer 调用，进行数组中元素的更新。
 
-如果我们发送另外一个‘ADD_TODO’动作 相对应的todo也将被添加到数组的末尾并发送一个id为0的‘TOGGLE_TODO’的动作 将标记id为0的todo的completed属性
+If we create a store with this reducer and log its state, we will find that the initial state of it is an empty array of todos. If we dispatch an 'ADD_TODO' action, we will find that the corresponding todo has been added to the state array.
 
-在一个简单的示例中将应用的整个state表示成一个todos数组没有什么问题 但如果我们想要存储更多信息呢？例如 我们可能想要让用户根据显示过滤器比如‘SHOW_COMPLETED’ ‘SHOW_ALL’ 或者 ‘SHOW_ACTIVE’来选择哪些todo是当前可见的
+如果我们使用这个 reducer 去创建一个 store 并且打印出它的 state, 我们将发现它的初始 state 是一个空的 todo 数组。如果我们分发一个‘ADD_TODO’动作，我们会发现相应的 todo 将被添加到 state 数组中。
 
-显示过滤器的state用一个简单的字符串来表示当前过滤器 它通过‘SET_VISIBILITY_FILTER’动作来改变
+If we dispatch another 'ADD_TODO' action, the corresponding todo will also be added at the end of the array. And dispatch a 'TOGGLE_TODO' action with id 0 will flip the completed field of the todo with id 0.
 
-为了存储这个新的信息 我不需要改变已经存在的reducers 我将使用reducer组合模式 创建一个新的reducer来调用已经存在的reducers来管理它的大部分状态 并且将结果合并到一个单独的state对象里面
+如果我们发送另外一个‘ADD_TODO’动作，相对应的 todo 也将被添加到数组的末尾。还有分发一个 id 为 0 的‘TOGGLE_TODO’的动作，会翻转 id 为 0 的 todo 的 completed 字段。
 
-现在第一次运行它，将传递undefined作为子reducers的state 因为组合reducer的初始state是一个空的对象 所以它的所有属性都是undefined 这使得第一次执行时子reducers返回它们的初始state并且归并到state对象中
+Representing the whole state of the application as an array of todos works for a simple example, but what if we want to store more information? For example, we may want to let the user choose which todos are currently visible with the visibility filter such as 'SHOW_COMPLETED', 'SHOW_ALL', or 'SHOW_ACTIVE'.
 
-当一个动作进来时 它调用了reducers并传递了他们管理的state 同时动作将结果合并到一个新的state对象中
+在一个简单的示例中，将应用的整个 state 表示成一个 todos 数组没有什么问题，但如果我们想要存储更多信息呢？例如 我们可能想要让用户通过“显示过滤器”，比如‘SHOW_COMPLETED’ ‘SHOW_ALL’ 或者 ‘SHOW_ACTIVE’来选择哪些 todo 是当前可见的。
 
-这是另外一个reducer组合模式的例子 但这一次我们使用它将多个reducers组合成一个单独的reducer以便我们用来创建我们的store 组合后的reducer初始state现在包含独立reducers的初始state 每当动作到来时 那些reducers将独立处理这些动作
+The state of the visibility filter is a simple string representing the current filter. It is changed by 'SET_VISIBILITY_FILTER' action.
 
-这个模式有助于减少Redux的开发量 因为同一个团队中的不同人们可以在不同的reducers中工作 在处理相同动作时无需进入各自的领域并且同时可以避免合并的冲突
+显示过滤器的 state 用一个简单的字符串来表示当前过滤器，它通过‘SET_VISIBILITY_FILTER’动作来改变。
 
-最后 我将发送‘SET_VISIBILITY_FILTER’动作 你可以看到它并不影响todos 但是“显示过滤器”属性将被更新
+To store this new information, I don't need to change the existing reducers. I will use the reducer composition pattern and create a new reducer that calls the existing reducers to manage parts of its state and combines the results in a single state object.
+
+为了存储这个新的信息，我不需要改变已经存在的 reducer. 我将使用 reducer 组合模式，创建一个新的 reducer 来调用已经存在的 reducer ，来管理它的不同部分的状态，并且将结果合并到一个单独的 state 对象里面。
+
+Now that the first time it runs, it will pass undefined as the state of the child reducers because the initial state of the combined reducer is an empty object, so all its fields are undefined. This gets the child reducers to return their initial states and populates the state object for the first time.
+
+现在第一次运行它，将传递 undefined 作为子 reducers 的 state, 因为组合 reducer 的初始 state 是一个空的对象，所以它的所有属性都是 undefined, 这使得第一次执行时子 reducers 返回它们的初始 state 并且填充到 state 对象中。
+
+When an action comes in, it calls the reducers with the pass of the state that they manage and the action and combines the results into the new state object.
+
+当一个传递动作进来时，它调用了全部 reducer 并把他们管理的对应的 state 部分和动作传递进去，然后将结果合并到一个新的 state 对象中。
+
+This is another example of the reducer composition pattern, but this time we use it to combine several reducers into a single reducer that we will now use to create our store. The initial state of the combined reducer now contains the initial states of independent reducers. Any time an action comes in, those reducers handle the action independently.
+
+这是另外一个 reducer 组合模式的例子，但这一次我们使用它将多个 reducer 组合成一个单独的 reducer, 我们用它来创建我们的 store. 组合后的 reducer 初始 state 现在包含独立 reducer 的初始state. 每当动作到来时，那些 reducer 将独立处理这些动作。
+
+This pattern helps scale Redux's development because different people on the team can work on different reducers handling the same actions without running into each other and causing merge conflicts.
+
+这个模式使 Redux 开发更具扩展性。因为在团队中的不同的人可以去开发不同的 reducer, 在处理相同动作时不会产生冲突，还能避免合并（代码）的冲突。
+
+Finally, I'm dispatching the 'SET_VISIBILITY_FILTER' action. You can see that it doesn't affect the todos, but the "visibilityFilter" field has been updated.
+
+最后，我将分发‘SET_VISIBILITY_FILTER’动作，你可以看到它并不影响 todos, 但是“显示过滤器”字段被更新了。
