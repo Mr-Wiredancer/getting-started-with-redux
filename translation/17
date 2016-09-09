@@ -115,8 +115,8 @@ It is common for react components to dispatch actions in Redux apps.
 However, it is equally important to be able to render the current state.
 但同样重要的是，React 部件要能够渲染当前的状态。
 
- My "TodoApp" component assumes that it's going to receive todos as a prop, and it maps over the todos to display a list of them using the ID as a key.
- 我的 TodoApp 部件会假设自己以属性的方式得到 todos，然后它会遍历所有的 todos，使用 ID 作为 key 属性，以列表的方式来显示它们。
+My "TodoApp" component assumes that it's going to receive todos as a prop, and it maps over the todos to display a list of them using the ID as a key.
+我的 TodoApp 部件会假设自己以属性的方式得到 todos，然后它会遍历所有的 todos，使用 ID 作为 key 属性，以列表的方式来显示它们。
 
 This component is being rendered in the "render" function that runs any time the store state changes and initially.
 在最开始以及每次 store 状态改变的时候，这个部件都会在 render() 函数里被渲染。
@@ -152,7 +152,7 @@ And if the action type is "ADD_TODO", and indeed, it is equal to "ADD_TODO" stri
 And we have a similar switch statement inside the "todo" reducer.
 在 todo 这个 reducer 中，我们也有类似的 switch 语句。
 
- And the action type is "ADD_TODO", so It returns the initial state of the todo with the ID and text from the action and the "completed" field set to false.
+And the action type is "ADD_TODO", so It returns the initial state of the todo with the ID and text from the action and the "completed" field set to false.
 而这里的动作类型是 "ADD_TODO"，所以它返回了 todo 的初始状态，里面有 ID ，从动作中获得的的 text，还有设为 false 的 completed 字段。
 
 The "todos" reducer that called it was returned a new array with all existent items and the new item added at the very end.

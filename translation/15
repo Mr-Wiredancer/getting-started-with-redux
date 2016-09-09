@@ -1,5 +1,5 @@
 In the previous lesson we learned how to use the reducer composition pattern to let different reducers handle different parts of the state tree, and then combine their results.
-在上一课中，我们学习了如何使用组合 reducer 的模式来让不同的 reducer 处理状态树的不同部分，然后再合并它们的结果。
+在上一课中，我们学习了如何使用 reducer 组合模式来让不同的 reducer 处理状态树的不同部分，然后再合并它们的结果。
 
 In fact this pattern is so common that it's present in most Redux applications.
 实际上，这种模式是如此的常见，以至于在大部分 Redux 应用中它都存在。
@@ -31,8 +31,8 @@ This "combineReducers" call says that the "todos" field inside the state object 
 And the results will be assembled into a single object.
 然后这些更新的结果会被合并到一个单一的对象里。
 
- In other words, it behaves pretty much exactly as the function commented down below.
- 换句话说，它的行为基本上就像下面注释里所写的一样。
+In other words, it behaves pretty much exactly as the function commented down below.
+换句话说，它的行为基本上就像下面注释里所写的一样。
 
 Finally, I will establish a useful convention.
 最后，我要提出一个非常有用的约定。
