@@ -1,0 +1,74 @@
+In the previous lesson, I extracted the "Todo" and "TodoList" components from the "TodoApp" component. In this lesson, I will continue extracting other presentational components to separate the looks from the behavior.
+在上一节课 我从“TodoApp”组件中抽取了“Todo”和“TodoList”组件 在这节课里 我将继续抽取其他展示型组件来分离外表的行为
+
+Now I want to extract the input and the button into a separate component called, "AddTodo." I'm declaring "AddTodo" as a functional component that doesn't accept any props. And I'm going to return these copy-pasted input and button, but I'm wrapping them in a div because a component needs to have a single root element.
+现在我想要抽取输入框和按钮到一个叫“AddTodo”的组件 我把“AddTodo”声明为一个不接收任何属性的功能组件 然后我会返回这些复制粘贴过来的输入框和按钮 但我要把他们的封装到一个div里面 因为组件必须有个单独的根元素
+
+The functional components don't have instances. However, instead of using this, I can use a local variable called, "input," that I'm going to close over so I can write to it in the callback graph and I can read from it in the event handler.
+功能组件没有实例，尽管如此，我可以使用一个叫“input”的本地变量来代替实例 我如此靠近它所以我可以在回调图形中写入它并且可以从事件处理器中读取它
+
+Like previously, I want it to be a presentational component and not specify behavior, so I am just calling the function called, "onAddClick," passing the current "input.value". I make "onAddClick" a prop so that the component that uses "AddTodo" can specify what happens when that button is clicked.
+像之前一样 我想让它是一个展示型组件并且不具备行为 所以我只是调用“onAddClick”函数 并传递当前的“input.value” 我创建一个“onAddClick”的属性 这样“AddTodo”组件就可以使用按钮按下后的行为了
+
+Again, the "TodoApp" component acts as a container component for the "AddTodo". And it specifies that when add button is clicked, we should dispatch an action with the type "ADD_TODO", the corresponding "text", and the "nextTodoId".
+同样的 为了“AddTodo”组件 “TodoApp”组件表现为一个容器组件 并且它指定了当添加按钮被点击时 我们会发送一个类型为“ADD_TODO”和对应的“text”和“nextTodoId”的动作
+
+The last component I want to extract today is the footer, which contains all these three "FilterLink"s. I'm creating a new functional component called, "Footer." And I'm not sure which props it needs, so I skip them. And  I paste the markup. It seems that the "FilterLink" need the "visibilityFilter", so I add it as a prop.
+我今天想要抽取的最后一个组件是页脚 它包含了三个“FilterLink” 我将创建一个新的功能组件叫“Footer” 我不确定它需要哪些属性 所以我选择跳过 然后我粘贴了标识 看起来“FilterLink”好像需要“visibilityFilter” 所以我把它作为一个属性添加上去
+
+I would like the "Footer" and the "FilterLink" to be presentational components. However, the "FilterLink" currently includes a "store.dispatch" call. I am replacing it with an "onClick" call. And I pass the "filter" as the single parameter for the calling component's convenience. I add "onClick" to the props.
+我想要让“Footer”和“FilterLink”是显示型组件 尽管如此 “FilterLink”当前包含了一个“store.dispatch”的调用 我用一个“onClick”调用来代替它 并且我为了方便调用组件把“fliter”作为一个单独的参数传递 我添加“onClick”作为属性
+
+Now I need to specify it every time "FilterLink" is used. So I add "onFilterClick" to the footer. I pass "onClick" equals "onFilterClick" for every "FilterLink" in the "Footer", so whatever we pass to the "Footer" as "onFilterClick" prop is going to end up in the "FilterLink" as "onClick".
+现在我需要在每次“FilterLink”使用时都指定它 所以我在页脚中添加“onFilterClick" 我为页脚中的每个“FilterLink”传递了“onClick”相当于“onFilterClick” 所以不管我们传递什么作为“onFilterClick”给“Footer” 最终会成为“FilterLink”的“onClick”
+
+Now I can use the "Footer" component I just defined inside my "TodoApp" component. I need to pass to props, one of them is the "visibilityFilter" so it can highlight the active link. And another prop is "onFilterClick" where I say that whenever a filter is clicked, I want to dispatch an action with a type "SET_VISIBILITY_FILTER" and the filter being clicked.
+现在我可以使用刚刚在我的“TodoApp”中定义的“Footer”组件了 我需要传递一些属性 其中一个是“visibilityFilter”它可以高亮活动的链接 另外一个属性“onFilterClick”是过滤器被点击时使用 当被点击时我希望发送一个带有类型为“SET_VISIBILITY_FILTER”和过滤器的动作
+
+Finally, I just noticed that the "TodoApp" component doesn't actually have to be a class. I can turn it into a function. I prefer to do that when possible.
+最后 我刚注意到“TodoApp”组件没有必要是一个类 我可以将其转换成一个函数 可能的话我更喜欢做这个
+
+Instead of destructuring the props inside the "render" method, I am now doing it inside the argument. I can remove now the destructuring. I'm also going to remove the "render" method declaration. The visible todos are only used in a single place, so I'm moving the "getVisibleTodos" call to the "TodoList"'s todos prop declaration. Now the body of my function is just a single expression, so I can get rid of the return statement and unintended code to make it look nicer.
+我在参数中解构属性代替在“render”方法中做这个 我可以删除解构 我也可以删除“render”方法声明 可见的待办只在一个地方使用 所以我把“getVisibleTodos”调用移到“TodoList”的待办属性声明中 现在我的函数的正体就只有一个单独的表达式了 所以我可以避免返回语句和没必要的代码 这样让代码看起来更简洁
+
+This concludes the initial refactoring of the todo list application into a single container component called "TodoApp" and many presentational components that are only concerned with how things look. Let's recap the data flow in this example.
+把待办列表应用的初始重构归纳为一个单独的容器组件叫“TodoApp”和很多与其有关的展示型组件 让我们回顾一下这个示例中的数据流
+
+We have a single container component called "TodoApp". And we re-render it any time the store changes. It receives the keys of the global state object as the props, so it receives the "todos" and the "visibilityFilter" values.
+我们有一个单独的容器组件叫“TodoApp” 并且我们会在每次store改变时重新渲染它 它接收全局state对象的键值作为属性 所以它接收“todos”和“visibilityFilter”值
+
+The first component it renders is called "AddTodo". "AddTodo" is a presentational component that renders an input and a button. When the button is clicked, it passes the current input value to the "onAddClick" function.
+它渲染的第一个组件叫“AddTodo” “AddTodo”是一个展示型组件 它渲染了一个输入框和一个按钮 当按钮被点击时 它传递了当前的输入框值到“onAddClick”函数
+
+"OnAddClick" function is a prop for the "AddTodo" component. In this case, it is specified by the "TodoApp", which says that when the button is clicked, it should dispatch an action containing the current text in the action object. Dispatching the "ADD_TODO" action will call our reducer, update the store state with the new todos, and re-render "TodoApp" component with the new todos.
+“OnAddClick”函数是“AddTodo”组件的一个属性 在这个例子中，它通过“TodoApp”指定 当按钮被点击时 它应该在动作对象中发送一个包含当前文本的动作 发送“ADD_TODO”动作将调用reducer 随着新的待办更新store中state 然后随着新的待办重新渲染“TodoApp”组件
+
+The todos themselves are rendered by the "TodoList" presentational component that receives two props, the currently visible todos and the "onTodoClick" callback.
+待办列表被“TodoList”展示型组件渲染 它接收2个属性 当前可见的待办和“onTodoClick”回调
+
+The "TodoList" component receives an array of todos, and it maps over them, rendering individual "Todo" components. It uses the spread operator to pass every property of the todo object as a prop to "Todo" component. And it specifies the "onClick" handler as calling "onTodoClick" with the ID of the particular todo.
+“TodoList”组件接收一个待办数组 然后通过数组的映射方法 独立渲染成“Todo”组件 它使用传播操作符传递每个待办对象的每个属性来作为一个“Todo”组件的属性 然后它指定的“onClick”处理器作为调用“onTodoClick”并传递特定待办的ID
+
+The "Todo" component is defined above. And it is also a presentational component, so it doesn't specify the behavior. It says that when a list item is clicked, it should call the "onClick" handler. Being a presentational component, it specifies how the component looks in different circumstances. In this case, it uses the "completed" prop to choose between two different styles of the todo item.
+“Todo”组件在上面定义了 并且它也是一个展示型组件 所以它不需要指定行为 当一个集合元素被点击 它应该调用“onClick”处理器 作为一个展示型组件 它表明了在不同条件下如何展示组件 在这种情况下 它使用“completed”属性在待办元素中选择两种不同的样式中来展示
+
+The "TodoList" is also presentational component. So it delegates actually handling the click to "onTodoClick" prop. It passes the ID of the todo being clicked.
+“TodoList”也是一个展示型组件 所以它将处理点击的操作委托给“onTodoClick”属性 它传递了被点击的待办ID
+
+Finally, the "TodoApp" component reacts to it by dispatching an action containing the ID of the todo clicked and the type "TOGGLE_TODO". The store will call our reducer and update the state of the application, re-rendering the "TodoApp" component with the new todos.
+最后 “TodoApp”组件通过发送一个包含被点击待办的ID和“TOGGLE_TODO”的类型的动作来影响它 store将调用我们的reducer并更新应用的state 使用新的待办列表重新渲染“Todo”组件
+
+The "Footer" component receives the current visibility filter as a prop and also receives the "onFilterClick" callback that sets the current visibility filter. The "Footer" component renders three "FilterLinks", passing down their respective filter values, the "onClick" handler, and the current visibility filter.
+“Footer”组件接收当前显示的过滤器作为一个属性并且接收“onFilterClick”回调 这个回调可以设置当前的显示过滤器 “Footer”组件渲染三个“FilterLinks” 向下传递它们各自的过滤器的值 “onClick”处理器 和当前的显示过滤器
+
+The "FilterLink" component being a presentational component doesn't know what to do when it's clicked, so it calls the "onClick" callback, passing the filter, which is different for each of those links, as an argument. The "Footer" delegates handling the click of the "FilterLink" to its own prop, called "onFilterClick".
+“FilterLink”组件作为一个展示型组件并不知道当它被点击时该做什么 所以它调用“onClick”回调 传递每个链接都不相同的过滤器作为一个参数 “Footer”委托“FilterLink”点击的处理给它的属性 叫“onFilterClick”
+
+Finally, the "TodoApp" component being the container component in our application specifies the behavior, which in this case means that when the "FilterLink" is clicked, it should dispatch an action with the type "SET_VISIBILITY_FILTER", and the new filter.
+最后 “TodoApp”组件在我们的应用中作为容器组件指定了行为 在这个例子中意味着当“FilterLink”被点击时 它应该发送一个包含类型为“SET_VISIBILITY_FILTER”和新过滤器的动作
+
+Separation of the presentational components is not required in Redux, but I recommend this pattern because it decouples your rendering from Redux. So if you later choose to move your project to another framework, such as Relay, you will not have to change all your components because you can keep the presentational components exactly the same.
+在Redux中并不要求分离展示型组件 但我推荐这种模式因为它将你的渲染从Redux中解耦 所以如果你以后选择将你的工程迁移到另外一个框架 比如Relay 你就不用修改你全部的组件 因为你可以保持从中抽取出的展示型组件
+
+This approach also has downsides, such as that you have to thread a lot of props through the components to get them to the list components, including the callbacks. This problem can be easily solved by introducing many intermediate container components as we will see in the next lesson.
+这种方法也有缺点 比如你不得不把很多属性传给组件来获取到组件集合 包括回调方法 这个问题可以通过引入很多中间容器组件来轻松解决 我们将在下一节学到这个方法
