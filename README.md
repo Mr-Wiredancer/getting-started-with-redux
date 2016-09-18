@@ -66,7 +66,7 @@
 17 |[mrwiredancer](https://github.com/Mr-Wiredancer)|✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer)| ✔️| [ceoimon](https://github.com/ceoimon)| ✔️
 18 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | ✔️|  [ceoimon](https://github.com/ceoimon)| ✔️
 19 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | ✔️|  [ceoimon](https://github.com/ceoimon)| ✔️
-20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中| [ceoimon](https://github.com/ceoimon)| ✔️
+20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | 进行中| 
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[zhaozhiming](https://github.com/zhaozhiming) | 进行中
 22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
