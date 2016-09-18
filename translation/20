@@ -1,20 +1,20 @@
 In the last few lessons, we created a user interface for a simple React and Redux todo list where I can add items, toggle them as completed, and change the currently visible todos.
-在前面几节课中，我们创建了一个简单的 React 和 Redux 待办事项列表的用户界面，在上面我可以增加项目，完成/撤销项目，以及改变当前可见的项目。
+在前面几节课中，我们为一个简单的应用，React/Redux 的简单 todo 列表，创建了用户界面，在上面我可以增加项目，完成/撤销项目，以及改变当前可见的项目。
 
 And we did that by having a single "TodoApp" component that has the input, the button for adding todos, the list of currently visible todos with click handler. And it has these three links that let us change the currently visible todos.
-我们实现这个应用的方式，是通过一个单一的 TodoApp 部件，这个部件有一个 input，一个添加待办事项的按钮，以及带有点击处理器的当前可见 todo 列表。而且他有三个
+我们实现这个应用的方式，是通过一个单一的 TodoApp 部件，这个部件有一个输入框，一个添加待办事项的按钮，以及带有点击处理器的当前可见 todo 列表。这个应用还有三个链接，可以让我们改变当前可见的 todo。
 
 The single component approach worked so far. However, we really want to have many components that can be used, tested, and changed by different people separately. So we're going to refactor our application in this lesson.
-到目前为止，这种单一部件的方法都还不错。不过，我们真正想要的是，我们能够拥有很多部件，而这些部件能够被使用、测试或者被不同的人所修改。所以这节课，我们会来重构我们的应用。
+到目前为止，这种单一部件的方式都还不错。不过，我们真正想要的是，能够拥有很多部件，而这些部件能够被使用、测试或者被不同的人所修改。所以这节课，我们会来重构我们的应用。
 
 The first component I want to extract from the "TodoApp" component is the "Todo" component that renders a single list item. I am declaring the "Todo" component as a function which React 14 allows me to do. I'm not sure which props it's going to have, so I'll leave them blank for now. And I will just paste the list item I copied before.
-第一个我想从 TodoApp 部件中提取出来的是 Todo 部件，它会渲染一个单一的列表项目。我现在将 Todo 部件声明为一个函数，这在 React 14 中是合法的。我不太清楚我会需要哪些属性，所以我会先空着。
+第一个我想从 TodoApp 部件中提取出来的是 Todo 部件，它会渲染一个单独的 todo 列表项。我现在将 Todo 部件声明为一个函数，这在 React 14 中是合法的。我不太清楚我会需要哪些属性，所以我会先空着。然后我会将列表项的代码复制过来。
 
 The first thing I'm doing is removing the special "key" property because it's only needed when I enumerate an array. And I'll use it later when enumerating many todos.
 我首先要做的事情是，移除 key 属性，因为它只在我遍历一个数组的时候才会用到。我会在之后遍历很多 todo 的时候再使用它。
 
 One of my goals with this refactoring is to make every component as flexible as it is reasonable. Right now, I have hardcoded that clicking a todo always causes the "TOGGLE_TODO" action. And this is perfectly fine to do in your app.
-重构这些代码的目标之一，是要让每个部件都既灵活又合理。
+重构这些代码的目标之一，是要让每个部件都既灵活又合理。现在，点击一个 todo 总是触发 "TOGGLE_TODO" 动作，我把这个逻辑写死在部件里了。在你的应用中你也完全可以这样做。
 
 However, I prefer to have a bunch of components that don't specify any behaviors, and that are only concerned with how things look or how they render. I call such components the presentational components.
 然而，我希望有一些部件，它们不指明任何行为，而只关心内容如何被渲染。我将这种部件称作展示部件。
@@ -29,17 +29,22 @@ Note how the "Todo" component is now a purely presentational component and doesn
 要注意，我们是如何将 Todo 部件变成一个纯展示部件的。它并没有指明任何行为，但它知道如何渲染 "ADD_TODO"。
 
 The next component I create is called "TodoList". And it's also a presentational component. It's only concerned with how things look.
-下一个我要创建的部件叫做 TodoList。它也是一个展示部件。它只关心内容看起来的样子。
+下一个我要创建的部件叫做 TodoList。它也是一个展示部件。它只关心内容的呈现方式。
 
 And it accepts an array of todos. And it's going to render an unordered list of them by calling the "todos.map" function and rendering a "Todo" component for every todo. It tells React to use todo ID as the unique key for the elements. And it spreads over the "todo" object properties so the "text" and "completed" end up as props on the "Todo" component.
-它会接受一个 todo 的数组。然后它会渲染一个无序的 todo 列表，通过调用 todos.map() 函数，以及为每一个 todo 渲染一个 Todo 部件。它让 React 使用 todo 的 ID 作为元素的唯一键。
+它会接受一个 todo 的数组。然后它会渲染一个无序的 todo 列表，通过调用 todos.map() 函数，以及为每一个 todo 渲染一个 Todo 部件。它让 React 使用 todo 的 ID 作为元素的唯一键。然后它对 todo 对象使用了展开运算符，这样 text 和 completed 就会作为属性传递给 Todo 部件。
 
 Now I need to specify what happens when a todo is clicked. And I could have dispatched an action here. And again, that would be fine, but I want it to a presentational component, so I'm going to call another function, called "onTodoClick", and pass the ID of the todo, and let it decide what should happen. So "onTodoClick" is another prop for the "TodoList".
+现在我需要定义如何处理对一个 Todo 部件的点击。我可以分发一个动作，这当然是可行的。但是我希望它是一个展示部件，所以我调用了另一个函数 onTodoClick()，然后将 todo 的 ID 传递给它，然后让它决定要怎么处理。所以 onTodoClick 成为了 TodoList 部件的另一个属性。
 
 Both "Todo" and "TodoList" are presentational components, so we need something I call, "container components" to actually pass the data from the store and to specify the behavior. In this case, the top level "TodoAppComponent" acts as a container component. And We will see more examples of container components in the future lessons.
+Todo 和 TodoList 都是展示部件，所以我们需要容器部件来从 store 传递数据以及定义行为。在这个例子中，最高层的 TodoAppComponent 就是一个容器部件。在后面的课程中我们会看到更多的容器部件。
 
 In this case, it just renders the "TodoList" with visible todos as the "todos", and with a callback that says that when "onTodoClick" is called with a todo ID, we should dispatch an action on the store with the type "TOGGLE_TODO" and the ID of the todo.
+在这个例子中，TodoAppComponent 只渲染 TodoList，它以当前可见的 todo 作为 todos。它还传递了一个回调函数，这个函数定义了，当 onTodoClick() 被以一个 todo ID 调用时，我们应该分发一个动作给 store，这个动作的类型是 "TOGGLE_TODO"，它的 ID 就是 todo 的 ID。
 
 Let's recap again how this works. The "TodoApp" component renders a "TodoList", and it passes a function to it that can dispatch an action. The "TodoList" component renders the "Todo" component and passes "onClick" prop which calls "onTodoClick".
+让我们回顾一下。TodoApp 部件渲染了一个 TodoList，而且传递了一个可以分发状态的函数。TodoList 部件渲染了 Todo 部件，而且传递了一个属性 onClick，它会调用 onTodoClick()。
 
 The "Todo" component just uses the "onClick" prop it receives and binds it to the list item's "onClick". This way, when it's called, the "onTodoClick" is called, and this dispatches the action and updates the visible todos because the action updates the store.
+Todo 部件只是使用了 onClick 属性，将它绑定到 todo 列表项的 onClick。这样，当 onClick 被调用时，onTodoClick() 会被调用，它会分发一个动作，然后更新当前可见的 todo，因为动作更新了 store。
