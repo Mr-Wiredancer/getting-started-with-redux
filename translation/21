@@ -50,7 +50,7 @@ The "TodoList" component receives an array of todos, and it maps over them, rend
 TodoList 组件接收一个 todo 的数组，然后通过数组的 map() 方法，来分别渲染每一个 Todo 组件。它使用展开操作符，来将 todo 对象的每个属性，转化成 Todo 部件的属性来传递。它还定义了 onClick 处理器，让它用具体 todo 的 ID 来调用 onTodoClick()。
 
 The "Todo" component is defined above. And it is also a presentational component, so it doesn't specify the behavior. It says that when a list item is clicked, it should call the "onClick" handler. Being a presentational component, it specifies how the component looks in different circumstances. In this case, it uses the "completed" prop to choose between two different styles of the todo item.
-我们之前已经定义了 Todo 组件。它也是一个展示组件 所以它指定行为。当一个列表项被点击时，它应该调用 onClick 处理器。作为一个展示组件，它表明了在不同条件下部件的呈现方式。在这个例子中，它使用了 completed 属性来选择列表项的两种风格中的一种。
+我们之前已经定义了 Todo 组件。它也是一个展示组件，所以它不指定行为。当一个列表项被点击时，它应该调用 onClick 处理器。作为一个展示组件，它表明了在不同条件下部件的呈现方式。在这个例子中，它使用了 completed 属性来选择列表项的两种风格中的一种。
 
 The "TodoList" is also presentational component. So it delegates actually handling the click to "onTodoClick" prop. It passes the ID of the todo being clicked.
 TodoList 也是一个展示组件，所以它将点击的处理代理 onTodoClick 属性。它传递了被点击的 todo 的 ID。
