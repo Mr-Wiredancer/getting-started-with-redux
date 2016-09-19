@@ -32,7 +32,7 @@ The next component I create is called "TodoList". And it's also a presentational
 下一个我要创建的部件叫做 TodoList。它也是一个展示部件。它只关心内容的呈现方式。
 
 And it accepts an array of todos. And it's going to render an unordered list of them by calling the "todos.map" function and rendering a "Todo" component for every todo. It tells React to use todo ID as the unique key for the elements. And it spreads over the "todo" object properties so the "text" and "completed" end up as props on the "Todo" component.
-它会接受一个 todo 的数组。然后它会渲染一个无序的 todo 列表，通过调用 todos.map() 函数，以及为每一个 todo 渲染一个 Todo 部件。它让 React 使用 todo 的 ID 作为元素的唯一键。然后它对 todo 对象使用了展开运算符，这样 text 和 completed 就会作为属性传递给 Todo 部件。
+它会接受一个 todo 的数组。然后它会调用 todos.map() 函数来渲染一个无序的 todo 列表，以及为每一个 todo 渲染一个 Todo 部件。它让 React 使用 todo 的 ID 作为元素的唯一键。然后它对 todo 对象使用了展开运算符，这样 text 和 completed 就会作为属性传递给 Todo 部件。
 
 Now I need to specify what happens when a todo is clicked. And I could have dispatched an action here. And again, that would be fine, but I want it to a presentational component, so I'm going to call another function, called "onTodoClick", and pass the ID of the todo, and let it decide what should happen. So "onTodoClick" is another prop for the "TodoList".
 现在我需要定义如何处理对一个 Todo 部件的点击。我可以分发一个动作，这当然是可行的。但是我希望它是一个展示部件，所以我调用了另一个函数 onTodoClick()，然后将 todo 的 ID 传递给它，然后让它决定要怎么处理。所以 onTodoClick 成为了 TodoList 部件的另一个属性。
