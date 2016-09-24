@@ -1,25 +1,51 @@
 In the previous lessons, we used this store top-level variable to refer to the Redux store. The components that access the store, such as the container components, read the state from it, subscribe to the store, and dispatch actions on the store using this store top-level variable.
 
+在前面的课程中，我们使用这个最顶层的 store 变量来关联 Redux store。访问 store 的组件，比如那些容器组件，它们都使用这个最顶层的 store 变量来从 store 读取状态，订阅 store，以及分发动作到 store。
+
 This approach works fine for JSbin example where everything is in a single file. However, it doesn't scale to real applications for several reasons.
+
+这种方法对于一个 JSBin 的例子来说工作正常，因为所有的东西都在一个文件里。但是，有几个原因使它不能扩展到真正的应用中。
 
 First of all, it makes your container components harder to test because they reference a specific store, but you might want to supply a different mock store in the test. Secondly, it makes it very hard to implement universal applications that are rendered on the server, because on the server, you want to supply a different store instance for every request because different requests have different data.
 
+首先，它使你的容器组件很难测试，因为它们关联到了一个具体的 store，但是你可能想在测试中使用一个不同的假的 store。其次，它导致很难实现在服务器端进行渲染的通用应用，因为在服务器端，你想为每一个请求提供不同的 store 实例，因为不同的请求携带不同的数据。
+
 I'm going to start by moving the store creation code to the bottom of the file where I render my React components. I'm going to change it slightly. And instead of creating the store top-level variable, I will pass the store I create as a prop to the top-level component, so it is completely injectable into it.
+
+我将开始把创建 store 的代码移到文件底部，在渲染我的 React 组件的地方。我将稍微地改变它。我将把创建的 store 作为属性传递给最顶层的组件，替代创建最顶层的 store 变量，这样它是完全可注入的。
 
 Every container component needs a reference to the store so unfortunately, we have to pass it down to every component as a prop. It's less effort than passing different data through every component, but it's still inconvenient. So, don't worry, we'll find a better solution later, but for now, we need to see the problem.
 
+每一个容器组件都需要一个 store 的引用，所以很不幸，我们需要把它作为属性往下传递给每一个组件。比起传递不同的数据给每一个组件，这样更省力，但它仍然不方便。所以，别急，我们之后会找到一个更好的解决办法。但是现在，我们需要看看这个问题。
+
 The problem is that the container components need to have the store instance to get the state from it, dispatch actions and subscribe to the changes. So this time, I'm changing the container component to take the store from the props using the ES6 destruction syntax, which just means "store equals props.store."
+
+这个问题就是容器组件需要 store 的实例来获取状态，分发动作和订阅变化。所以这次，我把容器组件改变为使用 ES6 解构语法从属性中获取 store，这里的意思是 store 等于 props.store。
 
 And I'm doing the same here. I'm just taking the store from the props so I can call "dispatch" on it.
 
+我在这里做同样的操作，我从 props 中获取 store，这样我就能调用它的 dispatch() 方法了。
+
 I need to make similar changes to other container components. And in this case, I have this "AddTodo" component, which is not exactly a container component, but it still needs the store to dispatch the "ADD_TODO" action, so I added it as a prop. And I'm also going to add the store to the "Footer" component because, unfortunately, "FilterLink" needs it.
+
+我需要对其它的容器组件做相似的改变，在这种情况下，这个 AddTodo 组件，实际并不是一个真正的容器组件，但它仍然需要 store 来分发 ADD_TODO 动作，所以我添加它作为属性。而且我也为 Footer 组件添加 store 属性，因为很不幸，FilterLink 需要它。
 
 And the "Footer" component renders "FilterLink". This is not convenient, but as I said, we'll figure out a way to avoid this later. But for now, we need to pass the store down so that every container component, such as "FilterLink", can use it to subscribe to the changes, to read the state and to dispatch actions without relying on a top-level variable being available.
 
+Footer 组件渲染 FilterLink 组件，这并不方便，但正如我之前所说的，我们之后会找个办法来解决这个问题。但是现在，我们需要往下传递 store，这样每一个容器组件，比如 FilterLink，就能在不依赖顶层变量的情况下，使用它来订阅变化，读取状态和分发动作，
+
 I'm changing the "render" method to read the store from the props. And now, all containers read the store instance from the props, and don't rely on a top-level variable that I removed.
+
+我改变 render() 方法为从属性中读取 store。而且现在，所有的容器都从属性中读取 store 实例，不再依赖我之前移除的顶层变量。
 
 Note that this change did not change the behavior or the data flow of this application. The container components subscribe to the store, just like before, and update their states in response to its changes.
 
+注意这个变化并没有改变这个应用的行为或数据流。这些容器组件订阅到 store，和之前一样，随着它的变化而更新它们自己的状态。
+
 However, what changed is how they access the store. Previously, they would access a top-level variable, but this approach does not scale to real-world applications. And this is why, right now, I'm passing down the store as a prop, so the container components can subscribe to it.
 
+然而，改变的只是他们访问 store 的方式。之前，它们访问一个顶层变量，但这种方法不能扩展到真实世界的应用。这就是为什么，现在，我把 store 作为属性向下传递，这样容器组件就能订阅它。
+
 In the future lessons, we will see how to pass the store down to the container components implicitly but without introducing the top-level variable.
+
+在将来的课程中，我们将看到在不需要顶层变量的情况下，如何隐式地向下传递 store 组容器组件。
