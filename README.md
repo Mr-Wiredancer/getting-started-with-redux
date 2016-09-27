@@ -70,7 +70,7 @@
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[zhaozhiming](https://github.com/zhaozhiming) | ✔️
 22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [baurine](https://github.com/baurine) | doing
 23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [howard](https://github.com/hayeah) | ✔️
-24 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [baurine](https://github.com/baurine) | doing
+24 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [baurine](https://github.com/baurine) |  ✔️
 25 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | doing
 26 |  [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
 27 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
