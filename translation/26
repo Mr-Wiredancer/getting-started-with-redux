@@ -1,8 +1,15 @@
 In the previous lesson, we implemented the "Provider" component that uses the react advanced context feature to make the store from the props available to every component in our app.
 
+在前面的课程中，我们通过使用 React 高级的 context 特性实现了 Provider 组件，使属性中的 store 对我们应用中的每一个组件都有效。
+
 So if we pass it through the "Provider", we can read it in any other component from the context, which is really convenient for the container components. In fact, this is so convenient that you don't need to actually write the "Provider" yourself, because it is included in a special library called "react-redux".
+
+所以如果我们通过 Provider 传递它，我们就可以在其它任意的组件中通过 context 读取它，这对于容器组件来说真的很方便。实际上，由于如此方便，我们不需要真的自己去写 Provider，因为它已经包括在一个特别的 react-redux 库中了。
 
 And note that it is not the same as Redux. This is a different library. These are React bindings to the Redux library. You can import the "Provider" by destructuring the "ReactRedux" global object in JSbin, or if you use Babbel, and something like NPM, you can import "Provider" with the braces, because it's a named export from "react-redux" package. Or if you write ES5 code, you can write "var Provider=require('react-redux').Provider", or "var Provider=ReactRedux.Provider".
 
+而且注意这和 Redux 不同，这是一个不同的库，这些是把 React 绑定到 Redux 的库。你可以通过解构在 JSBin 中的 ReactRedux 全局对象来导入 Provider。或者如果你使用 Babel 和 NPM 之类 (的工具)，你可以用大括号导入 Provider，因为它是一个来自 react-redux 包的命名导出。或者如果你写 ES5 代码，你可以写成 "var Provider = require('react-redux').Provider"，或者 "var Provider = ReactRedux.Provider"。
+
 Just like the "Provider" we wrote before, the "Provider" that comes with "react-redux" exposes the store you passed this prop on the context, so the components can specify the context types, and then use this context's store to subscribe to the store updates and dispatch actions.
 
+正如我们之前所写的 Provider 那样，来自 react-redux 的 Provider 也暴露你传递到 context 上的 store 属性。所以组件可以指定 context 类型。然后使用这个 context 的 store 来订阅 store 的更新和分送动作。
