@@ -1,20 +1,39 @@
 Finally, let's take a look at the "FilterLink" container component that renders a "Link" with an active property and a click handler. First, I will write the "mapStateToProps" function, which I'll call, "mapStateToLinkProps", because I have everything in a single file.
 
+最后，让我们来看一下 FilterLink 容器组件，它渲染拥有激活属性和点击处理方法的 Link 组件。首先，我来写 mapStateToProps 方法，我把它命名为 mapStateToLinkProps，因为我把所有内容都写在一个文件里。
+
 And it's going to accept the state of the Redux store and return the props that should be passed to the "Link". And we only have a single such prop called "active" that determines whether the "Link" displays the current visibility filter.
+
+它将接受 Redux store 的状态，并返回应该被传递给 Link 组件的属性。我们 (这里) 只有一个叫 active 的属性，它用来决定 Link 组件显示的是不是当前可见性过滤值。
 
 When I paste this expression from the "render" method, I see that it references the "filter" prop of the "FilterLink" component. To tell whether a "Link" is active, we need to compare this prop with the "visibilityFilter" value from the Redux store state.
 
+当我从 render 方法中粘贴这个表达式时，我发现它引用了 FilterLink 组件的 filter 属性。为了表明一个 Link 组件是否激活，我们需要把这个属性和 Redux store 的状态中的 visibilityFilter 值进行比较。
+
 It is fairly common to use the container props when calculating the child props, so this is why props are passed as a second argument to "mapStateToProps". I will rename it to "ownProps" to make it clear we are talking about the container component's own props and not the props that are passed through the child, which is the return value of "mapStateToProps".
+
+使用容器 (组件的) 属性去计算子 (组件的) 属性是相当常见的，所以这就是为什么 props 被作为 mapStateToProps 的第二个参数进行传递，我将把它重命名为 ownProps，使它更清晰的表明，我们谈论的是容器组件自己的属性，而不是作为 mapStateToProps 的返回值，用于传递给子组件的属性。
 
 The second function I'm writing here is "mapDispatchToProps" or, to avoid name clashes in this JSbin, "mapDispatchToLinkProps". The only argument so far is the "dispatch" function. And I'm going to need to look at the container component I wrote by hand to see what props depend on the "dispatch" function.
 
+这里我写的第二个方法是 mapDispatchToProps，或者，为了避免在 JSBin 中的命名冲突，(它实际叫) mapDsipatchToLinkProps，目前为止它唯一的参数是 dispatch 方法。我将需要看看我手写的容器组件有哪些属性依赖 dispatch 方法。
+
 In this case, this is just the click handler where I dispatch the "SET_VISIBILITY_FILTER" action. The only prop I'm passing down is called, "onClick". And I declare it as an arrow function with no arguments, and I paste the dispatch code. But it references the props again, so I need to add "ownProps" as an argument, the second argument, to "mapDispatchToProps" function to you.
+
+在这个例子中，这是分发了 SET_VISIBILITY_FILTER 动作的点击处理方法。我将往下传递的唯一属性是 onClick，而且我用无参的箭头函数来声明它，我粘贴 dispatch 的代码，但是它又引用了 (容器组件的) 属性，所以我需要添加 ownProps 参数，作为 mapDispatchToProps 的第二个参数。
 
 Finally, I will call the "connect" function from "react-redux" library to generate the "FilterLink" container component. I pass the relevant "mapStateToProps" function as the first argument, the "mapDispatchToProps" as the second argument, and I call the function again with a "Link" component which should be rendered. Now I can remove the old "FilterLink" implementation.
 
+最后，我将调用来自 react-redux 库的 connect() 方法，用来生成 FilterLink 容器组件，我传递相应的 mapStateToProps 方法作为第一个参数，mapDispatchToProps 作为第二个参数，然后我用应该被渲染的 Link 组件 (作为参数) 再一次调用这个方法。现在我可以移除掉旧的 FilterLink 实现了。
+
 Let's recap the data flow in this example. The "Footer" component renders three "FilterLink"s, and each of them has a different "filter" prop that specifies which filter it corresponds to. This prop will be available on the "ownProps" object that both "mapDispatchToProps" and "mapStateToProps" will receive as the second argument.
+
+让我们来回顾一下这个例子中的数据流。Footer 组件渲染三个 FilterLink，每一个 FilterLink 都有一个不同的 filter 属性，用来指定它对应的过滤值。这个属性将用于 ownProps 对象，它是 mapDispatchToProps 和 mapStateToProps 接收的第二个参数。
 
 We pass these two functions to the "connect" call, which will return a container component called, "FilterLink". The "FilterLink" will take the props that will return from the "mapDispatchToProps" and "mapStateToProps" and pass them as props to the "Link" component that it wraps.
 
+我们传递这两个方法给 connect() 调用，它将返回一个容器组件叫 FilterLink。FilterLink 将使用 mapDispatchToProps 和 mapStateToProps 返回的值作为属性传递给它包装的 Link 组件。
+
 We can now use the "FilterLink" container component and specify just the "Filter", but the underlying "Link" component will have received the calculated "active" and "onClick" values.
 
+我们现在可以用 FilterLink 容器组件，而且只需指定 filter (属性)，但底层的 Link 组件可以接收计算得到的 active 和 onClick 值。
