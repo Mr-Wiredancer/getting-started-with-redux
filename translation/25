@@ -1,0 +1,197 @@
+In the previous lesson, we got rid of the top-level store variable and instead started passing the store as a prop to the "TodoApp" component.
+在上一课里，我们去掉了全局的 store 变量，转而将它作为属性传递给 TodoApp 组件。
+
+So every component below receives the store as a prop.
+所以，对于 TodoApp 里面的每一个组件，store 都变成了一个属性。
+
+And we even have to do this for presentational components because sometimes they contain container components that need the store to subscribe to the changes.
+甚至对于展示组件也是如此，因为展示组件有时候会包含容器组件，而容器组件需要监听 store 的变化。
+
+We have to write a lot of boiler plate code to pass the store down as a prop.
+要将 store 作为属性来传递，我们需要写大量的模版代码。
+
+But there is another way, using the advanced React feature called "Context".
+但其实，我们有另外一种解决办法，那就是 React 的高级特性“上下文(Context)”。
+
+I'm creating a new component called "Provider".
+我现在要创建一个名为“Provider”的新组件。
+
+And from its "render" method, it just returns whatever its child is.
+它的 render() 方法只是单纯地返回它的子组件。
+
+So we can wrap any component in a "Provider", and it's going to render that component.
+所以，我们可以将任何组件，包裹在 Provier 组件中进行渲染。
+
+I'm changing the "render" call to render a "TodoApp" inside the "Provider".
+这里，我会修改 ReactDOM.render() 的代码，让它在 Provider 里面渲染一个 TodoApp 组件。
+
+And I'm moving the "store" prop from the "TodoApp" to the "Provider" component.
+而且，我还要将 store 对象从 TodoApp 移到 Provider 的属性里面。
+
+The "Provider" component will use the React advanced Context feature to make the store available to any component inside it, including grandchildren.
+Provider 组件会运用 React 的上下文特性，让 Provider 的所有后代组件都可以访问 store 对象。
+
+To do this, it has to define a special method called "getChildContext" that will be called by React by using this prop "store" which corresponds to the "store" that is passed to the "Provider" as a prop just once.
+要做到这一点，Provider 组件需要定义一个特殊的方法，getChildContext()。而 React 会调用这个方法，而它所返回的对象的 store 属性，就是 Provider 组件的 store 属性。
+
+The store will be part of the context that the "Provider" specifies for any its children and grandchildren.
+这样，Provider 就为它的后代组件定义了一个上下文，而 store 对象则变成了这个上下文的一部分。
+
+So the "TodoApp" is going to receive this context, and any component inside "TodoApp" is also going to receive this context object with the store inside it.
+所以，TodoApp 组件，以及它的所有后代组件，都会接收到这个包含 store 对象的上下文。
+
+However, there is an important condition for the context to work.
+不过，要使用上下文需要满足一个重要的条件。
+
+And this condition is that you have to specify "childContextTypes" on the component that defines "getChildContext".
+这个条件就是，你需要为定义了 getChildContext() 方法的类，定义一个静态属性 childContextTypes。
+
+These are just React prop types definition, but unlike prop types, the "childContextTypes" are essential for the context to be turned on.
+这些只是普通的 React.PropTypes 的定义，但 childContextTypes 对于使用上下文非常重要。
+
+If you don't specify them, no child components will receive this context.
+如果你不定义 childContextTypes，没有任何一个子组件能够访问这个上下文。
+
+The container components currently access store by props, but we're going to change this to read the store from React context.
+目前为止，容器组件是通过属性来访问 store 对象的，不过我们要修改代码，让它们通过 React 上下文来读取 store。
+
+And to do that, we just refer to "this.context".
+我们只需要把 this.props 改成 this.context。
+
+Similarly, in the "render" method, I'm also going to read the store from the context instead of the props.
+同样地，在 render() 方法里，我们也要通过上下文来访问 store，而不是通过属性的方式。
+
+Finally, the context is opt-in for the receiving components, too.
+最后要提到的一点，组件是可以选择是否接收上下文的。
+
+So you have to specify a special field called "contextTypes", which are similar to "childContextTypes".
+你需要做的是，声明一个特殊的静态属性 ContextTypes，它和 childContextTypes 类似。
+
+But, in this case, we are specifying which context we want to receive and not pass down.
+不过在这里，我们要声明的是想接收，而不是要传递，的上下文。
+
+If you forget to declare the "contextTypes", the component will not receive the relevant context, so it is essential to remember to declare them.
+如果你忘了声明 contextTypes，组件是不会接收到相应的上下文的，所以千万不要忘记。
+
+What about the functional components that don't have "this"?
+那些没有“this”的函数组件要怎么办？
+
+It turns out that they also receive the context but as a second argument after the props.
+我们会发现，函数组件也会接收到上下文，不过，是通过函数的第二个参数。
+
+So I'm destructuring the second argument and getting the store from there.
+所以，我会用 ES6 的解构语法，从第二个参数中得到 store。
+
+And the second argument is the context.
+而第二个参数就是上下文。
+
+Just like with the class components, I still have to add a property called, "contextTypes" that specifies which context I want to receive.
+就像类组件一样，函数组件也需要添加一个contextTypes 属性，以此来声明想接收的上下文。
+
+And in this case, I want to receive the store from the "Provider".
+在这个例子里，我希望得到的是 Provider 组件中的 store 对象。
+
+If I forget to declare the "contextTypes", my functional component will not receive the relevant context as a second argument.
+如果我忘了声明 contextTypes，函数组件就无法获得对应的上下文。
+
+So it's important to remember to declare them any time you use the context.
+所以在使用上下文时，千万记得要声明 contextTypes。
+
+Finally, I'm replacing the props with the context when getting the store for the "FilterLink".
+最后，我们要将 FilterLink 组件中读取 store 的地方，改成通过上下文的方式。
+
+And I'm adding the "contextTypes" declaration to the "FilterLink" so it receives the relevant context from the "Provider".
+我现在要在 FilterLink 里面添加 contextTypes 的定义，这样它才能接收到 Provider 中定义的上下文。
+
+Now that the "FilterLink" receives the store by context, I no longer need to pass it as a prop, so I'm removing its usage.
+现在 FilterLink 可以从上下文里读取 store 对象了，所以我要把使用属性方式读取的地方都删掉。
+
+And I'm also removing the "store" prop from the "Footer" because it doesn't need to pass it down anymore.
+另外，我还要从 Footer 中删掉 store 属性，因为 Footer 不再需要传递它了。
+
+I'm also removing the "store" prop from the "TodoApp" component because I no longer need to pass it down to the containers.
+基于同样的原因，我把 TodoApp 中的 store 属性也删除掉。
+
+Now, instead of explicitly passing the store down by props, we pass it implicitly by context.
+现在，我们不需要显式地通过属性传递 store 对象，而是隐式地通过上下文传递。
+
+Let's recap how we use the context to pass the store down.
+让我们回顾一下如何使用上下文传递 store 对象。
+
+We start by rendering the "TodoApp" inside the "Provider" component we defined above.
+首先，我们在 Provider 组件中渲染 TodoApp。
+
+The "Provider" component just renders whatever you pass through it.
+Provider 组件会渲染我们传递给它的一切。
+
+So in this case, it renders its children or the "TodoApp" component.
+所以在这个例子中，它渲染了 TodoApp 组件。
+
+However, it also provides the context to any components inside it including grandchildren.
+除此以外，Provider 组件还为它的所有后代组件提供了上下文。
+
+The context contains just one key called the "store".
+这个上下文只包含了一个属性 store。
+
+And it corresponds to the "store" we passed as a prop to the "Provider" component.
+它对应了原来我们通过属性来传递的 store 对象。
+
+We pass the "store" to the "Provider" component in our render code and make it available to child components by defining the "getChildContext" with the "store" key pointing to that prop.
+我们在 ReactDOM.render() 中将 store 对象传递给 Provider 组件。而且，通过定义 getChildContext()，我们让 Provider 的后代组件也可以读取到 store 对象。
+
+It is essential that the "getChildContext" is matched by "childContextTypes" where we specify that the "store" key has prop type of "Object".
+要注意，childContextTypes 要和 getChildContext() 的返回值一致，也就是它的 store 属性必须是 React.PropTypes.object 类型。
+
+ Note that the "childContextTypes" definition is absolutely required if you want to pass the context down the tree.
+ 要注意，如果想要将上下文通过树状结构传递下去，childContextTypes 的定义是必不可少的。
+
+The benefit is that we don't need to pass the store through the intermediate components.
+这样做的好处是，我们不需要通过中间组件来传递 store 对象。
+
+And instead, we can declare the "contextTypes" on the container components that need access to the store so that they can retrieve it from the context instead of retrieving it from the props.
+取而代之地，我们可以在需要读取 store 的容器组件里，定义 contextTypes。这样我们就可以从上下文里访问 store，而不需要通过组件的属性。
+
+The context creates something like a wormhole between the "VisibleTodoList" component that reads the context and the "Provider" that provides the context.
+可以看到，在 VisibleTodoList 和 Provider 组件之间，上下文就好像创造了一个虫洞。
+
+And this wormhole is only enabled because the "contextTypes" declared on the "VisibleTodoList" include the "store" that is defined in "childContextTypes" of the "Provider" component.
+而只有当 VisibleTodoList 的 contextTypes 和 Provider 的 childContextTypes 一致时，这个虫洞才会开启。
+
+The "AddTodo" is another component that needs access to the store.
+AddTodo 是另一个需要访问 store 对象的组件。
+
+So it also opts-in to receiving it in the context by specifying the "contextTypes".
+所以，它也定义了 contextTypes ，以此来接收上下文。
+
+This is why, in addition to props, it receives a second argument, which is the context.
+这就是为什么，除了 props 以外，AddTodo 还接收了第二个参数，也就是上下文。
+
+I'm using the destruction syntax to grab the store from the context here.
+这里我是用 ES6 的解构语法，来从上下文处获取 store 对象。
+
+The context works at any depth, so it is not necessary to put "contextTypes" on the footer.
+上下文在树结构的任何深度都可以访问，所以我们不需要在 Footer 里定义 contextTypes。
+
+The "FilterLink" is the component that directly uses the context, so this is the component that has to specify the "contextTypes" so that it can use the store by reading it from the context.
+FilterLink 才是那个需要直接使用上下文的组件，所以我们只需要在 FilterLink 里面定义 contextType 就可以了。
+
+Context is a powerful feature, but in a way it contradicts the React philosophy of the explicit data flow.
+上下文是个非常强大的特性，但从某个角度它违反了 React 的显式数据流的哲学。
+
+The context essentially allows global variables across the component tree.
+上下文其实就是让全局变量成为了可能。
+
+But global variables are usually a bad idea.
+不过全局变量通常不是一个好的做法。
+
+And unless you're using it for dependency injection, like here when we need to make a single object available to all components, then probably you shouldn't use context.
+所以，除非你需要进行依赖注入，就像在这个例子里，所有的部件都需要能够访问一个单一的对象，否则你不应该使用上下文。
+
+Finally, the context API is not stable in React.
+还要说一句，React 的上下文 API 处于不稳定的阶段。
+
+It has changed before, and it is likely to change again.
+它之前被修改过，之后还可能被再次修改。
+
+So try your best not to rely on it too much.
+所以不要对它太过依赖。
