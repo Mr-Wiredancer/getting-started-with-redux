@@ -1,0 +1,47 @@
+In the previous lesson, I added "react-redux" bindings to the project and I used a "Provider" component from "react-redux" to pass the store down the context so that the container components can read the store from the context and subscribe to its changes. All container components are very similar.
+在之前的课程里 我在工程中添加了“react-redux”库 然后我从“react-redux”中使用了“Provider”组件来把store传递到上下文 这样容器型组件就可以从上下文读取到store并订阅它的改变 所有容器型组件都非常类似
+
+They need to re-render when the store state changes, they need to unsubscribe from the store when they unmount and they take the current state of the Redux store and use it to render the presentational components with some props that they calculate from the state of the store, and they also need to specify the "contextTypes" to get the store from the context.
+当store state改变时它们需要重新渲染 当它们被卸载时需要从store取消订阅 并且它们使用Redux store当前的state来渲染展示型组件 组件的属性可以从store的state中计算得到 同时他们也需要通过“contextTypes"在上下文中获得store
+
+I'm going to write this component in a different way now. And I'll declare a function called "mapsStateToProps" which takes the redux store state and returns the props that I need to pass to the presentational "TodoList" component, to render it with the current state.
+我将用一种不同的方式来写这个组件 同时我将声明一个叫“mapsStateToProps”的方法 这个方法入参是redux store state并返回我将传递给“TodoList”展示型组件的属性 通过当前的state来渲染这个组件
+
+In this case, there is just a single prop called "todos". So I copy-paste this expression to the "mapStateToProps "function. It returns the props that depend on the current state of the redux store. So in this case, this is just the "todos" prop.
+在这个例子里 只有一个单独的属性叫“todos” 所以我复制粘贴这个表达式到“mapsStateToProps”方法 它返回的属性依赖当前的redux store state 所以在这个例子中只有“todo”属性
+
+I'm creating another function that I call "mapDispatchToProps". And it accepts the "dispatch" method from the store as the only argument and returns the props that should be passed to the "TodoList" component and they depend on the "dispatch" method.
+我正在创建另外一个方法叫“mapDispatchToProps” 它接收从store过来的唯一参数“dispatch”方法，返回应该传递给“TodoList”组件的属性 他们依赖“dispatch”方法
+
+The only prop that uses "store.dispatch" is called "onTodoClick". So I copy-paste the "onTodoClick", into "mapDispatchToProps". Now that I don't have the reference to the store here anymore. So instead, I'm changing it just to use the "dispatch", which is provided as an argument to "mapDispatchToProps".
+这个唯一的属性在调用“onTodoClick”时使用了“store.dispatch” 所以我复制粘贴“onTodoClick”到“mapDispatchToProps”中 现在我在这里不再需要提及store 作为替换我使用“dispatch”这个“mapDispatchToProps”的参数来改变它
+
+I will add some punctuation to make it appear easier on my eyes. "onTodoClick" is a function that accepts the ID of the todo, and dispatches an action. Now, I've got two different functions.
+我将添加一些标点符号来让它更容易出现在我的眼睛里 “onTodoClick”是一个接收待办事项ID的方法 并且发送一个动作 现在我有两个不同的方法了
+
+The first one maps the redux store state to the props of the "TodoList" component that are related to the data from the redux store. The second function maps the "dispatch" method of the store to the callback props of "TodoList" component. It specifies the behavior, that is, which callback prop dispatches which action.
+第一个映射了redux store state和“TodoList”组件的属性 它需要从redux store中关联数据 第二个方法映射了store的“dispatch”方法和“TodoList”组件的回调属性 它指定了这个回调属性发送动作的行为
+
+To gather this, your function has described a container component so well that instead of writing it, I can generate it by using the "connect" function provided by "react-redux" library. If you use Babble and NPM, you will likely import it like this instead. And don't forget the curly braces.
+把它们结合在一起 你的方法已经很好地声明了一个容器型组件而不是去编写它 我可以使用“react-redux”库里的“connect”方法来生成它 如果你使用Babel和NPM 你可能会像这样来导入它 注意不要忘记大括号
+
+Now, instead of declaring a class, I'm going to declare a variable. And I will call the "connect" method to obtain it. I'm passing "mapStateToProps" as the first argument and "mapDispatchToProps" as the second argument. And notice that this is a curry function, so I have to call it once again. And this time, I pass the presentational component that I wanted to wrap and pass the props to it.
+现在 代替声明一个类 我将声明一个变量 并且我将调用“connect”方法去得到它 我将传递“mapStateToProps”作为第一个参数 “mapDispatchToProps”作为第二个参数 请注意这是一个柯里化函数 所以我不得不再次调用它 这一次 我传递了我想要包装和传递属性的展示型组件
+
+The "connect" function will generate the component, just like the one I previously wrote by hand. So I don't need to write the code to subscribe to the store or to specify the "contextTypes", because the "connect" function takes care of that.
+“connect”方法将生成组件 就像我之前手写的那个一样 所以我不需要写代码来订阅store或者指定“contextTypes” 因为“connect”方法可以处理好这些事情
+
+Now, let's recap how to generate the container component using the "connect" function. First, I'll write a function called "mapStateToProps" that takes the state of the redux store and returns the props for the presentational component calculated from it.
+现在 让我们来回顾如何使用“connect”方法来生成容器型组件 首先 我将写一个叫“mapStateToProps”的方法 它取得redux store的state并返回展示型组件从中计算所需要的属性
+
+These props will be updated anytime the state changes. Next, I write a function that I call "mapDispatchToProps". It takes the "stores.dispatch" method as its first argument. And it returns the props that used the "dispatch" method to dispatch actions, so it returns the callback props needed for the presentational component.
+这些属性在state改变时会随时更新 下一步 我写了一个方法叫“mapDispatchToProps” 它取得“stores.dispatch”作为它的第一个参数 并且返回使用“dispatch”方法来发送动作的属性 所以它返回展示型组件需要的回调属性
+
+To create the container component from them, I import "connect" from the "react-redux" library and I call it passing "mapStateToProps" as the first argument and "mapDispatchToProps" as the second argument.
+基于这些方法来创建容器型组件 我从“react-redux”中导入“connect”方法 并且我将“mapStateToProps”作为第一个参数和“mapDispatchToProps”作为第二个参数传递给它
+
+Finally, I close the function call paren and I open another paren, because this is a curry function and it needs to be called twice. And the last argument is the presentational component that I want to connect to the redux store.
+最后 我通过调用括弧来关闭函数 并且我开了另外一个括弧 因为这是一个柯里化函数 它需要被调用两次 最后的参数是我想要连接到redux store的展示型组件
+
+The result of the "connect" call is the container component that is going to render my presentational component. It will calculate the props to pass to the presentational component by merging the objects returned from "mapStateToProps", "mapDispatchToProps", and its own props.
+“connect”方法调用的结果是容器型组件将渲染我的展示型组件 它将通过合并“mapStateToProps”，“mapDispatchToProps”返回的结果和它自己的属性 然后来计算传递给展示型组件的属性
