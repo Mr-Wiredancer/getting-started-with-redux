@@ -1,5 +1,5 @@
 In the previous lesson, we got rid of the top-level store variable and instead started passing the store as a prop to the "TodoApp" component.
-在上一课里，我们去掉了全局的 store 变量，转而将它作为属性传递给 TodoApp 组件。
+在上一课里，我们将 store 对象的变量声明删掉了，转而将它作为属性传递给 TodoApp 组件。
 
 So every component below receives the store as a prop.
 所以，对于 TodoApp 里面的每一个组件，store 都变成了一个属性。
@@ -17,10 +17,10 @@ I'm creating a new component called "Provider".
 我现在要创建一个名为“Provider”的新组件。
 
 And from its "render" method, it just returns whatever its child is.
-它的 render() 方法只是单纯地返回它的子组件。
+它的 render() 方法只是单纯地返回子组件。
 
 So we can wrap any component in a "Provider", and it's going to render that component.
-所以，我们可以将任何组件，包裹在 Provier 组件中进行渲染。
+所以，我们可以将任意组件，包裹在 Provier 组件中进行渲染。
 
 I'm changing the "render" call to render a "TodoApp" inside the "Provider".
 这里，我会修改 ReactDOM.render() 的代码，让它在 Provider 里面渲染一个 TodoApp 组件。
@@ -44,7 +44,7 @@ However, there is an important condition for the context to work.
 不过，要使用上下文需要满足一个重要的条件。
 
 And this condition is that you have to specify "childContextTypes" on the component that defines "getChildContext".
-这个条件就是，你需要为定义了 getChildContext() 方法的类，定义一个静态属性 childContextTypes。
+这个条件就是，定义了 getChildContext() 方法的类，必须定义一个静态属性 childContextTypes。
 
 These are just React prop types definition, but unlike prop types, the "childContextTypes" are essential for the context to be turned on.
 这些只是普通的 React.PropTypes 的定义，但 childContextTypes 对于使用上下文非常重要。
