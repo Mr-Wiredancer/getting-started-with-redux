@@ -60,7 +60,7 @@ FilterLink 可能接收 children 属性，用于作为 Link 组件的内容。�
 
 There is a small problem with this implementation of "FilterLink". Inside the "render" method, it reads the current state of the Redux store. However, it does not subscribe to the store. So if the parent component does not update when the store is updated, it's going to render the state value.
 
-FilterLink 的这个实现存在一个小问题。在 render 方法中，它读取 Redux store 的当前状态，但是，它没有订阅到 store。所以当 store 被更新时，如果父组件没有更新，它将渲染状态值 (??)。
+FilterLink 的这个实现存在一个小问题。在 render 方法中，它读取 Redux store 的当前状态，但是，它没有订阅到 store。所以当 store 被更新时，如果父组件没有更新，它将渲染原来的状态值。
 
 Currently, we re-render the whole application when the state changes. However, this is not very efficient. So in future, we will instead move subscription to the store, to the lifecycle methods of the container components.
 
@@ -88,7 +88,7 @@ When it mounts, it subscribes to the store, so it independently re-renders when 
 
 Instead of specifying the DOM tree, it delegates all the rendering to the "Link" presentational component. And its only job is to calculate the props based on the "FilterLink"'s own props and the current state of the Redux store. And it also specifies the callbacks that are going to dispatch the actions on the store.
 
-它不是指定 DOM 树，而是代理渲染 Link 表现型组件 (??)。它唯一的工作就是根据 FilterLink 自己的属性和 Redux store 的当前状态来计算 (新的) 属性。而且它也指定了回调用于分发动作到 store。
+它没有指明 DOM 树的结构，而是把渲染的工作交给了展示组件 Link。它唯一的工作就是根据 FilterLink 自己的属性和 Redux store 的当前状态来计算 (新的) 属性。而且它也指定了回调用于分发动作到 store。
 
 After the action is dispatched, the store will remember the new state returned by the reducer and will call every subscriber to the store. And in this case, every "FilterLink" component instance is subscribed to the store, so they will all have their "forceUpdate" methods called on them. They will re-render according to the current store state.
 
