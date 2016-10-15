@@ -1,0 +1,99 @@
+In the previous lesson, we separated the presentational components from the main container component. The "TodoApp" specifies the behaviors, which is what happens when "Add Todo" button is clicked, how the todos are selected, what happens when a single todo is being clicked, and what happens when a footer link is clicked.
+
+在前面的课上，我们从主容器组件中分离出表现型组件，由 TodoApp 指定它们的行为，包括点击 “Add Todo” 按钮的行为，todo 列表是怎么被选择的，点击一个单独的 todo 元素的行为，以及点击底部链接的行为。
+
+And the components, such as "AddTodo", the "TodoList", the "Todo" itself, the "Footer", and the "FilterLink", they don't dispatch actions. They call their callbacks in the props. So they are only responsible for the looks but not for the behavior.
+
+像 AddTodo，TodoList，Todo，Footer，还有 FilterLink 这些组件，它们不再分发动作。它们调用属性中的回调。所以它们只负责展示，不负责行为。
+
+The downside of this approach is that I have to pass a lot of props down the tree even when the intermediate components don't really use them.
+
+但这种做法的缺点就是，我需要往下层传递很多属性，虽然有些中间层组件并一定真的需要用到它们。
+
+For example, the "FilterLink" needs to know the "currentFilter" so that it can choose a different appearance when it is active. However, in order to receive the "currentFilter", it has to be passed down from the top. So this is why the "Footer" has to accept "visibilityFilter" as a prop, so it can pass it down as a "currentFilter" to the "FilterLink".
+
+比如，FilterLink 组件需要知道 currentFilter 的值，这样当它被激活时，它可以选择一个不同的展现形式。但是，为了接收 currentFilter，它需要从最顶层被传递下来，这就是为什么 Footer 需要接受 visibilityFilter 作为属性，这样它才能把它作为 currentFilter 属性传递给 FilterLink 组件。
+
+In a way, this breaks encapsulation because the parent components need to know too much about what data the child components need. To solve this, we're going to extract a few more container components, just like we extracted the presentation components in the previous lesson.
+
+在某种程度上，这种做法打破了封装，因为父组件需要知道太多子组件需要的数据。为了解决这个问题，我们将抽取一些额外的容器组件，就像在前面的课上抽取表现型组件一样。
+
+The first component I'm going to refactor is the "Footer" component. And currently, it accepts two props -- the "visibilityFilter", and the "onFilterClick" callback. But it doesn't actually use either of them. It just passes them down to the "FilterLink". So this seems like a good opportunity for simplification.
+
+我想重构的第一个组件是 Footer 组件。现在，它接收两个属性，visibilityFilter 和 onFilterClick 回调。但实际上它并没有使用它们。它只是把它们往下传递给 FilterLink 组件。看起来这是个简化的好机会。
+
+We can only do this because we know that the "Footer" component doesn't care about the values of these props. They only exist to be passed down to the "FilterLink" that cares about them.
+
+我们只能做这个是因为我们知道 Footer 组件不关心这些属性的值，它们存在只是为了往下传递给真正关心它们的 FilterLink 组件。
+
+I am removing the props definition, and I'm removing these props from the "FilterLink" usage. And it might start to seem a lot like the code before separating the presentational component. However, what I want to do here is a little bit different.
+
+我现在移除这些属性的定义，我也从 FilterLink 中移除对这些属性的使用。现在可能它开始看上去和分离表现型组件前的代码很相似，但是，在这里我想做的有一点不同。
+
+The "FilterLink" does not currently specify the behavior for clicking on the link. It also needs the "currentFilter" to tell whether it should be rendered as active.
+
+FilterLink 组件现在没有指定点击链接的行为，它也需要 currentFilter 属性来告诉它是否需要被渲染成激活的样子。
+
+Therefore, it's a bit dishonest to say that "FilterLink" is a presentational component because it is inseparable from its behavior. The only reasonable reaction to clicking on it is setting the "visibilityFilter" by dispatching an action.
+
+因此，说 FilterLink 是一个表现型组件是有一点不诚实的，因为它没有和行为相分离。点击它后唯一合理的反应就是通过分发动作来设置 visibilityFilter。
+
+This is why I'm changing it to a different presentational component I'm going to call, "Link." I will create another "FilterLink" component as a container that uses it for rendering. The "Link" component doesn't know anything about the filter. It only accepts the active prop, and it calls its own "onClick" handler. It is only concerned with rendering.
+
+这就是为什么我把它变成一个不同的表现型组件，我称之为 Link。我将创建另一个 FilterLink 组件作为容器用于渲染。Link 组件不知道任何关于过滤值的内容。它只接受 active 属性，而且调用它自身的 onClick 处理方法。它只关心渲染。
+
+However, I'm also creating another component, called, "FilterLink." It is going to be a class this time that is going to render the "Link" with the current data from the store. It's going to read the component props, and it's going to read the state. But I don't mean react state. I mean the Redux store state it gets by calling, "store.getState."
+
+然而，我同时也创建另一个组件，FilterLink，这一次它将是一个使用 store 中的当前数据来渲染 Link 组件的类。它将读取组件的属性，而且它也将读取状态，但我不是指 react 的状态，我是指通过调用 store.getState() 得到的 Redux store 的状态。
+
+As a container component, the "FilterLink" doesn't have its own markup. It delegates rendering to the "Link" presentational component. In this case, it calculates its "active" prop by comparing its own "filter" prop with the "visibilityFilter" in the Redux store state. The "filter" prop is the one that is passed to the "FilterLink" from the "Footer". And The "visibilityFilter" corresponds to the currently chosen visibility filter that is held in Redux store  state. If they match, we want the "Link" to appear active.
+
+作为一个容器组件，FilterLink 没有自己的标记，它代理渲染 Link 表现型组件。在这个例子中，它通过比较它自己的 filter 属性和 Redux store 状态中的 visibilityFilter 来计算得到 active 属性。filter 属性是从 Footer 传递到 FilterLink 的。visibilityFilter 对应当前被选中的可见过滤值，它被保存在 Redux store 的状态中。如果二者匹配，我们想让 Link 显示成激活的样式。
+
+The container component also needs to specify the behavior. So in this case, the "FilterLink" specifies that when this particular "Link" is clicked, we should dispatch the action with the type "SET_VISIBILITY_FILTER" and the "filter" value that we take from the props.
+
+容器组件也需要指定行为，所以在这个例子中，FilterLink 指定当这个特定的 Link 被点击时，我们应该分发一个动作，类型是 SET_VISIBILITY_FILTER，还有从属性中得到的 filter 值。
+
+The "FilterLink" may accept children which are used as the contents of the "Link", so we're going to pass the children down to the "Link" component. We're just going to render them inside the "a" tag.
+
+FilterLink 可能接收 children 属性，用于作为 Link 组件的内容。所以我们将把 children 传递到 Link 组件。我们将把它们渲染在 <a> 标签中。
+
+There is a small problem with this implementation of "FilterLink". Inside the "render" method, it reads the current state of the Redux store. However, it does not subscribe to the store. So if the parent component does not update when the store is updated, it's going to render the state value.
+
+FilterLink 的这个实现存在一个小问题。在 render 方法中，它读取 Redux store 的当前状态，但是，它没有订阅到 store。所以当 store 被更新时，如果父组件没有更新，它将渲染原来的状态值。
+
+Currently, we re-render the whole application when the state changes. However, this is not very efficient. So in future, we will instead move subscription to the store, to the lifecycle methods of the container components.
+
+当前，当状态改变时，我们重新渲染整个应用，然而，这不是很有效率，所以将来，我们把订阅到 store 的行为移到容器组件的生命周期方法中。
+
+React provides a special "forceUpdate" method on the component instances to force their re-rendering. And we're going to use it together with "store.subscribe" method so that any time the store state changes, we force update the container components.
+
+React 在组件实例中提供一个特别的 forceUpdate() 方法，它用来强制进行重新渲染。我们将把它和 store.subscribe() 一起使用，这样，任何时候只要 store 的状态值发生改变，我们就强制更新容器组件。
+
+We perform the subscription inside the "componentDidMount" lifecycle method. So it's important to unsubscribe inside the "componentWillUnmount" method. Note that we don't actually have the unsubscribe function, but this is the return value of the "store.subscribe" method, so we can keep it, and then call it inside "componentWillUnmount".
+
+我们在 componentDidMount() 生命周期方法中执行订阅，在 componentWillUnmount() 方法中取消订阅很重要。注意我们实际上并没有 unsubscribe() 方法，但这是 store.subscribe() 方法的返回值，所以我们可以保存它，然后在 componentWillUnmount() 中调用它。
+
+Let's recap this part. The "FilterLink" component subscribes to the store, calling "forceUpdate" any time the store changes so it can render the current state of the store. It saves the reference through the "unsubscribe" function returned by "store.subscribe". And it invokes it when the component is about to unmount to clean up the subscription.
+
+让我们来回顾这部分内容。FilterLink 组件订阅到 store，任何时候 store 发生改变就调用 forceUpdate()，这样它就能渲染 store 的当前状态。它使用 unsubscribe 保存 store.subscribe() 返回的引用，然后当组件即将卸载时调用它，用来清除订阅。
+
+Let's recap the relationship between the "FilterLink" container component and the "Link" presentational component. The "Link" component only specifies the appearance of the the "Link", when it is active or inactive, but it doesn't know about the behavior. The "FilterLink" component is a container, so it provides the data and the behavior for the presentational component.
+
+让我们来回顾 FilterLink 容器组件和 Link 表现型组件之间的关系。Link 组件只指定了当它处理激活或未激活时的展现形式，但不知道它的行为。FilterLink 组件是一个容器，它为表现型组件提供数据和行为。
+
+When it mounts, it subscribes to the store, so it independently re-renders when the store state changes because it needs to use the store's current state inside its "render" method.
+
+当它被装载时，它订阅到 store，当 store 状态改变时它会独立地重新渲染，因为在它的 render 方法中它需要使用 store 的当前状态。
+
+Instead of specifying the DOM tree, it delegates all the rendering to the "Link" presentational component. And its only job is to calculate the props based on the "FilterLink"'s own props and the current state of the Redux store. And it also specifies the callbacks that are going to dispatch the actions on the store.
+
+它没有指明 DOM 树的结构，而是把渲染的工作交给了展示组件 Link。它唯一的工作就是根据 FilterLink 自己的属性和 Redux store 的当前状态来计算 (新的) 属性。而且它也指定了回调用于分发动作到 store。
+
+After the action is dispatched, the store will remember the new state returned by the reducer and will call every subscriber to the store. And in this case, every "FilterLink" component instance is subscribed to the store, so they will all have their "forceUpdate" methods called on them. They will re-render according to the current store state.
+
+在动作被分发后，store 将会记住由 reducer 返回的新状态，然后它将调用每一个订阅到 store 的订阅者。在这个例子中，每一个 FilterLink 组件实例都订阅到了 store，所以它们将调用它们的 forceUpdate() 方法。它们将根据当前 store 的状态进行重新渲染。
+
+The "FilterLink" is a container component, so it is completely self-sufficient and can be used inside the presentational components, such a "Footer", without passing additional props to get the data from the store and specify the behavior. This lets us keep the "Footer" component simple and decoupled from the behavior and the data that its child components need.
+
+FilterLink 是一个容器组件，所以它是完全自主的，而且它可以被用在表现型组件中，比如 Footer 组件，它没有从 store 获取数据作为额外的属性进行传递，也没有指定行为。这让我们保持 Footer 组件足够简单，而且和行为，以及它的子组件需要的数据解耦。
