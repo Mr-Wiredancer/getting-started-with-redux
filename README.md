@@ -68,12 +68,12 @@
 19 |[baurine](https://github.com/baurine)|✔️ | [baurine](https://github.com/baurine) | ✔️|  [ceoimon](https://github.com/ceoimon)| ✔️
 20 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️| 
 21 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[zhaozhiming](https://github.com/zhaozhiming) | ✔️
-22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [baurine](https://github.com/baurine) | doing
+22 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [baurine](https://github.com/baurine) | ✔️
 23 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [howard](https://github.com/hayeah) | ✔️
 24 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [baurine](https://github.com/baurine) |  ✔️
 25 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | [mrwiredancer](https://github.com/Mr-Wiredancer) |   ✔️
 26 |  [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ |[baurine](https://github.com/baurine)|✔️ 
 27 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️|[zhaozhiming](https://github.com/zhaozhiming) | ✔️
-28 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+28 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | mrwiredancer | ✔️
 29 |[mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️|[baurine](https://github.com/baurine)|✔️ 
-30 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️
+30 | [mrwiredancer](https://github.com/Mr-Wiredancer) | ✔️ | mrwiredancer | doing
