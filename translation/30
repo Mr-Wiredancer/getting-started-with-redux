@@ -1,0 +1,83 @@
+So far we have covered the container components, the presentational components, the reducers, and the store.
+目前为止，我们已经讲解了容器组件，展示组件，reducer 以及 store。
+
+But we have not covered the concept of action creators, which you might see in the Redux talks and examples.
+但我们还没讲到动作生成器 (action creator) 的概念，而你可能会在 Redux 相关的演讲或者示例代码里面见到。
+
+Let's consider the following example.
+让我们来考虑下面的例子。
+
+I dispatch the "ADD_TODO" action from inside the "button onClick" handler.
+我在 button 组件的 onClick 里面分发了一个 "ADD_TODO" 动作。
+
+And this is fine.
+这没什么问题。
+
+However, it references the "nextTodoId" variable, which I declared alongside the "AddTodo" component.
+但是，它引用了变量 nextTodoID，这个变量我是跟 AddTodo 组件一起声明的。
+
+Normally, it would be local.
+通常，它会是本地变量。
+
+However, what if another component wants to dispatch the "ADD_TODO" action?
+不过，如果另一个组件也想要分发 "ADD_TODO" 动作怎么办？
+
+It would need to have the access to "nextTodoId" somehow.
+它会需要通过某个途径访问到 nextTodoId。
+
+And while I could make this variable global, it's not a very good idea.
+虽然我可以将变量改成全局变量，但这不是一个好的做法。
+
+Instead, it would be best if the components dispatching the "ADD_TODO" action did not have to worry about specifying the ID. Because the only information they really pass is the text of the todo being added.
+最好的做法是，分发 "ADD_TODO" 动作的组件不需要指明 ID。因为它们传递的信息其实就是 todo 的内容而已。
+
+I don't want to generate the ID inside the reducer, because that would make it non-deterministic.
+我不想在 reducer 里面去生成 ID，因为那样会让 reducer 变得不确定。
+
+However, I can extract this code generating the action object into a function I will call "addTodo".
+不过，我可以将这段生成动作对象的代码提取到一个函数中，我将它命名为 addTodo()。
+
+I pass the input value to "addTodo".
+我将 input.value 传递给 addTodo()。
+
+And "addTodo" is just a function that takes the text of the todo and constructs an action object representing "ADD_TODO" action.
+而 addTodo() 只不过是一个函数，它接受 todo 的内容，然后构造出一个动作对象来代表 "ADD_TODO" 动作。
+
+So it has the type, "ADD_TODO", it takes care of generating the unique ID and it includes the text.
+一句话总结，"ADD_TODO" 负责生成唯一的 ID，而且包含了 todo 的内容。
+
+Although extraction such functions is not required, it is very common pattern in Redux applications to keep them maintainable.
+虽然提取这样的函数不是必须的，但是在 Redux 中它是一种非常普遍的做法，用来提高应用的可维护性。
+
+So, like all these functions, we usually place action creators separately from components or from reducers.
+所以就像这里的这些函数，我们通常把 action creators 跟组件和 reducers 分开放置。
+
+I will now extract other action creators from the components.
+我现在会从组件抽取其它的动作生成器。
+
+And I see that I have a "SET_VISIBILITY_FILTER" with "dispatch" here, so I will change this to call the "setVisibilityFilter" action creator with "ownProps.filter" as the argument and is going to return the action that needs to be dispatched, so I'm declaring the "setVisibilityFilter" function.
+我看到这里有一个 "SET_VISIBILITY_FILTER" 的 dispatch() 调用，所以我要修改这里的代码，让它以 ownProps.filter 作为参数调用 setVisibilityFilter() 这个 action creator，它会返回要分发的动作。所以我这里声明 setVisibilityFilter() 函数
+
+This is what I call an action creator, because it takes the arguments about the action and it returns the action object with the type "SET_VISIBILITY_FILTER" and the "filter" itself.
+我把类似这样的函数称为 action creator，因为它会接收有关动作信息的参数，然后返回一个动作对象，类型是 "SET_VISIBILITY_FILTER"，还包含了 filter 的值。
+
+You might think that this kind of code is boilerplate and you'd rather dispatch the action inline inside the component.
+你可能觉得这样的代码有点像模版，你宁愿将代码直接写在组件里面。
+
+However, don't underestimate how action creators document your software, because they tell your team what kinds of actions the components can dispatch, and this kind of information can be invaluable in large applications.
+但是，不要低估 action creators 的作用，因为你的协作者可以通过它们明确知道组件能够分发的动作，而这个信息对于编写大型应用来说是非常有价值的。
+
+I will now scroll down to the last place where I call "dispatch" with an inline action object.
+我现在会滚动到最后一个直接用动作对象调用 dispatch() 的地方。
+
+And I will now extract that to a "toggleTodo" action creator, to which I pass the ID of the todo as the argument.
+而我现在会将这些代码提取到一个 toggleTodo() action creato，我会将 todo 的 ID 作为参数传给它。
+
+I'm now scrolling up to my action creators and I will add a new one that I call "toggleTodo". It accepts the ID as the argument and it returns the action of the type, "TOGGLE_TODO", and this ID.
+现在我要添加一个新的 action creator 叫 toggleTodo()。它接收 ID 作为参数，然后返回一个动作对象，类型是 "TOGGLE_TODO"，还有 todo 的 ID。
+
+Let's take a moment to consider how convenient it is to have all the action creators in a single place so that I can use them from components and tests without worrying about the action's internal structure.
+让我们来想想，如果你把所有的 action creator 都放在一个统一的地方，可以任意从组件和测试中使用，而不需要担心动作的内部结构，这事多么方便。
+
+Know that whether you use action creators or not, the data flow is exactly the same, because I just call the action creator to get the action object and then I call "dispatch" just like I did before, passing the action.
+要知道，无论你是否使用 action creator，数据流都是完全一样的，因为我只是调用了 action creator 来获得动作对象，然后再调用 dispatch()，把动作传递进去。
